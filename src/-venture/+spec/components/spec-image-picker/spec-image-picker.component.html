@@ -1,0 +1,27 @@
+<div class="input-wrapper" [class.default-cursor]="spec?.disabled">
+  <div *ngIf="!selectedItem" (click)="openDialog()" (keydown.enter)="openDialog()" class="trigger">
+    <span class="placeholder">{{ field.display }}</span>
+    <ng-container class="input-bar">
+      <div><input matInput [value]="" /></div>
+      <div class="mat-select-arrow-wrapper"><div class="mat-select-arrow"></div></div>
+    </ng-container>
+  </div>
+  <div *ngIf="selectedItem" (click)="openDialog()" (keydown.enter)="openDialog()" class="input">
+    <span class="label">{{ field.display }}</span>
+    <ng-container class="input-bar">
+      <div><input class="value-text" matInput [value]="selectedItem.display" /></div>
+      <div>
+        <div>
+          <img *ngIf="selectedItem.url" [src]="selectedItem.url" />
+        </div>
+        <div class="mat-select-arrow-wrapper"><div class="mat-select-arrow"></div></div>
+      </div>
+    </ng-container>
+  </div>
+  <mat-hint *ngIf="showHint || displayCustomOptionHint">
+    {{ showHint }}
+    <span class="custom-value-warning warning" *ngIf="displayCustomOptionHint">
+      NOTE: Non-std option selected. PM to review
+    </span>
+  </mat-hint>
+</div>

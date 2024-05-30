@@ -1,0 +1,16 @@
+<form>
+  <mat-form-field appearance="outline" [class.animateSuccess]="updatedSucceeded" [class.animateFail]="updatedFailed">
+    <mat-label>{{ field.display }}</mat-label>
+    <textarea
+      [class.default-cursor]="spec?.disabled"
+      matInput
+      (blur)="saveField()"
+      [formControl]="fieldControl"
+      cdkTextareaAutosize
+      #autosize="cdkTextareaAutosize"
+      cdkAutosizeMinRows="2"
+      cdkAutosizeMaxRows="5"
+    ></textarea>
+    <mat-error *ngIf="fieldControl.invalid">{{ getErrorMessage() }}</mat-error>
+  </mat-form-field>
+</form>

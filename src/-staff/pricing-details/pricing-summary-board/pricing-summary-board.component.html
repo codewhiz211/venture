@@ -1,0 +1,32 @@
+<div class="tab-content-container">
+  <div class="summary-groups" *ngIf="(outStandingPricingItems$ | async).length > 0">
+    <h6 class="primary summary-title">Outstanding requests</h6>
+    <div class="job-section-board">
+      <ven-summary-card
+        class="summary-cards"
+        *ngFor="let item of outStandingPricingItems$ | async"
+        [status]="item.status"
+        [id]="item.title"
+        [description]="item.details"
+        [chips]="item.chips"
+      >
+        <ven-details-view-button title="EDIT PRICING" [hideIcon]="true" (onTitleClicked)="onEdit(item)"></ven-details-view-button>
+      </ven-summary-card>
+    </div>
+  </div>
+  <div class="summary-groups" *ngIf="(completedPricingItems$ | async).length > 0">
+    <h6 class="primary summary-title">Completed requests</h6>
+    <div class="job-section-board">
+      <ven-summary-card
+        class="summary-cards"
+        *ngFor="let item of completedPricingItems$ | async"
+        [status]="item.status"
+        [id]="item.title"
+        [description]="item.details"
+        [chips]="item.chips"
+      >
+        <ven-details-view-button title="VIEW PRICING" [hideIcon]="true" (onTitleClicked)="onView(item)"></ven-details-view-button>
+      </ven-summary-card>
+    </div>
+  </div>
+</div>

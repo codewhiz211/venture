@@ -1,0 +1,57 @@
+.fab-label {
+  position: absolute;
+  padding: 4px 6px;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.4);;
+  top: 4px;
+  left: -65px;
+  background-color: white;
+  color: black;
+
+  &.edit {
+    left: -93px;
+  }
+
+  &.tracked {
+    left: -120px;
+  }
+
+  &.history {
+    left: -110px;
+  }
+
+  &.add-section {
+    left: -138px;
+  }
+
+  &.sync {
+    left: -148px;
+  }
+}
+
+.edit-mode {
+  background-color:  #8FCCF8;
+}
+
+.main-fab {
+  mat-icon {
+    position: absolute;
+    opacity: 0;
+    transition: all 0.3s ease-in;
+    top: 30%;
+    left: 30%;
+    transform: rotate(0deg);
+
+    &.show {
+      opacity: 1;
+    }
+  }
+
+  &.rotate {
+    mat-icon {
+      transform: rotate(360deg);
+      transition: all 0.3s ease-in;
+    }
+  }
+}
+

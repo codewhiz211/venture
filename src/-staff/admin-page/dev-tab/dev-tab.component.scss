@@ -1,0 +1,7 @@
+//disable hover style for chips
+:host::ng-deep .mat-standard-chip:hover::after {
+  opacity: 0 !important;
+}
+:host::ng-deep .mat-standard-chip:focus::after {
+  opacity: 0 !important;
+}

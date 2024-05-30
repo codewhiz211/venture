@@ -1,0 +1,9 @@
+<div class="bordered tab-content-container">
+  <ven-table
+    [disableHover]="true"
+    [data]="clients$ | async"
+    [columns]="columns"
+    initialSortedColumn="lastModified"
+    (onOperatorClick)="handleClientDeleteClicked($event)"
+  ></ven-table>
+</div>

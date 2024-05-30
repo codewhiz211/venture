@@ -1,0 +1,63 @@
+@import 'variables';
+@media only screen and (max-width: #{$tablet}) {
+  :host {
+    display: none;
+  }
+}
+
+ul {
+  list-style: none;
+  border-left: 3px solid $color-accent;
+
+  &.side-bar-navigation {
+    border-left: none;
+  }
+}
+
+.side-bar-navigation {
+  margin-top: 4px;
+
+  li {
+    color: $color-accent;
+    font-weight: 600;
+
+    &:first-child {
+      color: $color-accent;
+      margin-bottom: 0;
+      &:hover {
+        color: $color-accent;
+        text-decoration: underline;
+        cursor: pointer;
+      }
+    }
+
+    &:hover {
+      color: $color-accent;
+    }
+  }
+}
+
+li:first-child {
+  margin-bottom: 8px;
+  cursor: default;
+  font-weight: bold;
+  &:hover {
+    color: initial;
+    text-decoration: none;
+    cursor: default;
+  }
+}
+
+li {
+  padding-left: 8px;
+  &:hover {
+    color: $color-accent;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+}
+
+.active {
+  color: $color-accent;
+  font-weight: bold;
+}

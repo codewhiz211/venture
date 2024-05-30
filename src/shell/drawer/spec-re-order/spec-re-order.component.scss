@@ -1,0 +1,73 @@
+@import 'variables';
+
+.dialog-wrapper {
+  .re-order-title {
+    color: $color-accent;
+    display: flex;
+    align-items: center;
+    margin-bottom: 32px;
+    font-weight: 400;
+  }
+
+  p {
+    margin-bottom: 20px;
+  }
+
+  .drag-drop-container {
+    margin-bottom: 20px;
+
+    .drag-drop-item-wrapper {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      height: 42px;
+      color: $color-grey;
+      padding-right: 12px;
+      border-bottom: 1px solid $border-colour;
+
+      mat-icon {
+        color: $color-grey;
+      }
+    }
+
+    @media screen and (max-width: $tablet) {
+      width: 80%;
+    }
+  }
+
+  .cdk-drag-animating {
+    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+  }
+
+  .cdk-drag-placeholder {
+    opacity: 0;
+  }
+
+  .cdk-drop-list-dragging .drag-drop-item-wrapper:not(.cdk-drag-placeholder) {
+    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+  }
+}
+
+:host::ng-deep {
+  .cdk-drag-preview {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 12px 0 4px;
+    background-color: #ffffff;
+    box-sizing: border-box;
+    border-bottom: 1px solid $border-colour;
+    z-index: 10000;
+  }
+
+  .mat-dialog-actions {
+    justify-content: flex-end;
+    display: flex;
+
+    & > * {
+      margin-left: 8px;
+    }
+  }
+}

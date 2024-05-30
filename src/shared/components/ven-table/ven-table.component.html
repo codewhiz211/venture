@@ -1,0 +1,78 @@
+<div class="box">
+  <table mat-table [dataSource]="dataSource" matSort matSortDirection="desc" [matSortActive]="initialSortedColumn">
+    <ng-container *ngFor="let item of columns" [matColumnDef]="item.accessor">
+      <ng-container *ngIf="item.type != 'operator'; else operatorRow">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header [ngStyle]="{ width: item.width }" [ngClass]="item.class">
+          <span class="subtitle-2 primary">{{ item.label }}</span>
+        </th>
+        <td mat-cell *matCellDef="let row" [ngStyle]="{ width: item.width }" [ngClass]="item.class">
+          <div *ngIf="!item.complex; else complexCell" class="body-2">
+            <ng-container *ngIf="!item.format">
+              <span *ngIf="item.type != 'number'; else numberCell">{{ row[item.accessor] }}</span>
+              <ng-template #numberCell>
+                <span *ngIf="item.prefix">{{ item.prefix }}</span>
+                {{ row[item.accessor] | number: '1.2-2' }}
+                <span *ngIf="item.suffix">{{ item.suffix }}</span>
+              </ng-template>
+            </ng-container>
+            <ng-container *ngIf="item.format == 'shortDate'">{{ row[item.accessor] | date: 'short' }}</ng-container>
+            <ng-container *ngIf="item.format == 'chip'">
+              <mat-chip-list [aria-label]="item.label">
+                <mat-chip [disableRipple]="true">
+                  <ven-icon-new *ngIf="item.icon" [icon]="item.icon" colour="grey"></ven-icon-new>
+                  <span>{{ row[item.accessor] }}</span>
+                </mat-chip>
+              </mat-chip-list>
+            </ng-container>
+          </div>
+          <ng-template #complexCell>
+            <div class="multiple-element-cell" *ngIf="item.complex == 'multi-elements'">
+              <mat-chip-list [aria-label]="item.label">
+                <mat-chip [disableRipple]="true" *ngFor="let childItem of row[item.accessor]">
+                  {{ item.adapter ? item.adapter[childItem] : item.fieldName ? childItem[item.fieldName] : childItem }}
+                </mat-chip>
+              </mat-chip-list>
+            </div>
+            <!-- <div class="parent-children-cell" *ngIf="item.complex == 'parent-children'">
+              <div>{{ row[item.accessor] }}</div>
+              <div class="emphasis-med show-on-mobile">
+                {{ row[item.children][0][item.fieldName] }}
+                <span *ngIf="row[item.children].length > 1"> & {{ row[item.children].length - 1 }} others</span>
+              </div>
+              <div class="emphasis-med show-on-desktop" *ngFor="let child of row[item.children]">{{ child[item.fieldName] }}</div>
+            </div> -->
+          </ng-template>
+        </td>
+      </ng-container>
+      <ng-template #operatorRow>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="pull-right primary subtitle" [ngStyle]="{ width: item.width }">
+          {{ item.label }}
+        </th>
+        <td class="operator-column" mat-cell *matCellDef="let row" [ngStyle]="{ width: item.width }" [ngClass]="item.class">
+          <ven-menu
+            *ngIf="item.children; else singleOperator"
+            [menuItems]="item.children"
+            (menuSelected)="onAction(row, $event)"
+          ></ven-menu>
+          <ng-template #singleOperator>
+            <div class="operator-cell">
+              <ven-icon-new (click)="onAction(row)" [icon]="item.icon" colour="rgba(0,0,0,0.67)"></ven-icon-new>
+            </div>
+          </ng-template>
+        </td>
+      </ng-template>
+    </ng-container>
+
+    <!-- @rowAnimation is a part of fixing of issues that table can't retain in router animation, please see component ts -->
+    <tr mat-header-row @rowAnimation *matHeaderRowDef="displayedColumns"></tr>
+    <!-- should be id -->
+    <tr
+      mat-row
+      [ngClass]="{ 'hover-disabled': disableHover }"
+      @rowAnimation
+      *matRowDef="let row; columns: displayedColumns"
+      (click)="onRowClick.emit(row)"
+    ></tr>
+  </table>
+  <mat-paginator class="caption" *ngIf="!hidePagnator" [pageSize]="10" [length]="dataSource?.filteredData?.length"></mat-paginator>
+</div>

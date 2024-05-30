@@ -1,0 +1,9 @@
+<!-- we are maintaining the old shell until all pages are migrated -->
+<router-outlet *ngIf="!showNewShell; else newShell"></router-outlet>
+
+<ng-template #newShell>
+  <ng-container *ngIf="authService.isAuthenticated">
+    <ven-application-chrome-bottom-nav></ven-application-chrome-bottom-nav>
+  </ng-container>
+  <ven-application-chrome></ven-application-chrome>
+</ng-template>

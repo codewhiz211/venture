@@ -1,0 +1,25 @@
+@import 'variables';
+@import 'chrome-theme';
+
+.grid-total-row {
+  display: grid;
+  grid-template-columns: 14fr 2fr 2fr 2fr;
+  align-items: center;
+  border-bottom: 1px solid $chrome-border-colour-dark;
+  padding: 11px 0;
+
+  & > div {
+    text-align: right;
+  }
+  & > div:last-of-type {
+    margin-right: 9px; //align with operator in row
+  }
+
+  @media only screen and (max-width: #{$mobile}) {
+    grid-template-columns: 10fr 7fr 3fr;
+
+    div:nth-child(2) {
+      display: none;
+    }
+  }
+}

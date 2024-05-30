@@ -1,0 +1,92 @@
+@import 'variables';
+.progress-text {
+  display: flex;
+  justify-content: center;
+  margin-top: 5px;
+  margin-bottom: 3px;
+}
+
+mat-progress-bar {
+  margin-bottom: 5px;
+}
+
+mat-selection-list:focus {
+  outline: none;
+}
+
+::ng-deep {
+  .mat-progress-bar-fill::after {
+    background-color: $color-accent;
+  }
+  .mat-progress-bar-background {
+    fill: rgb(147, 205, 243);
+  }
+  .mat-progress-bar-buffer {
+    background-color: rgb(147, 205, 243);
+  }
+
+  .align-center {
+    display: flex;
+    align-items: center;
+
+    mat-icon {
+      margin-right: 6px;
+    }
+  }
+
+  .cta {
+    color: $color-accent;
+    margin-top: 10px;
+    padding: 5px 15px;
+    cursor: pointer;
+    &:hover {
+      background: rgba(0, 0, 0, 0.05);
+    }
+  }
+}
+
+:host {
+  ::ng-deep {
+    .mat-pseudo-checkbox {
+      position: absolute;
+      right: 40px;
+
+      @media screen and (max-width: $mobile) {
+        right: 50px;
+      }
+    }
+
+    .wrap-list-option {
+      position: relative;
+
+      .mat-list-item-content {
+        padding-right: 70px;
+      }
+    }
+
+    .btn-failed {
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: rgb(175, 173, 173);
+      width: 16px;
+      height: 16px;
+
+      &.active {
+        color: red;
+      }
+    }
+  }
+}
+
+.signature {
+  display: flex;
+  padding: 5px 15px;
+  color: $color-accent;
+
+  mat-icon {
+    color: $color-accent;
+    margin-right: 6px;
+  }
+}

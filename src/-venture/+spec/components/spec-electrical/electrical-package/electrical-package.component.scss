@@ -1,0 +1,60 @@
+@import 'variables';
+@import 'chrome-theme';
+.package {
+  margin-bottom: 16px;
+  margin-left: 8px;
+  h3 {
+    color: $color-accent;
+    border-bottom: 1px solid $chrome-border-colour-dark;
+    width: 100%;
+    margin-bottom: 16px;
+    @media only screen and (max-width: #{$mobile}) {
+      margin-top: 1em;
+    }
+  }
+}
+
+.package-wrapper {
+  display: flex;
+  flex-direction: column;
+  @media print {
+    page-break-inside: avoid;
+    display: block;
+    span {
+      float: left;
+      width: 50%;
+      display: block;
+    }
+  }
+}
+
+.package-row {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  span {
+    width: 50%;
+    border-bottom: 1px solid $chrome-border-colour-dark;
+    margin-bottom: 3px;
+  }
+  @media only screen and (max-width: #{$mobile}) {
+    border-bottom: none;
+    span {
+      width: 100%;
+      display: block;
+      border-bottom: 1px solid $chrome-border-colour-dark;
+      font-size: 0.8rem;
+    }
+  }
+  @media print {
+    font-size: 0.8rem;
+  }
+}
+
+.package-detail-container {
+  display: flex;
+  mat-icon {
+    margin-left: 6px;
+    color: $color-accent;
+  }
+}

@@ -1,0 +1,31 @@
+@import 'chrome-theme';
+
+.title {
+  align-items: center;
+  color: $blue-primary;
+  display: flex;
+  justify-content: space-between;
+  padding: 16px;
+  position: relative;
+  z-index: 10;
+
+  &:before {
+    content: '';
+    position: absolute;
+    left: 16px;
+    bottom: 0;
+    height: 1px;
+    width: calc(100% - 32px);
+    border-bottom: 1px solid rgba(33, 33, 33, 0.08);
+  }
+}
+
+.sub-drawer-container {
+  height: 100%;
+  overflow: hidden;
+  background: white;
+  border: 1px solid rgba(33, 33, 33, 0.08);
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+  z-index: 10;
+}

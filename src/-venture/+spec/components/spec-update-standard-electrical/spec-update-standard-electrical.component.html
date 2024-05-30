@@ -1,0 +1,46 @@
+<div class="dialog-wrapper">
+  <div>
+    <p>
+      A standard package is automatically added to the electrical section based on the House Size entered in the ‘Section Details’ section.
+    </p>
+    <p>If you need to overwrite this selection, you can update each item or select a different package below</p>
+  </div>
+
+  <mat-tab-group mat-stretch-tabs (selectedTabChange)="handleTabChange($event)">
+    <mat-tab label="UPDATE ITEMS">
+      <ng-container *ngIf="packageList.length">
+        <form [formGroup]="packagesForm">
+          <ng-container formArrayName="packagesList">
+            <mat-form-field
+              class="half-width"
+              appearance="outline"
+              *ngFor="let item of packagesForm.get('packagesList')['controls']; index as i"
+            >
+              <input [placeholder]="packageList[i]" matInput type="text" [formControlName]="i" />
+            </mat-form-field>
+          </ng-container>
+        </form>
+      </ng-container>
+    </mat-tab>
+    <mat-tab label="CHANGE PACKAGE">
+      <mat-radio-group class="update-radio-group" [(ngModel)]="selectedPackage">
+        <mat-radio-button class="update-radio-button" [value]="ElectricalPackages.StandardSmall"
+          ><span>80m2 to 129m2</span></mat-radio-button
+        >
+        <mat-radio-button class="update-radio-button" [value]="ElectricalPackages.StandardMedium"
+          ><span>130m2 to 169m2</span></mat-radio-button
+        >
+        <mat-radio-button class="update-radio-button" [value]="ElectricalPackages.StandardLarge"
+          ><span>170m2 to 199m2</span></mat-radio-button
+        >
+        <mat-radio-button class="update-radio-button" [value]="ElectricalPackages.None"><span>none</span></mat-radio-button>
+      </mat-radio-group>
+    </mat-tab>
+  </mat-tab-group>
+
+  <ven-dialog-footer-buttons
+    [closeAction]="closeAction"
+    [submitAction]="submitAction"
+    [disabled]="action === 'packagesList' && !packageList"
+  ></ven-dialog-footer-buttons>
+</div>

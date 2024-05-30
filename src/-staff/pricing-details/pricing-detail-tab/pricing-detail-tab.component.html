@@ -1,0 +1,24 @@
+<div class="double-column-container tab-content-container">
+  <div class="right-container">
+    <div class="bordered">
+      <ven-pricing-status [status]="status"></ven-pricing-status>
+    </div>
+    <div class="bordered hide-on-mobile">
+      <div class="primary subtitle price-option-title">Pricing options</div>
+      <div class="primary icon-line" (click)="openInBuild()">
+        <ven-icon-new icon="handyman" colour="#008be5"></ven-icon-new><span>Open in Builds</span>
+      </div>
+      <div class="primary icon-line" (click)="copyPricing()" *ngIf="editable">
+        <ven-icon-new icon="content_copy" colour="#008be5"></ven-icon-new><span>Copy pricing</span>
+      </div>
+      <div class="primary icon-line" (click)="shareSummary()">
+        <ven-icon-new icon="share" colour="#008be5"></ven-icon-new><span>Share summary</span>
+      </div>
+    </div>
+  </div>
+  <div class="left-container">
+    <div class="main-table">
+      <ven-pricing-accordion [pricing]="pricing" [client]="client" [specUid]="specUid" [optionId]="optionId"></ven-pricing-accordion>
+    </div>
+  </div>
+</div>

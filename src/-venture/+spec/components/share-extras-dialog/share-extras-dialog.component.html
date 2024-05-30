@@ -1,0 +1,8 @@
+<h1 mat-dialog-title>New extras added</h1>
+<div mat-dialog-content>
+  <p>New extras have been added for client, {{ data.client }}. <br />Would you like to share these changes with the client?</p>
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button color="default" (click)="onNoClick()">Cancel</button>
+  <button mat-raised-button color="accent" [mat-dialog-close]="true" cdkFocusInitial>Share</button>
+</div>

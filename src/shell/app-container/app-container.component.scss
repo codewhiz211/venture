@@ -1,0 +1,47 @@
+@import 'variables';
+@import 'print';
+
+body {
+  background: #{$color-primary-200};
+}
+
+.ven-content mat-card {
+  margin: 20px;
+}
+
+.container {
+  z-index: 20;
+  display: inherit;
+  padding: 0;
+
+  @media print {
+    position: relative;
+  }
+}
+
+mat-drawer {
+  width: $drawer-width;
+
+  &.wide-drawer {
+    width: $drawer-width-wide;
+  }
+}
+
+/* make the bottom sheet full height */
+:host::ng-deep .mat-bottom-sheet-container {
+  max-height: 100vh !important;
+  height: 100vh;
+}
+/* end make the bottom sheet full height */
+
+@media only screen and (max-width: #{$mobile}) {
+  mat-drawer {
+    width: $drawer-width-mobile;
+  }
+}
+
+@media only screen and (min-width: #{$mobile}) and (max-width: #{$tablet}) {
+  mat-drawer {
+    width: $drawer-width-tablet;
+  }
+}

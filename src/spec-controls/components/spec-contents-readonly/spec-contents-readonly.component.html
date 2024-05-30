@@ -1,0 +1,6 @@
+<ul>
+  <li class="body-2">Contents</li>
+  <li *ngFor="let section of sections" class="body-2">
+    <a (click)="onSectionClicked(section.id)">{{ section.title }}</a>
+  </li>
+</ul>

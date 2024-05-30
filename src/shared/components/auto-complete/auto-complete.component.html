@@ -1,0 +1,18 @@
+<mat-form-field appearance="outline" [class.fullWidth]="fullWidth">
+  <input
+    type="text"
+    placeholder="Choose"
+    aria-label="Choose"
+    matInput
+    [formControl]="autoControl"
+    [matAutocomplete]="auto"
+    (click)="resetValue()"
+  />
+  <mat-label>{{ label }}</mat-label>
+  <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onSelectionChanged($event)">
+    <mat-option *ngFor="let option of (filteredOptions | async)" [value]="option[optionValueKey]">
+      {{ option[optionLabelKey] }}
+    </mat-option>
+  </mat-autocomplete>
+  <mat-error *ngIf="autoControl.invalid && hasRequiredField()">Field is required</mat-error>
+</mat-form-field>

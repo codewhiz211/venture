@@ -1,0 +1,8 @@
+<div class="dialog-wrapper">
+  <form [formGroup]="notesForm">
+    <div class="body-2 note-entry" formArrayName="notes" *ngFor="let item of notesForm.get('notes')['controls']; let i = index">
+      <mat-checkbox [formControlName]="i">{{ notesValue[i].note }}</mat-checkbox>
+    </div>
+  </form>
+  <ven-dialog-footer-buttons [submitAction]="submitAction" [closeAction]="closeAction"></ven-dialog-footer-buttons>
+</div>

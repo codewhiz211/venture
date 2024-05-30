@@ -1,0 +1,15 @@
+// only styles specific to colour component should go in here
+// ideally this component will simply use the styles injected by PrintItemComponent
+// see print-item/print-item.component.scss
+.colour-badge {
+  width: 100%;
+  padding: 16px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  &:first-child {
+    padding: 0;
+  }
+}

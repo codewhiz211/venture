@@ -1,0 +1,13 @@
+<div class="dialog-wrapper">
+  <div class="emphasis-high">
+    <form [formGroup]="verifyGroup">
+      <div class="body-override">Has this remedial work been completed to standard?</div>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Job Feedback</mat-label>
+        <input matInput formControlName="feedback" type="feedback" id="feedback" name="feedback" />
+        <mat-hint>Feedback provided will be shared with the subbie</mat-hint>
+      </mat-form-field>
+    </form>
+  </div>
+  <ven-dialog-footer-buttons [closeAction]="closeAction" [submitAction]="submitAction"></ven-dialog-footer-buttons>
+</div>

@@ -1,0 +1,47 @@
+<div [class.default-cursor]="spec.disabled">
+  <h2 class="subtitle primary" [class.animateSuccess]="updatedSucceeded" [class.animateFail]="updatedFailed">{{ sectionTitle }} Extras</h2>
+  <div *ngIf="extras$ | async as extras">
+    <p *ngIf="extras.length === 0" class="print-only no-extras-label">No extras selected</p>
+    <div [ngClass]="{ 'no-print-block': extras.length === 0 }">
+      <ul>
+        <li class="list-blur" *ngFor="let extra of extras; trackBy: trackItem">
+          <div>
+            <ven-icon-new icon="close" colour="grey"></ven-icon-new>
+            {{ extra.item || extra.display }}
+          </div>
+          <ven-extra-amount
+            *ngIf="extra.amount != 'pending'; else pendingExtra"
+            [amount]="extra.amount"
+            [isAddedInQuote]="spec.details.status == 'Prepared for contract' && extra.addedStatus == 'Quote'"
+          ></ven-extra-amount>
+          <ng-template #pendingExtra>
+            <div>
+              {{ extra.amount }}
+            </div>
+          </ng-template>
+        </li>
+        <li class="list-blur">${{ total | number }}</li>
+      </ul>
+      <form [formGroup]="extrasForm" #formDirective="ngForm" class="no-print">
+        <mat-form-field appearance="outline" *ngIf="!spec?.disabled">
+          <mat-label>Item</mat-label>
+          <input formControlName="item" matInput placeholder="Item" />
+          <mat-error *ngIf="extrasForm.controls.item.invalid">{{ getErrorMessage() }}</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" *ngIf="!spec?.disabled">
+          <mat-label>Amount</mat-label>
+          <!-- https://github.com/angular/material2/issues/11831 -->
+          <span matPrefix>$&nbsp;</span> <input formControlName="amount" matInput placeholder="" />
+          <mat-error *ngIf="extrasForm.controls.amount.invalid">{{ getErrorMessage() }}</mat-error>
+        </mat-form-field>
+        <mat-error *ngIf="error">{{ error }}</mat-error>
+        <ven-white-button label="REQUEST PRICING" (onClick)="onRequestPricing()"></ven-white-button>
+        <ven-app-primary-button
+          label="ADD"
+          (onClick)="onAddItem(extrasForm, formDirective)"
+          [disabled]="!extrasForm.valid || extrasForm.controls.item.value === '' || extrasForm.controls.amount.value === ''"
+        ></ven-app-primary-button>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,27 @@
+@import 'variables';
+mat-menu,
+.header-menu {
+  z-index: 9999;
+}
+
+:host {
+  align-items: baseline;
+  display: flex;
+  height: 24px;
+}
+
+button mat-icon {
+  margin-right: 16px !important;
+}
+
+a.mat-menu-item {
+  align-items: center;
+  display: flex;
+}
+
+@media print {
+  mat-menu,
+  .header-menu {
+    display: none !important;
+  }
+}

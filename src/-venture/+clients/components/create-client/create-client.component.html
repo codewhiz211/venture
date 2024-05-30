@@ -1,0 +1,54 @@
+<div class="dialog-wrapper" [ngClass]="{ 'loader-active': loading }">
+  <div *ngIf="loading; else addClient" class="loader-wrapper">
+    <mat-progress-spinner [mode]="'indeterminate'" [color]="'accent'"></mat-progress-spinner>
+  </div>
+  <ng-template #addClient>
+    <form [formGroup]="clientForm">
+      <mat-form-field class="half-width" appearance="outline">
+        <mat-label>Lot #</mat-label>
+        <input matInput formControlName="lot" type="text" id="lot" name="lot" />
+      </mat-form-field>
+      <mat-form-field class="half-width" appearance="outline">
+        <mat-label>Client name</mat-label>
+        <input matInput formControlName="client" type="text" id="client" name="client" />
+      </mat-form-field>
+      <mat-form-field class="half-width" appearance="outline">
+        <mat-label>Subdivision</mat-label>
+        <input matInput formControlName="subdivision" type="text" id="subdivision" name="subdivision" />
+      </mat-form-field>
+
+      <mat-checkbox class="duplicate-spec" formControlName="duplicateSpec">Duplicate existing Spec</mat-checkbox>
+
+      <mat-checkbox class="duplicate-spec" formControlName="syncFreedom">Sync with Freedom</mat-checkbox>
+
+      <ng-container *ngIf="clientForm.get('duplicateSpec').value">
+        <div class="clients-container">
+          <p>Select which client's spec you would like to duplicate below</p>
+
+          <ven-autocomplete
+            (optionChanged)="setUid($event.uid)"
+            [fullWidth]="true"
+            [label]="'Client Name'"
+            [options]="clients | async"
+            [optionLabelKey]="'client'"
+            [optionValueKey]="'client'"
+          ></ven-autocomplete>
+        </div>
+      </ng-container>
+
+      <ven-dialog-footer-buttons [closeAction]="closeAction" [submitAction]="submitAction"></ven-dialog-footer-buttons>
+      <div *ngIf="errorMessage" class="error-message">
+        {{ errorMessage }}
+      </div>
+      <div *ngIf="!clientForm.controls.lot.valid && clientForm.controls.lot.dirty" class="error-message">
+        <p>Please enter a lot #</p>
+      </div>
+      <div *ngIf="!clientForm.controls.client.valid && clientForm.controls.client.dirty" class="error-message">
+        <p>Please enter a client name</p>
+      </div>
+      <div *ngIf="!clientForm.controls.subdivision.valid && clientForm.controls.subdivision.dirty" class="error-message">
+        <p>Please enter a subdivision</p>
+      </div>
+    </form>
+  </ng-template>
+</div>

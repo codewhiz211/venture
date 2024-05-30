@@ -1,0 +1,43 @@
+<mat-accordion displayMode="flat">
+  <mat-expansion-panel class="mat-elevation-z0" (opened)="footerTitle = 'HIDE ACTIVITY'" (closed)="footerTitle = 'VIEW ACTIVITY'">
+    <mat-expansion-panel-header>
+      <mat-panel-title class="footer-title accent-colour">
+        <button class="primary footer-title-button" mat-flat-button disableRipple="true">{{ footerTitle }}</button>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <mat-vertical-stepper class="job-activity-stepper" [disableRipple]="true">
+      <mat-step *ngIf="completed" state="step" [editable]="false" [completed]="true">
+        <ng-template matStepLabel>
+          <ven-job-step-label [step]="getCompletedStep(completed)"></ven-job-step-label>
+        </ng-template>
+        <div *ngFor="let image of completed.images" class="accent-colour font-line view-image">
+          <ven-icon-new icon="insert_photo" colour="#008be5"></ven-icon-new>
+          <a class="accent-colour font-line" [href]="image.url">{{ image.filename }}</a>
+        </div>
+      </mat-step>
+      <mat-step *ngIf="scheduled" state="step" [editable]="false" [completed]="true">
+        <ng-template matStepLabel>
+          <div class="overline dark-medium-emphasis">{{ scheduled.date | date: 'shortDate' }}</div>
+          <div class="subtitle-2 dark-high-emphasis">
+            Job scehduled for <span *ngIf="scheduled.startDate">{{ scheduled.startDate | date: 'shortDate' }} - </span
+            >{{ scheduled.dueDate | date: 'shortDate' }}
+          </div>
+        </ng-template>
+      </mat-step>
+      <mat-step *ngIf="created" state="step" [editable]="false" [completed]="true">
+        <ng-template matStepLabel>
+          <ven-job-step-label [step]="getCreateStep(created)"></ven-job-step-label>
+        </ng-template>
+      </mat-step>
+      <ng-template matStepperIcon="step">
+        <ven-icon-new class="step-icon" icon="task_alt" colour="#008be5"></ven-icon-new>
+      </ng-template>
+      <ng-template matStepperIcon="edit">
+        <ven-icon-new class="step-icon" icon="task_alt" colour="#008be5"></ven-icon-new>
+      </ng-template>
+      <ng-template matStepperIcon="done">
+        <ven-icon-new class="step-icon" icon="task_alt" colour="#008be5"></ven-icon-new>
+      </ng-template>
+    </mat-vertical-stepper>
+  </mat-expansion-panel>
+</mat-accordion>

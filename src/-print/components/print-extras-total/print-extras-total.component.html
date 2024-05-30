@@ -1,0 +1,11 @@
+<div class="total">
+  <div class="bold">
+    <span>Total extras</span> <span>${{ totalPostExtras | number }}</span>
+  </div>
+  <div>
+    <span>Contracted price</span> <span>${{ (spec?.quote?.includeGST ? quote.gross : quote?.net) | number: '1.2-2' }}</span>
+  </div>
+  <div class="bold">
+    <span>Total price <span *ngIf="!spec?.quote?.includeGST">(Excluding GST)</span></span> <span>${{ total | number }}</span>
+  </div>
+</div>

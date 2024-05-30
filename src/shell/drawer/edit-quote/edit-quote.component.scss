@@ -1,0 +1,40 @@
+@import 'variables';
+
+.loader-active {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+:host::ng-deep.mat-form-field-appearance-outline .mat-form-field-prefix,
+.mat-form-field-appearance-outline .mat-form-field-suffix {
+  top: 0;
+}
+
+.loader-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+h2 {
+  color: $color-accent;
+  display: flex;
+  align-items: center;
+  font-weight: 400;
+}
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.mat-card-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+mat-checkbox {
+  margin-bottom: 16px;
+}

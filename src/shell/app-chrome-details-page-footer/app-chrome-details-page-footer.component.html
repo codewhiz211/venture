@@ -1,0 +1,28 @@
+<div class="app-chrome-details-page-footer" *ngIf="actions?.length > 0">
+  <ng-container [ngSwitch]="config.type">
+    <!-- force FAB -->
+    <mat-nav-list *ngSwitchCase="'forceFab'">
+      <ven-fab-button *ngFor="let actionItem of actions" [actionItem]="actionItem" [labelOnButton]="true"></ven-fab-button>
+    </mat-nav-list>
+
+    <!-- force Speed Dial -->
+    <ng-container *ngSwitchCase="'forceSpeedDial'">
+      <mat-nav-list *ngIf="actions.length <= 1; else speedDial">
+        <!-- simgle fab without label -->
+        <ven-fab-button [actionItem]="actions[0]" [labelOnButton]="false"></ven-fab-button>
+      </mat-nav-list>
+    </ng-container>
+
+    <!-- mix -->
+    <ng-container *ngSwitchCase="'mix'">
+      <mat-nav-list *ngIf="actions.length <= 1; else speedDial">
+        <!-- fab with label -->
+        <ven-fab-button [actionItem]="actions[0]" [labelOnButton]="true"></ven-fab-button>
+      </mat-nav-list>
+    </ng-container>
+
+    <ng-template #speedDial>
+      <ven-speed-dial [options]="actions"></ven-speed-dial>
+    </ng-template>
+  </ng-container>
+</div>

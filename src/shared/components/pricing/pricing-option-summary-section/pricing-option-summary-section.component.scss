@@ -1,0 +1,52 @@
+@import 'chrome-theme';
+@import 'variables';
+
+.half-width {
+  width: 48%;
+  @media screen and (max-width: $tablet) {
+    width: 100%;
+  }
+}
+.text-fields {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  .text-field {
+    display: flex;
+    flex-direction: column;
+    padding: 12px 0;
+    border-bottom: $grey-border;
+  }
+}
+
+.summary-table {
+  margin: 16px 0;
+  border: $grey-border;
+  border-radius: 3px;
+  page-break-inside: avoid;
+  .grid-row {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    align-items: center;
+    padding: 11px 16px;
+    border-bottom: $grey-border;
+
+    @media screen and (max-width: $tablet) {
+      grid-template-columns: 3fr 2fr;
+    }
+
+    .pull-right {
+      text-align: right;
+    }
+    .bold {
+      font-weight: bold;
+    }
+    .indentation {
+      padding-left: 10px;
+    }
+  }
+  .summary-note {
+    padding: 16px 16px 24px 16px;
+  }
+}

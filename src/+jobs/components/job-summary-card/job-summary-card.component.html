@@ -1,0 +1,101 @@
+<mat-card class="mat-elevation-z0">
+  <div class="job-item">
+    <div class="job-item-header">
+      <div class="job-item-title">
+        <div class="job-item-status dark-medium-emphasis overline">{{ status | uppercase }}</div>
+        <div class="dark-high-emphasis subtitle">{{ title }}</div>
+      </div>
+      <button mat-icon-button *ngIf="isAdmin" [matMenuTriggerFor]="menu">
+        <ven-icon-new icon="more_vert" colour="black"></ven-icon-new>
+      </button>
+      <mat-menu #menu="matMenu">
+        <a class="header-button" mat-menu-item (click)="handleEditJob()">
+          <ven-icon-new icon="edit" colour="rgba(0,0,0,0.87)" hover="black"></ven-icon-new>
+          <span>Edit Job</span>
+        </a>
+        <a class="header-button" mat-menu-item (click)="handleDeleteJob()">
+          <ven-icon-new icon="delete" colour="rgba(0,0,0,0.87)" hover="black"></ven-icon-new>
+          <span>Delete Job</span>
+        </a>
+      </mat-menu>
+    </div>
+    <div class="body-2 dark-medium-emphasis">
+      {{ job.description }}
+    </div>
+    <div [ngClass]="{ 'thick-margin': isAdmin, 'thin-margin': !isAdmin }">
+      <mat-chip-list class="chips">
+        <ng-container *ngIf="!isRemedial; else remedial">
+          <mat-chip [disableRipple]="true">
+            <ven-icon-new
+              class="small-icon-new"
+              icon="task_alt"
+              colour="#008be5"
+              *ngIf="job.status == 'completed'; else calendarIcon"
+            ></ven-icon-new>
+            <ng-template #calendarIcon>
+              <ven-icon-new class="small-icon-new" icon="event" colour="#6c6b6d"></ven-icon-new>
+            </ng-template>
+            <span
+              class="body-2"
+              [ngClass]="{
+                'accent-colour': job.status == 'completed'
+              }"
+            >
+              <span *ngIf="job.status == 'scheduled' && startDate">{{ startDate | date: 'shortDate' }} - </span>
+              {{ (dueDate | date: 'shortDate') || 'TBC' }}
+            </span>
+          </mat-chip>
+          <button
+            *ngIf="isAdmin && (job.status == 'created' || job.status == 'scheduled')"
+            class="date-picker-button"
+            (click)="openSchedulingDialog()"
+          >
+            <ven-icon-new icon="edit" class="small-icon-new" colour="#6c6b6d"></ven-icon-new>
+          </button>
+          <!-- TODO: re-enable after updating ng material -->
+          <!-- <mat-form-field color="accent" appearance="fill" style="width: 1px; height: 1px; visibility: hidden">
+            <mat-label>Enter a date range</mat-label>
+            <mat-date-range-input [formGroup]="scheduleFormDate" [min]="today" [rangePicker]="picker" (dateChange)="dateSelected($event)">
+              <input matInput matStartDate formControlName="start" />
+              <input matInput matEndDate formControlName="end" />
+            </mat-date-range-input>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-date-range-picker #picker></mat-date-range-picker>
+          </mat-form-field> -->
+          <!-- <button
+            *ngIf="isAdmin && (job.status == 'created' || job.status == 'scheduled')"
+            class="date-picker-button"
+            (click)="picker.open()"
+          >
+            <ven-icon-new icon="edit" class="small-icon-new" colour="#6c6b6d"></ven-icon-new>
+          </button> -->
+        </ng-container>
+        <ng-template #remedial>
+          <mat-chip id="urgent-chip" *ngIf="job.isUrgent && (job.status == 'created' || job.status == 'ready')" [disableRipple]="true">
+            <ven-icon-new class="small-icon-new" icon="error_outline" colour="red"></ven-icon-new>
+            <span class="body-2">Urgent</span>
+          </mat-chip>
+          <mat-chip id="ready-chip" *ngIf="job.status == 'ready'" [disableRipple]="true">
+            <ven-icon-new icon="hourglass_empty" class="small-icon-new" colour="#6c6b6d"></ven-icon-new>
+            <span class="body-2">{{ duration }} Days</span>
+          </mat-chip>
+          <mat-chip id="pending-chip" *ngIf="job.status == 'completed'" [disableRipple]="true">
+            <ng-container *ngIf="isAdmin; else subbie">
+              <ven-icon-new class="small-icon-new" icon="notification_important" colour="red"></ven-icon-new>
+              <span class="body-2">To be verified</span>
+            </ng-container>
+            <ng-template #subbie>
+              <ven-icon-new class="small-icon-new" icon="task_alt" colour="#008be5"></ven-icon-new>
+              <span class="accent-colour body-2">{{ activity.completed.date | date: 'shortDate' }}</span>
+            </ng-template>
+          </mat-chip>
+          <mat-chip id="verified-chip" *ngIf="job.status == 'verified'" [disableRipple]="true">
+            <ven-icon-new class="small-icon-new" icon="task_alt" colour="#008be5"></ven-icon-new>
+            <span class="accent-colour body-2">{{ activity.verified.date | date: 'shortDate' }}</span>
+          </mat-chip>
+        </ng-template>
+      </mat-chip-list>
+    </div>
+  </div>
+  <ng-content></ng-content>
+</mat-card>

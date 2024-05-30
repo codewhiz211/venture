@@ -1,0 +1,25 @@
+<div class="subtitle primary notification-title">Notification Details</div>
+<form #emailForm="ngForm">
+  <mat-form-field class="half-width" appearance="outline">
+    <mat-label>Email(s)</mat-label>
+    <input matInput [(ngModel)]="form.to" type="email" id="email" name="to" #email="ngModel" required />
+  </mat-form-field>
+  <span class="note">Separate multiple emails with a comma</span>
+  <mat-form-field class="half-width" appearance="outline">
+    <mat-label>Subject</mat-label>
+    <input matInput [(ngModel)]="form.subject" type="subject" id="subject" name="subject" #subject="ngModel" required />
+  </mat-form-field>
+  <mat-label>Message</mat-label>
+  <angular-editor [(ngModel)]="form.message" [config]="editorConfig" name="message" #message="ngModel" required></angular-editor>
+  <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+  <div *ngIf="!email.valid && !email.pristine" class="error-message">
+    <p>Please enter an email address</p>
+  </div>
+  <div *ngIf="!subject.valid && !subject.pristine" class="error-message">
+    <p>Please enter a subject</p>
+  </div>
+  <div *ngIf="!message.valid && !message.pristine" class="error-message">
+    <p>Please enter a message</p>
+  </div>
+</form>
+<ven-dialog-footer-buttons [closeAction]="closeAction" [submitAction]="submitAction"></ven-dialog-footer-buttons>

@@ -1,0 +1,22 @@
+@import 'variables';
+// only styles specific to text area component should go in here
+// ideally this component will simply use the styles injected by PrintItemComponent
+// see print-item/print-item.component.scss
+.textarea {
+  width: 100% !important;
+  border-bottom: none !important;
+
+  h5 {
+    font-size: 15px;
+    margin-top: 1em;
+    margin-bottom: 0.5em;
+    color: #039be5;
+    font-weight: 400;
+  }
+
+  &.highlight-body {
+    border-radius: 6px;
+    background-color: $color-highlight;
+    padding: 8px 6px 6px;
+  }
+}

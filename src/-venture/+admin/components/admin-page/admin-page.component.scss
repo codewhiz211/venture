@@ -1,0 +1,51 @@
+@import 'variables';
+.page-wrapper {
+  display: flex;
+  justify-content: center;
+}
+mat-icon {
+  color: white;
+}
+:host::ng-deep .mat-tab-labels {
+  display: flex;
+  justify-content: space-between;
+  text-transform: uppercase;
+}
+:host::ng-deep .mat-tab-label {
+  width: 50%;
+}
+
+.admin-content {
+  margin-top: -50px;
+
+  @media only screen and (max-width: #{$tablet}) {
+    margin-top: 0;
+  }
+}
+.add-button {
+  margin-top: -30px;
+  margin-left: 16px;
+
+  @media only screen and (max-width: #{$tablet + 1}) {
+    display: none !important;
+  }
+}
+
+.add-button-small {
+  @media only screen and (min-width: #{$tablet + 1}) {
+    display: none !important;
+  }
+
+  @media only screen and (max-width: #{$tablet}) {
+    position: absolute;
+    margin-top: -22px;
+    right: 32px;
+  }
+
+  @media only screen and (max-width: #{$mobile}) {
+    position: fixed;
+    bottom: 16px;
+    right: 32px;
+    z-index: 200;
+  }
+}

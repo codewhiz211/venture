@@ -1,0 +1,28 @@
+<!-- rows -->
+<div class="grid-row body-2 dark-medium-emphasis" *ngFor="let row of data">
+  <div *ngFor="let column of columns" [ngClass]="column.class">
+    <ng-container [ngSwitch]="column.type">
+      <span *ngSwitchCase="'number'">
+        <span *ngIf="column.prefix">{{ column.prefix }}</span
+        >{{ row[column.accessor] | number: '1.2-2' }}<span *ngIf="column.suffix">{{ column.suffix }}</span>
+      </span>
+      <span *ngSwitchCase="'operator'">
+        <ng-container *ngIf="editable">
+          <ven-menu
+            *ngIf="column.children; else singleOperator"
+            [menuItems]="column.children"
+            (menuSelected)="onAction(row, $event)"
+          ></ven-menu>
+          <ng-template #singleOperator>
+            <div class="operator-cell">
+              <ven-icon-new (click)="onAction(row)" [icon]="column.icon" colour="rgba(0,0,0,0.67)"></ven-icon-new>
+            </div>
+          </ng-template>
+        </ng-container>
+      </span>
+      <span *ngSwitchDefault>
+        {{ row[column.accessor] }}
+      </span>
+    </ng-container>
+  </div>
+</div>

@@ -1,0 +1,20 @@
+<div class="print-cover-page bg-image">
+  <img [src]="vdLogoImage" class="main-logo" />
+  <div class="text-container">
+    <span class="large-text" *ngIf="printSpec && !printExtras && !printQuote; else other">Specification Sheet</span>
+    <ng-template #other>
+      <span class="large-text" *ngIf="!printSpec && printExtras">Extras</span>
+      <span class="large-text" *ngIf="printSpec && printExtras">Extras & Specification Sheet</span>
+      <span class="large-text" *ngIf="!printSpec && printQuote">Quote </span>
+      <span class="large-text" *ngIf="printSpec && printQuote">Quote & Specification Sheet</span>
+    </ng-template>
+    <span class="medium-text">{{ clientName }}</span> <span class="small-text">{{ clientAddress }}</span>
+  </div>
+  <div class="logo-container">
+    <div><img [src]="mbLogoImage" /></div>
+    <div><img [src]="lpbLogoImage" /></div>
+    <div><img [src]="fpbLogoImage" style="height:31px" /></div>
+    <!--preload the background image to prepare for printing-->
+    <div><img [src]="blueWaveImage" style="display: none;" /></div>
+  </div>
+</div>

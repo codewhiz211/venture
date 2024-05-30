@@ -1,0 +1,6 @@
+<mat-checkbox *ngFor="let file of files" class="example-margin" [(ngModel)]="file.checked" (change)="onFileSeletChange()"
+  ><span class="ellipsis body-2 dark-medium-emphasis">{{ file.filename }}</span></mat-checkbox
+>
+<mat-checkbox *ngIf="files.length > 1" class="example-margin body-2 dark-medium-emphasis" [(ngModel)]="selectAll" (change)="onSelectAll()"
+  >All</mat-checkbox
+>

@@ -1,0 +1,58 @@
+<div class="dialog-wrapper">
+  <div>
+    <p>Fill out the details below to add new section to the spec</p>
+    <form class="section-detail-container" novalidate [formGroup]="form">
+      <p class="section-detail-label">New Section Details</p>
+      <mat-form-field appearance="outline">
+        <mat-label>Section name</mat-label>
+        <input [formControlName]="'name'" matInput cdkFocusInitial />
+        <mat-error *ngIf="form.get('name').invalid">Field is required</mat-error>
+      </mat-form-field>
+
+      <ven-autocomplete
+        (optionChanged)="onSectionChanged('afterSection', $event)"
+        [fullWidth]="true"
+        [label]="'Insert After'"
+        [options]="data.sections"
+        [optionLabelKey]="'title'"
+        [optionValueKey]="'title'"
+      ></ven-autocomplete>
+
+      <p class="section-detail-label">Section Type:</p>
+      <mat-radio-group [formControlName]="'type'" class="section-radio-group">
+        <mat-radio-button value="{{ FreeSection }}">Free text</mat-radio-button>
+        <mat-radio-button value="{{ DuplicateSection }}">Duplicate section</mat-radio-button>
+      </mat-radio-group>
+    </form>
+
+    <ng-container *ngIf="form.get('type').value === DuplicateSection">
+      <div class="section-detail-container">
+        <p>What do you want to duplicate?</p>
+        <ven-autocomplete
+          (optionChanged)="onSectionChanged('duplicateSection', $event)"
+          [fullWidth]="true"
+          [label]="'Section'"
+          [options]="sectionsAvailableForDuplication"
+          [optionLabelKey]="'title'"
+          [optionValueKey]="'title'"
+        ></ven-autocomplete>
+
+        <ng-container *ngIf="subSections?.length">
+          <div class="section-checkbox-container">
+            <mat-checkbox
+              *ngFor="let subSection of subSections"
+              class="example-margin"
+              [(ngModel)]="subSection.checked"
+              (change)="onSelectedChecklistsChanged()"
+              ><span class="ellipsis">{{ subSection?.name }}</span></mat-checkbox
+            >
+            <mat-checkbox *ngIf="subSections?.length > 1" class="example-margin" [(ngModel)]="selectAll" (change)="onSelectAll()"
+              >All</mat-checkbox
+            >
+          </div>
+        </ng-container>
+      </div>
+    </ng-container>
+  </div>
+  <ven-dialog-footer-buttons [closeAction]="closeAction" [submitAction]="submitAction"></ven-dialog-footer-buttons>
+</div>

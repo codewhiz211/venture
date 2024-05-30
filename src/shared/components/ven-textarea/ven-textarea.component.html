@@ -1,0 +1,17 @@
+<form [formGroup]="inputForm">
+  <mat-form-field [ngClass]="styleClass" appearance="outline">
+    <mat-label>{{ label }}</mat-label>
+    <textarea
+      matInput
+      formControlName="field"
+      type="details"
+      id="field"
+      name="field"
+      (blur)="onBlur()"
+      cdkTextareaAutosize
+      #autosize="cdkTextareaAutosize"
+      cdkAutosizeMinRows="2"
+      cdkAutosizeMaxRows="5"
+    ></textarea>
+  </mat-form-field>
+</form>

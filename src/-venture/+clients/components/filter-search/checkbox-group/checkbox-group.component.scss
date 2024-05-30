@@ -1,0 +1,14 @@
+@import 'variables';
+:host {
+  margin-bottom: 16px;
+}
+li {
+  list-style: none;
+  font-size: 0.75em;
+  text-transform: capitalize;
+
+  &.toggle {
+    color: $color-accent;
+    cursor: pointer;
+  }
+}

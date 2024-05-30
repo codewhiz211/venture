@@ -1,0 +1,36 @@
+@import 'chrome-theme';
+mat-card {
+  padding: 0px;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid $chrome-border-colour-dark;
+}
+
+.summary-body {
+  margin: 10px 16px 24px 16px !important; //override .mat-card>:first-child of angular material
+}
+
+.chips {
+  mat-chip {
+    margin-top: 18px;
+    max-width: 100%;
+  }
+  .small-icon-new {
+    transform: scale(0.75);
+  }
+  div {
+    margin: 0 1px;
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  a {
+    color: $blue-primary;
+    text-decoration: none;
+  }
+}
+
+.mat-chip.mat-standard-chip::after {
+  background-color: rgba(0, 0, 0, 0); // disable that a chip under hover becomes darker
+}

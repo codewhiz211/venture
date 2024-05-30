@@ -1,0 +1,78 @@
+@import 'variables';
+@import 'chrome-theme';
+
+.mat-dialog-actions {
+  justify-content: flex-end;
+}
+.file-list {
+  display: flex;
+  justify-content: space-between;
+
+  .filename {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    overflow: hidden;
+
+    @media only screen and (max-width: #{$mobile + 1}) {
+      border: 1px solid $chrome-border-colour-dark;
+      padding: 8px;
+      border-radius: 3px;
+      margin-bottom: 16px;
+    }
+
+    div {
+      display: flex;
+      flex-wrap: wrap;
+      max-width: 100%;
+
+      span:first-child {
+        max-width: 85%;
+        display: block;
+        display: inline-block;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        margin-right: 16px;
+        opacity: 1;
+      }
+      span {
+        opacity: 0.6;
+      }
+    }
+
+    mat-icon:first-child {
+      &:hover {
+        color: $color-accent;
+      }
+    }
+    mat-icon:nth-child(2) {
+      &:hover {
+        color: darkred;
+      }
+    }
+  }
+
+  mat-icon {
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  form {
+    mat-icon {
+      margin-left: 16px;
+
+      &:last-child {
+        color: green;
+      }
+    }
+  }
+}
+
+.error {
+  font-size: 14px;
+  color: red;
+  margin-left: 16px;
+}

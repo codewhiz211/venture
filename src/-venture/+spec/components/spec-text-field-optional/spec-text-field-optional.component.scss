@@ -1,0 +1,43 @@
+@import '../shared-styles.scss';
+@import 'variables';
+
+.remove-wrapper {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.add-container,
+.remove-container {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  width: fit-content;
+  margin-bottom: 8px;
+
+  mat-icon {
+    height: 18px;
+    width: 18px;
+  }
+
+  &.remove-container {
+    position: relative;
+    right: 0;
+  }
+
+  .emphasis-med {
+    font-size: 12px;
+  }
+}
+
+.optional-form {
+  ::ng-deep .mat-form-field-wrapper {
+    padding-bottom: 0 !important;
+    margin-bottom: 0 !important;
+  }
+}
+
+@media screen and (min-width: $mobile) {
+  .add-container {
+    margin-bottom: 12px;
+  }
+}

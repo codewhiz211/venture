@@ -1,0 +1,102 @@
+@import 'variables';
+@import 'chrome-theme';
+.dialog-wrapper {
+  &.loader-active {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+  }
+}
+mat-icon {
+  fill: $color-accent;
+}
+
+.loader-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+h2 {
+  color: $color-accent;
+  display: flex;
+  align-items: center;
+  margin-bottom: 32px;
+  font-weight: 400;
+}
+
+p {
+  margin-bottom: 16px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 8px;
+}
+
+.mat-card-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.grid {
+  margin-bottom: 16px;
+}
+
+.grid-row {
+  display: grid; //four columns; first is twice width of the rest
+  grid-template-columns: 0.25fr 1.25fr 1fr 1.25fr;
+  border-bottom: 1px solid $chrome-border-colour-dark;
+  font-size: 13px;
+  &.padded {
+    padding-bottom: 16px;
+  }
+  &.noUnderline {
+    border-bottom: none;
+  }
+  &.bold {
+    font-weight: bold;
+    border-bottom: 1px solid $chrome-border-colour-dark;
+  }
+  @media only screen and (max-width: #{$mobile}) {
+    font-size: 11px;
+    div:first-child {
+      font-size: 12px;
+    }
+  }
+}
+
+.grid-row-header {
+  border-bottom: 1px solid $chrome-border-colour-dark;
+}
+
+.tile {
+  border: $secondary-blue-border;
+  padding: 8px;
+  border-radius: 3px;
+  margin-bottom: 8px;
+
+  &:active {
+    border: 1px solid $blue-primary;
+  }
+  div span:first-child {
+    margin-right: 5px;
+    font-size: 14px;
+  }
+}
+.subtitle {
+  @media only screen and (max-width: #{$tablet}) {
+    justify-content: space-between;
+  }
+  mat-icon {
+    margin-right: 5px;
+  }
+  span {
+    display: flex;
+  }
+}

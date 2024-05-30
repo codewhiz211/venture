@@ -1,0 +1,66 @@
+<div class="wrapper">
+  <!-- search -->
+  <div class="search-box">
+    <mat-form-field [floatLabel]="'never'">
+      <input matInput (keyup)="keyUp.next(filterInput.value)" #filterInput placeholder="Search client or Lot#" />
+      <mat-icon matSuffix>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+          <path fill="none" d="M0 0h24v24H0V0z" />
+          <path
+            d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"
+          />
+        </svg>
+      </mat-icon>
+    </mat-form-field>
+  </div>
+  <div>
+    <!-- button -->
+    <button (click)="onToggleFilters()" mat-raised-button color="accent" class="filter-button">
+      <mat-icon>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+          <path fill="none" d="M0 0h24v24H0V0z" />
+          <path d="M10 18h4v-2h-4v2zM3 6v2h18V6H3zm3 7h12v-2H6v2z" />
+        </svg>
+      </mat-icon>
+      <span class="not-mobile"> Filters</span>
+    </button>
+  </div>
+</div>
+
+<!-- selected filters chips -->
+<ven-selected-filters-list
+  *ngIf="!showFilters"
+  [definition]="filterDefinition"
+  (searchRemoved)="onRemoveSearch()"
+  (subdivisionRemoved)="onRemoveSubdivision($event)"
+  (consultantRemoved)="onRemoveConsultant($event)"
+  (pmRemoved)="onRemovePm($event)"
+  (statusRemoved)="onRemoveStatus($event)"
+></ven-selected-filters-list>
+
+<div *ngIf="showFilters" class="filter-box">
+  <ven-checkbox-group
+    (optionsChanged)="onSubdivisionChange($event)"
+    [selectedOptions]="selectedOptions.subdivisions"
+    [groupTitle]="'Subdivision'"
+    [groupOptions]="filterOptions.subdivisions"
+  ></ven-checkbox-group>
+  <ven-checkbox-group
+    (optionsChanged)="onConsultantChange($event)"
+    [selectedOptions]="selectedOptions.consultants"
+    [groupTitle]="'Consultant'"
+    [groupOptions]="filterOptions.consultants"
+  ></ven-checkbox-group>
+  <ven-checkbox-group
+    (optionsChanged)="onProjectManagerChange($event)"
+    [selectedOptions]="selectedOptions.pms"
+    [groupTitle]="'Project Managers'"
+    [groupOptions]="filterOptions.pms"
+  ></ven-checkbox-group>
+  <ven-checkbox-group
+    (optionsChanged)="onStatusChange($event)"
+    [selectedOptions]="selectedOptions.statuses"
+    [groupTitle]="'Status'"
+    [groupOptions]="filterOptions.statuses"
+  ></ven-checkbox-group>
+</div>

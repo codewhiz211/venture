@@ -1,0 +1,23 @@
+@import 'chrome-theme';
+mat-card {
+  padding: 0px;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid $chrome-border-colour-dark;
+}
+
+.build-summary-body {
+  margin: 10px 16px 24px 16px !important; //override .mat-card>:first-child of angular material
+}
+
+.chips {
+  mat-chip {
+    margin-top: 18px;
+  }
+  .small-icon-new {
+    transform: scale(0.75);
+  }
+  span {
+    margin: 0 1px;
+  }
+}

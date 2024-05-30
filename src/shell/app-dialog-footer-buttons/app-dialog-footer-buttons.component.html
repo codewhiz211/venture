@@ -1,0 +1,11 @@
+<mat-dialog-actions align="end">
+  <ven-app-cancel-button [label]="closeAction.label" [icon]="closeAction.icon" (onClick)="closeAction.handler()"></ven-app-cancel-button>
+  <ven-app-primary-button
+    *ngIf="submitAction"
+    style="margin-left: 16px"
+    [label]="submitAction.label"
+    [icon]="submitAction.icon"
+    (onClick)="submitAction.handler()"
+    [disabled]="disabled"
+  ></ven-app-primary-button>
+</mat-dialog-actions>

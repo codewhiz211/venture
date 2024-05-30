@@ -1,0 +1,3 @@
+<div class="overline dark-medium-emphasis font-line">{{ step.date | date: 'shortDate' }}</div>
+<div class="subtitle-2 dark-high-emphasis">{{ step.message }}</div>
+<div class="caption dark-medium-emphasis font-line" *ngIf="step.comments">{{ step.comments }}</div>

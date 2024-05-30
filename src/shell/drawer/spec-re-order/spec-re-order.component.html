@@ -1,0 +1,17 @@
+<div class="dialog-wrapper" *ngIf="displayComponent">
+  <div>
+    <p>
+      To change the order of the spec, drag and drop the sections in the list below. Once you are happy with the order, select save to
+      update.
+    </p>
+    <div cdkDropList class="drag-drop-container" *ngIf="sectionsList" (cdkDropListDropped)="onSectionDrop($event)">
+      <div class="drag-drop-item-wrapper" *ngFor="let section of sectionsList" cdkDrag>
+        <h2 class="body-2 dark-high-emphasis">
+          {{ section?.title }}
+        </h2>
+        <ven-icon-new icon="reorder" colour="grey"></ven-icon-new>
+      </div>
+    </div>
+  </div>
+  <ven-dialog-footer-buttons [closeAction]="closeAction" [submitAction]="submitAction"></ven-dialog-footer-buttons>
+</div>

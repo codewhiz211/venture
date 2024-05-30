@@ -1,0 +1,50 @@
+<form [formGroup]="quoteForm">
+  <!-- [class.animateSuccess]="updatedSucceeded" [class.animateFail]="updatedFailed" -->
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Payment method</mat-label>
+    <mat-select formControlName="paymentMethod" (selectionChange)="valueChanged($event)" class="subtitle">
+      <mat-option></mat-option>
+      <mat-option *ngFor="let payment of payments" [value]="payment.display"> {{ payment.display }} </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Build price</mat-label>
+    <span matPrefix class="subtitle">$&nbsp;</span>
+    <input
+      matInput
+      formControlName="buildPrice"
+      type="number"
+      id="buildPrice"
+      name="buildPrice"
+      (change)="valueChanged($event)"
+      class="subtitle"
+    />
+  </mat-form-field>
+  <mat-form-field *ngIf="quoteForm?.value.paymentMethod !== 'Build Only'" appearance="outline" class="full-width">
+    <mat-label>Land price</mat-label>
+    <span matPrefix class="subtitle">$&nbsp;</span>
+    <input
+      matInput
+      formControlName="landPrice"
+      type="number"
+      id="landPrice"
+      name="landPrice"
+      (change)="valueChanged($event)"
+      class="subtitle"
+    />
+  </mat-form-field>
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Initial commitment</mat-label>
+    <span matPrefix class="subtitle align-centered">$&nbsp;</span>
+    <input
+      matInput
+      formControlName="initialCommitment"
+      type="number"
+      id="initialCommitment"
+      name="initialCommitment"
+      (change)="valueChanged($event)"
+      class="subtitle"
+    />
+  </mat-form-field>
+</form>

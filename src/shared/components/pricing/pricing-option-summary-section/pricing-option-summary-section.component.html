@@ -1,0 +1,46 @@
+<div>
+  <div class="summary-header text-fields" *ngIf="summaryHeader">
+    <div *ngFor="let field of headerFields" class="text-field" [ngClass]="field.class">
+      <div class="dark-medium-emphasis overline">{{ field.display | uppercase }}</div>
+      <div class="text-value dark-high-emphasis body-override">
+        <span *ngIf="field.type == 'date'; else text">
+          {{ summaryHeader[field.name] | date: 'shortDate' }}
+        </span>
+        <ng-template #text>
+          <span>
+            {{ summaryHeader[field.name] || 'N/A' }}
+          </span>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+  <div class="summary-table body-override" *ngIf="pricingTable">
+    <div class="grid-row">
+      <div></div>
+      <div class="primary pull-right">Price</div>
+    </div>
+    <ng-container *ngFor="let section of tableFields">
+      <ng-container *ngIf="section.section; else field">
+        <div class="grid-row" *ngIf="pricingTable[section.section].total != 0">
+          <div class="primary">{{ section.display }}</div>
+          <div></div>
+        </div>
+        <ng-container *ngFor="let field of section.children">
+          <div *ngIf="pricingTable[section.section][field.name] as fieldValue" class="dark-high-emphasis grid-row">
+            <div [ngClass]="field.class" class="indentation">{{ field.display }}</div>
+            <div class="pull-right">${{ fieldValue | number: '1.2-2' }}</div>
+          </div>
+        </ng-container>
+      </ng-container>
+      <ng-template #field>
+        <div [ngClass]="section.class" class="grid-row">
+          <div [ngClass]="section.class">{{ section.display }}</div>
+          <div class="pull-right">${{ pricingTable[section.name] | number: '1.2-2' }}</div>
+        </div>
+      </ng-template>
+    </ng-container>
+    <div class="summary-note caption dark-medium-emphasis" *ngIf="notes">
+      <p *ngFor="let note of notes">{{ note }}</p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,17 @@
+@import 'variables';
+
+.mat-form-field {
+  display: block;
+}
+
+:host {
+  ::ng-deep {
+    .mat-form-field-wrapper {
+      padding-bottom: 1.34375em !important;
+    }
+  }
+}
+
+form {
+  margin-bottom: 16px;
+}

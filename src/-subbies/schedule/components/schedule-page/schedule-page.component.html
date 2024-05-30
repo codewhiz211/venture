@@ -1,0 +1,6 @@
+<div class="schedule-page">
+  <ven-app-chrome-loader *ngIf="loading; else scheduleContent"></ven-app-chrome-loader>
+  <ng-template #scheduleContent>
+    <ven-customising-header-calendar [scheduledDates]="scheduledDates$ | async"></ven-customising-header-calendar>
+  </ng-template>
+</div>

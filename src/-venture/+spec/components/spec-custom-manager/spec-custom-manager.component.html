@@ -1,0 +1,92 @@
+<h2 *ngIf="field.title" class="subtitle">
+  {{ subTitle || field.title }}
+  <ven-spec-accordion-menu [spec]="spec" [section]="section" [field]="field" [activeSection]="section.id"></ven-spec-accordion-menu>
+</h2>
+<ng-container *ngIf="!sectionHidden">
+  <ng-container *ngFor="let block of blocks; index as i">
+    <div class="field-wrapper">
+      <ng-container *ngFor="let field of block.fields">
+        <ng-container [ngSwitch]="field?.type">
+          <p *ngSwitchCase="'note'" class="subtitle">{{ field.text }}</p>
+          <h3 *ngSwitchCase="'subtitle'" class="subtitle">{{ field.text }}</h3>
+          <ven-spec-droppicker
+            *ngSwitchCase="'dropdown'"
+            [spec]="spec"
+            [section]="block.section"
+            [field]="field"
+            class="spec-field"
+          ></ven-spec-droppicker>
+          <ven-spec-text-field
+            *ngSwitchCase="'text'"
+            [spec]="spec"
+            [section]="block.section"
+            [field]="field"
+            class="spec-field"
+          ></ven-spec-text-field>
+          <ven-spec-number
+            *ngSwitchCase="'number'"
+            [spec]="spec"
+            [section]="block.section"
+            [field]="field"
+            class="spec-field"
+          ></ven-spec-number>
+          <ven-spec-text-area
+            *ngSwitchCase="'textarea'"
+            [spec]="spec"
+            [section]="block.section"
+            [field]="field"
+            class="spec-field"
+          ></ven-spec-text-area>
+          <!-- Displayed once PmNote field-->
+          <ng-container *ngIf="i === 0">
+            <ven-spec-text-area
+              *ngSwitchCase="'textarea-pm'"
+              [spec]="spec"
+              [section]="section"
+              [field]="field"
+              class="spec-field"
+            ></ven-spec-text-area>
+          </ng-container>
+          <!--conditional controls -->
+          <ven-spec-text-field-conditional
+            *ngSwitchCase="'text-conditional'"
+            [spec]="spec"
+            [section]="block.section"
+            [field]="field"
+            class="spec-field"
+          ></ven-spec-text-field-conditional>
+          <ven-spec-number-conditional
+            *ngSwitchCase="'number-conditional'"
+            [spec]="spec"
+            [section]="block.section"
+            [field]="field"
+            class="spec-field"
+          ></ven-spec-number-conditional>
+          <div *ngSwitchCase="'dropdown-conditional'">{{ field.name }} should use dropdown - not dropdown-conditional</div>
+          <ven-spec-text-area-conditional
+            *ngSwitchCase="'textarea-conditional'"
+            [spec]="spec"
+            [section]="block.section"
+            [field]="field"
+            class="spec-field"
+          ></ven-spec-text-area-conditional>
+        </ng-container>
+      </ng-container>
+      <div *ngIf="blocks.length > 1 && block.id !== blocks.length - 1 && !spec?.disabled" class="button-container no-print">
+        <ven-app-cancel-button (onClick)="removeBlock(block.id)" label="Remove"></ven-app-cancel-button>
+      </div>
+    </div>
+  </ng-container>
+</ng-container>
+<div *ngIf="addingBlock" class="loader">
+  Adding Block <mat-progress-spinner [mode]="'indeterminate'" [color]="'accent'" [diameter]="50"></mat-progress-spinner>
+</div>
+<ng-container *ngIf="!spec?.disabled">
+  <ng-container *ngIf="!sectionHidden; else showButton">
+    <div class="button-container no-print">
+      <ven-app-cancel-button *ngIf="blocks.length > 0" (onClick)="removeBlock(blocks.length - 1)" label="Remove"></ven-app-cancel-button>
+      <ven-app-primary-button (onClick)="addNewBlock()" label="Add"></ven-app-primary-button>
+    </div>
+  </ng-container>
+  <ng-template #showButton> <ven-visibility-toggle (onClicked)="showSection()"></ven-visibility-toggle> </ng-template>
+</ng-container>

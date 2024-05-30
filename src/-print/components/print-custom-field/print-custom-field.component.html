@@ -1,0 +1,17 @@
+<div>
+  <!-- USE SECTION HEADER -->
+  <div *ngIf="print" class="section-custom">
+    <div *ngIf="spec[section?.name][pmNotesField]?.length" class="textarea" [class.highlight-body]="highlightNote(pmNotesField)">
+      <h5>PM Notes</h5>
+      <div>{{ spec[section?.name][pmNotesField] }}</div>
+    </div>
+    <div *ngFor="let block of blocks; index as i" class="block-container">
+      <div *ngFor="let field of block.fields">
+        <div class="description">
+          <span class="description-label">{{ field.display }}</span> <span class="description-value">{{ field.value || 'n/a' }}</span>
+          <span class="error"> {{ findFieldError(i, field.name) }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,14 @@
+@import 'chrome-theme';
+@import 'variables';
+
+mat-nav-list {
+  display: flex;
+}
+
+mat-icon {
+  margin-right: 24px;
+
+  &:last-child {
+    margin-right: 8px;
+  }
+}

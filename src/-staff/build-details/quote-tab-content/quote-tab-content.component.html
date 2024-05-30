@@ -1,0 +1,39 @@
+<div class="double-column-container tab-content-container">
+  <!-- To get right container up to left container on mobile, we use row-reverse to get them right place on desktop -->
+  <div class="right-container">
+    <div class="bordered">
+      <ven-staff-notification [customValues]="customValues"></ven-staff-notification>
+    </div>
+    <div class="bordered hideOnMobile" *ngIf="spec.details.status == 'Quote'">
+      <div class="primary subtitle quote-options-title">Quote options</div>
+      <ven-quote-options [quote]="spec?.quote" (valueChange)="saveQuote($event)"></ven-quote-options>
+      <div class="primary caption advanced-options" (click)="openEditQuote()">Advanced options</div>
+    </div>
+  </div>
+  <div class="left-container">
+    <!-- Quote Header -->
+    <div class="bordered no-padding">
+      <mat-accordion class="quote-header">
+        <mat-expansion-panel class="mat-elevation-z0">
+          <mat-expansion-panel-header>
+            <mat-panel-title class="primary subtitle"> Quote header </mat-panel-title>
+          </mat-expansion-panel-header>
+          <p class="body-2 dark-medium-emphasis">
+            Thank you for the opportunity to provide you with a quote for your {{ spec.layout.bedrooms }} bedroom,
+            {{ spec.layout.bathrooms }} bathroom, {{ spec.section_details.sectionSize }} SQM Section &
+            {{ spec.section_details.houseSize }} SQM dwelling at Lot {{ spec.section_details.lot }} {{ spec.details.subdivision }}.
+          </p>
+          <p class="body-2 dark-medium-emphasis">
+            To complete the project works as per plans and specifications, including all insurances, Council Consent and a 10 year Master
+            Build Guarantee.
+          </p>
+          <p class="body-2 dark-medium-emphasis">This Quote is based on the {{ spec.quote?.paymentMethod }}.</p>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+    <!-- Quote Table -->
+    <div class="main-table">
+      <ven-quote-amount [spec]="spec"></ven-quote-amount>
+    </div>
+  </div>
+</div>

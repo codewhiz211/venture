@@ -1,0 +1,9 @@
+<div *ngIf="searchActive$ | async; else title">
+  <ven-search-bar></ven-search-bar>
+</div>
+<ng-template #title>
+  <div *ngIf="activePage$ | async; let page">
+    <h6 class="mobile-header" *ngIf="!page.hideMobile">{{ page.label }}</h6>
+    <h6 class="desktop-header">{{ page.label }}</h6>
+  </div>
+</ng-template>

@@ -1,0 +1,30 @@
+<div>
+  <div class="logo">
+    <img src="/assets/img/logo.svg" />
+  </div>
+
+  <ven-app-chrome-loader *ngIf="loading; else homeContent" [style.marginTop.px]="loaderOffset"></ven-app-chrome-loader>
+
+  <ng-template #homeContent>
+    <ven-subbie-jobs-board
+      class="subbie-jobs-board"
+      title="Outstanding Remedials"
+      [jobs]="outStandingRemedialJobs$ | async"
+    ></ven-subbie-jobs-board>
+
+    <ven-subbie-jobs-board
+      class="subbie-jobs-board"
+      title="Saved Jobs"
+      titleIcon="star"
+      [jobs]="savedJobs$ | async"
+    ></ven-subbie-jobs-board>
+
+    <div class="job-cards-container">
+      <!-- <ven-no-saved-jobs-card *ngIf="(savedJobs$ | async) == undefined || (savedJobs$ | async).length === 0"> </ven-no-saved-jobs-card> -->
+      <ven-no-saved-card
+        *ngIf="(savedJobs$ | async) == undefined || (savedJobs$ | async).length === 0"
+        [passages]="noSavedPassages"
+      ></ven-no-saved-card>
+    </div>
+  </ng-template>
+</div>

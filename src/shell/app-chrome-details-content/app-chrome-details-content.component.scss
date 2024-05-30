@@ -1,0 +1,56 @@
+@import '~@angular/material/theming';
+
+@import 'variables';
+@import 'chrome-theme';
+@import 'chrome-typography';
+
+:host::ng-deep .mat-tab-label-content {
+  letter-spacing: 1.25px;
+}
+
+:host::ng-deep .mat-tab-header {
+  border-bottom: none;
+  @include mat-elevation(4);
+}
+
+:host::ng-deep .mat-tab-label {
+  opacity: 1;
+}
+
+mat-tab-group {
+  height: 100%;
+}
+
+@media only screen and (min-width: #{$tablet+1}) {
+  :host::ng-deep .mat-tab-header {
+    background-color: $blue-light;
+  }
+  :host::ng-deep .mat-tab-label {
+    color: $text-light-medium-emphasis;
+  }
+  :host::ng-deep .mat-tab-label-active {
+    color: $text-light-high-emphasis;
+  }
+
+  //underline of the active tab
+  :host::ng-deep .mat-ink-bar {
+    background-color: #ffffff !important;
+  }
+}
+
+@media only screen and (max-width: #{$tablet}) {
+  // As we don't have a ThemePalette(with only  available values: primary, accent, warn and undefined) here,
+  // we only need to coloring tab-label-active with ng-deep
+  :host::ng-deep .mat-tab-label-active {
+    color: $blue-primary;
+  }
+
+  //underline of the active tab
+  :host::ng-deep .mat-ink-bar {
+    background-color: $color-accent !important;
+  }
+
+  :host::ng-deep .mat-tab-body-wrapper {
+    height: calc(100vh - #{$chrome-header-height} - 32px - 48px);
+  }
+}

@@ -1,0 +1,16 @@
+<div class="dialog-wrapper">
+  <div>
+    <p class="body-override">Add your signature in the box below using your finger, a mouse or a stylus</p>
+    <ven-signature-sign-pad [signatureSpec]="signatureSpec" #signPad (signedImg)="onSignedImg($event)"></ven-signature-sign-pad>
+  </div>
+  <ng-container *ngIf="spec">
+    <div class="sign-all-container">
+      <mat-checkbox [(ngModel)]="checkAll" class="option body-override">Apply signature to all sections</mat-checkbox>
+    </div>
+  </ng-container>
+  <div mat-dialog-actions>
+    <ven-app-cancel-button label="CLOSE" (onClick)="onCancel()"></ven-app-cancel-button>
+    <ven-app-cancel-button label="CLEAR" (onClick)="onClear()"></ven-app-cancel-button>
+    <ven-app-primary-button label="SAVE" (onClick)="onSubmit()"></ven-app-primary-button>
+  </div>
+</div>

@@ -1,0 +1,7 @@
+<div *ngIf="signaturePath || signedChecklist" class="signature">
+  <div class="signature-signed">Signed: <img [src]="signaturePath || signedChecklist" alt="Signature" /></div>
+  <div class="signature-actions">
+    <div>Date: {{ todayDate | date }}</div>
+    <button mat-flat-button (click)="openModalSign()">Edit</button>
+  </div>
+</div>

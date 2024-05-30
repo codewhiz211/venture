@@ -1,0 +1,26 @@
+<ven-app-chrome-loader *ngIf="!(clients$ | async); else mainContent"></ven-app-chrome-loader>
+
+<ng-template #mainContent>
+  <div class="page-container">
+    <ng-container *ngIf="!(searchActive$ | async)">
+      <ven-saved-cards-board title="SAVED BUILDS" [savedItem]="savedBuilds$ | async" [passages]="passages">
+        <ven-build-summary-card
+          class="summary-cards"
+          *ngFor="let item of savedBuilds$ | async"
+          [build]="item"
+          isSaved="true"
+        ></ven-build-summary-card>
+      </ven-saved-cards-board>
+    </ng-container>
+    <div class="table-section">
+      <h6 class="light-high-emphasis">ALL BUILDS</h6>
+      <ven-table
+        [data]="clients$ | async"
+        [columns]="columns"
+        [initialSortedColumn]="initialSortedColumn"
+        [filter]="filterValue$ | async"
+        (onRowClick)="viewSpecDetails($event)"
+      ></ven-table>
+    </div>
+  </div>
+</ng-template>

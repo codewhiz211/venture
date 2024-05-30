@@ -1,0 +1,52 @@
+@import '../shared-styles.scss';
+@import 'variables';
+
+.highlight-body {
+  .highlight-text {
+    display: flex;
+    cursor: pointer;
+    width: fit-content;
+    padding-bottom: 6px;
+    font-size: 12px;
+    color: rgba(0, 0, 0, 0.6);
+
+    &.disable-highlight {
+      opacity: 0.5;
+      cursor: initial;
+
+      &:hover {
+        color: rgba(0, 0, 0, 0.6);
+
+        svg {
+          fill: rgba(0, 0, 0, 0.6);
+        }
+      }
+    }
+
+    svg {
+      fill: rgba(0, 0, 0, 0.6);
+    }
+
+    &:hover {
+      color: $color-accent;
+
+      svg {
+        fill: $color-accent;
+      }
+    }
+  }
+
+  &.highlight {
+    span {
+      color: $color-accent;
+    }
+
+    svg {
+      fill: $color-accent !important;
+    }
+    ::ng-deep.mat-form-field-appearance-outline .mat-form-field-outline {
+      background-color: $color-highlight;
+      border-radius: 6px;
+    }
+  }
+}

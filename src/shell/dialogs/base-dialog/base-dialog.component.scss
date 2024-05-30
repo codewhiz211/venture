@@ -1,0 +1,25 @@
+@import 'chrome-theme';
+@import 'variables';
+
+.mat-dialog-content {
+  // this height calc is required to ensure footer buttons at bottom of screen (b
+  height: calc(100% - 52px); //5p2 = title + top padding
+}
+
+:host::ng-deep mat-dialog-content {
+  position: relative;
+}
+:host::ng-deep mat-dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.close-button {
+  float: right;
+  top: -24px;
+  right: -24px;
+}
+
+.accent-color {
+  color: $blue-primary;
+}

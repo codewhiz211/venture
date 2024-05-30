@@ -1,0 +1,20 @@
+@import 'chrome-theme';
+
+form {
+  padding-bottom: 16px;
+}
+
+.note-entry {
+  padding: 8px 0;
+  border-bottom: $grey-border;
+}
+
+// to let the long label in checkbox can wrap
+:host::ng-deep.mat-checkbox-layout {
+  white-space: normal !important;
+}
+
+// if there is an multi-line label, align the checkbox to the first line
+:host::ng-deep.mat-checkbox-inner-container {
+  margin-top: 4px;
+}

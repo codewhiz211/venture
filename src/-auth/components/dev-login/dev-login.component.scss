@@ -1,0 +1,134 @@
+@import 'variables';
+
+:host {
+  background-color: #414042;
+  background-image: url('/assets/img/background-desktop.png');
+  background-repeat: no-repeat;
+
+  background-attachment: fixed;
+  background-position: bottom;
+  background-size: contain;
+
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 9999;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @media only screen and (max-width: #{$tablet}) {
+    :host {
+      background-image: url('/assets/img/background-mobile.png');
+      background-size: cover;
+    }
+  }
+}
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo {
+  position: fixed;
+  top: 24px;
+  width: 250px;
+
+  @media only screen and (max-width: #{$tablet}) {
+    top: 16px;
+    width: 136px;
+  }
+}
+
+.box {
+  align-items: center;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  @media only screen and (max-width: #{$tablet}) {
+    width: auto;
+    min-height: auto;
+    min-width: 50%;
+  }
+}
+
+.login-content {
+  margin: 32px;
+}
+
+h6 {
+  color: $color-accent;
+  margin: 24px 0;
+  text-transform: uppercase;
+
+  @media only screen and (max-width: #{$tablet}) {
+    margin: 16px 0;
+  }
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 400px;
+
+  @media only screen and (max-width: #{$tablet}) {
+    max-width: 400px;
+    width: calc(100vw - 32px);
+  }
+
+  button {
+    width: 100px;
+  }
+}
+
+::ng-deep.mat-input-element {
+  color: white !important;
+}
+
+::ng-deep.mat-form-field-appearance-outline .mat-form-field-label {
+  color: white !important;
+}
+
+input:-internal-autofill-selected {
+  background: transparent !important;
+}
+
+::ng-deep.mat-form-field-appearance-outline .mat-form-field-outline {
+  color: white !important;
+}
+
+::ng-deep.mat-form-field-appearance-outline .mat-form-field-outline-thick {
+  color: white !important;
+}
+
+::ng-deep.mat-form-field .mat-form-field-label {
+  color: white !important;
+}
+::ng-deep.mat-form-field-label {
+  color: white !important;
+}
+
+.error-message {
+  background: darkred;
+  color: white;
+  padding: 10px;
+}
+
+mat-spinner {
+  width: 100px;
+  height: 100px;
+  margin: 20px auto 0 auto;
+  z-index: 5;
+}
+
+.full-width {
+  width: 100%;
+}

@@ -1,0 +1,47 @@
+@import 'variables';
+@import '../../styles/shared-print-styles.scss';
+/* use shared styles where possible - ovveride print styles where required */
+
+.grouped-content {
+  .textarea,
+  .textarea > span {
+    white-space: pre-wrap;
+  }
+
+  @media print {
+    display: block;
+    page-break-inside: avoid;
+  }
+  h4 {
+    margin-bottom: 1em;
+    width: 100%;
+  }
+  .group {
+    width: 100%;
+    border: 1px solid rgba(3, 155, 229, 0.17);
+    border-radius: 3px;
+    padding: 1em;
+    margin-bottom: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    /* these print styles are necessary to avoid page break inside the blue border. */
+    @media print {
+      /* if display block is used, the text is spaced better, but there is only one column within the box */
+      /* if display block is NOT used, we get two columns, but in some cases the value is not close to the desccription */
+      page-break-inside: avoid;
+    }
+    > div {
+      width: 48%;
+      padding-bottom: 0.15em;
+      border-bottom: 1px solid #eee;
+      margin-bottom: 0.5em;
+      @media only screen and (max-width: #{$mobile}) {
+        width: 100%;
+      }
+      &.full-width {
+        width: 100%;
+      }
+    }
+  }
+}

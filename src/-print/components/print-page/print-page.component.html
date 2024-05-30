@@ -1,0 +1,121 @@
+<div id="printcontent" *ngIf="spec || (printPricingSummary && currentClient); else loading" class="page-wrapper">
+  <ven-print-cover-page
+    [spec]="spec"
+    [printSpec]="printSpec"
+    [printExtras]="printExtras"
+    [printQuote]="printQuote"
+    *ngIf="!(printChecklists && !printSpec && !printExtras && !printQuote) && !printPricingSummary"
+  ></ven-print-cover-page>
+
+  <ng-container *ngIf="(spec && spec.details != null) || (printPricingSummary && currentClient)">
+    <ven-print-button></ven-print-button>
+
+    <div *ngIf="isNotChrome" class="chrome-warning">For best printing results, please use Google Chrome</div>
+
+    <!-- Every export gets one of these -->
+    <div class="masthead">
+      <img [src]="logoImage" />
+      <div *ngIf="!printPricingSummary; else pricingHeader">
+        <h1>{{ spec.contact_details.client }} | {{ spec.section_details.subdivision }}</h1>
+        <h2 *ngIf="!printChecklists">Prepared By {{ spec.contact_details.consultantName }}</h2>
+        <h3>{{ todaysDate | date }}</h3>
+      </div>
+      <ng-template #pricingHeader>
+        <div>
+          <h1>{{ currentClient.client }}</h1>
+          <h2 *ngIf="!printChecklists">Option #{{ optionId }}</h2>
+        </div>
+      </ng-template>
+    </div>
+
+    <!-- extras -->
+    <ven-print-extras *ngIf="printExtras" [spec]="spec" [sections]="sections" [extras]="extras"></ven-print-extras>
+
+    <ven-print-quote-section *ngIf="printQuote" [spec]="spec"></ven-print-quote-section>
+
+    <!-- pricing summary -->
+    <div *ngIf="printPricingSummary" class="bordered">
+      <ven-pricing-option-summary-section
+        [optionId]="optionId"
+        [client]="currentClient"
+        [uid]="snapshotId"
+        [specUid]="specId"
+      ></ven-pricing-option-summary-section>
+    </div>
+
+    <ng-container *ngIf="printSpec">
+      <ng-container *ngFor="let section of sections">
+        <!-- Always display planning section (if print spec) -->
+        <ven-print-planning-section
+          *ngIf="section.name === 'planning'"
+          [spec]="spec"
+          [section]="section"
+          [signed]="isSigned"
+        ></ven-print-planning-section>
+
+        <ng-container *ngIf="spec && !(spec.hiddenSections | isHidden: section?.name) && section?.name !== 'planning'">
+          <!-- electrical section -->
+          <ven-print-electrical-section
+            *ngIf="section.name === 'electrical'"
+            [spec]="spec"
+            [extras]="extras"
+            [section]="section"
+            [signed]="isSigned"
+          ></ven-print-electrical-section>
+
+          <!-- ALL other sections -->
+          <!-- are either standard OR grouped by subtitle -->
+          <!-- both might contain custom block fields -->
+          <ng-container>
+            <ng-container *ngIf="!section.groupBySubtitle; else grouped">
+              <ven-print-standard-section
+                *ngIf="section.name !== 'electrical'"
+                [spec]="spec"
+                [extras]="extras"
+                [section]="section"
+                [signed]="isSigned"
+                [showSign]="printSpec && !printExtras && !printQuote"
+              ></ven-print-standard-section>
+            </ng-container>
+            <ng-template #grouped>
+              <ven-print-grouped-section
+                *ngIf="section.name !== 'electrical'"
+                [spec]="spec"
+                [extras]="extras"
+                [section]="section"
+                [signed]="isSigned"
+                [showSign]="printSpec && !printExtras && !printQuote"
+              ></ven-print-grouped-section>
+            </ng-template>
+          </ng-container>
+        </ng-container>
+      </ng-container>
+    </ng-container>
+    <!-- end sections -->
+
+    <ven-print-checklists-section *ngIf="checklists && checklists.length > 0" [checklists]="checklists"></ven-print-checklists-section>
+
+    <!-- signature will be in safetySignature until submitted  -->
+    <ven-print-signature-section
+      [spec]="spec"
+      [signed]="isSigned"
+      [signature]="(spec.signatures || {}).spec || safetySignature"
+      (submit)="onSubmit($event)"
+      *ngIf="printSpec && !printExtras && !printQuote"
+    ></ven-print-signature-section>
+    <p class="pdf-footer">{{ currentClient?.client }} - Lot {{ currentClient?.lot }}</p>
+  </ng-container>
+  <ng-container *ngIf="spec && spec.details == null">
+    <div class="no-spec-message">
+      <img [src]="logoImage" />
+      <p>Sorry, this spec no longer exists.</p>
+    </div>
+  </ng-container>
+</div>
+
+<ng-template #loading>
+  <div class="print-loader">
+    <div>Generating...</div>
+    <div>{{ progress }}</div>
+  </div>
+</ng-template>

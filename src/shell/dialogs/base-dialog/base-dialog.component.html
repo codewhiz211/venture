@@ -1,0 +1,8 @@
+<button *ngIf="showCloseButton" mat-icon-button class="close-button" (click)="close()">
+  <mat-icon class="close-icon">close</mat-icon>
+</button>
+
+<div class="subtitle accent-color" *ngIf="title" mat-dialog-title>{{ title }}</div>
+<mat-dialog-content>
+  <ng-template venDialogContent></ng-template>
+</mat-dialog-content>

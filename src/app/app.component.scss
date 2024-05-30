@@ -1,0 +1,19 @@
+.toolbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: rebeccapurple;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  left: 0;
+  height: 64px;
+  padding-left: 16px;
+}
+.main {
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  display: flex;
+}

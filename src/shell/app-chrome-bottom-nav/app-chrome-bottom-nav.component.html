@@ -1,0 +1,6 @@
+<mat-nav-list class="app-bottom-nav">
+  <ven-application-chrome-bottom-nav-button
+    *ngFor="let menuItem of menuItems$ | async"
+    [action]="menuItem"
+  ></ven-application-chrome-bottom-nav-button>
+</mat-nav-list>

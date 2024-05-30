@@ -1,0 +1,33 @@
+<div class="dialog-wrapper" [ngClass]="{ 'loader-active': loading }">
+  <div *ngIf="loading; else editQuote" class="loader-wrapper">
+    <mat-progress-spinner [mode]="'indeterminate'" [color]="'accent'"></mat-progress-spinner>
+  </div>
+  <ng-template #editQuote>
+    <!-- TODO: using quote options instead-->
+    <form (ngSubmit)="onSaveClick()" [formGroup]="quoteForm">
+      <ng-container *ngIf="showQuoteEditor">
+        <ven-quote-options [quote]="quote" (valueChange)="setQuote($event)"></ven-quote-options>
+
+        <mat-checkbox formControlName="includeGST" id="IncludeGST" name="includeGST"
+          ><span class="body-2 dark-high-emphasis"> Include GST </span></mat-checkbox
+        >
+        <ng-container *ngIf="quote.paymentMethod === 'Turnkey Payment method'">
+          <mat-checkbox formControlName="autoCalcTurnkey" id="autoCalcTurnkey" name="autoCalcTurnkey">
+            <span class="body-2 dark-high-emphasis">Automatically calculate Turnkey Fee</span>
+          </mat-checkbox>
+          <mat-form-field appearance="outline" *ngIf="!quoteForm.value.autoCalcTurnkey">
+            <mat-label>Turnkey Fee</mat-label>
+            <span matPrefix>$&nbsp;</span> <input matInput formControlName="turnkeyFee" type="number" id="turnkeyFee" name="turnkeyFee" />
+          </mat-form-field>
+        </ng-container>
+      </ng-container>
+
+      <!-- here we list any extras that have been configured and provide the ability to change the price -->
+      <ng-container *ngIf="selectedExtras.length > 0">
+        <ven-edit-extras [extras]="selectedExtras" (extrasModified)="onExtrasModified($event)"></ven-edit-extras>
+      </ng-container>
+      <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+    </form>
+  </ng-template>
+  <ven-dialog-footer-buttons [closeAction]="closeAction" [submitAction]="submitAction"></ven-dialog-footer-buttons>
+</div>

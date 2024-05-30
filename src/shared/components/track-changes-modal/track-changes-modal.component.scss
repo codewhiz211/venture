@@ -1,0 +1,35 @@
+@import 'variables';
+
+.mat-dialog-actions {
+  justify-content: flex-end;
+
+  ven-app-primary-button {
+    margin-left: 16px;
+    margin-bottom: 16px;
+  }
+  ven-app-cancel-button {
+    margin-bottom: 16px;
+  }
+
+  @media screen and (max-width: $mobile) {
+    align-items: flex-start;
+    border: 1px solid #badffa;
+    border-radius: 4px;
+    flex-direction: column-reverse;
+    margin-bottom: 16px;
+    padding: 14px;
+
+    ven-app-cancel-button,
+    ven-app-primary-button {
+      display: flex;
+      margin: 0 0 16px 0;
+      text-align: start;
+      width: 100%;
+
+      //  not last as column-reverse
+      &:first-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}

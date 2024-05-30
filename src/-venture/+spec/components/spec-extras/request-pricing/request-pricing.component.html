@@ -1,0 +1,41 @@
+<div class="dialog-wrapper">
+  <form [formGroup]="requestForm">
+    <mat-form-field class="full-width" appearance="outline">
+      <mat-label>Spec Section</mat-label>
+      <mat-select formControlName="section" (selectionChange)="sectionChanged($event)">
+        <mat-option *ngFor="let sectionItem of sections" [value]="sectionItem.name">{{ sectionItem.title }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="full-width" appearance="outline">
+      <mat-label>Spec Option</mat-label>
+      <mat-select formControlName="field" (selectionChange)="optionChanged($event)">
+        <mat-option *ngFor="let field of currentOptions" [value]="field.name">{{ field.display }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="full-width with-hint" appearance="outline" *ngIf="showValue">
+      <mat-label>New Value</mat-label>
+      <input matInput formControlName="value" type="value" id="value" name="value" />
+      <mat-hint class="caption">The value to display in the spec once pricing is approved</mat-hint>
+    </mat-form-field>
+    <mat-form-field class="full-width with-hint" appearance="outline">
+      <mat-label>Option Details</mat-label>
+      <input matInput formControlName="details" type="details" id="details" name="details" />
+      <mat-hint class="caption">Include all information the QS team need to price this option</mat-hint>
+    </mat-form-field>
+    <ven-file-uploader-engine
+      [specId]="data.spec.uid"
+      [folder]="folder"
+      (fileUploaded)="handleUploaded($event)"
+      (uploading)="handleUploading($event)"
+    >
+      <label for="fileUpload" class="icon-line">
+        <ven-icon-new icon="attach_file" colour="#008be5"></ven-icon-new>
+        <span class="primary body-2">Attach supporting documents</span>
+      </label>
+    </ven-file-uploader-engine>
+    <div class="upload-file-list">
+      <div *ngFor="let item of uploadedFiles" class="body-2 dark-medium-emphasis">{{ item.filename }}</div>
+    </div>
+  </form>
+  <ven-dialog-footer-buttons [closeAction]="closeAction" [submitAction]="submitAction" [disabled]="uploading"></ven-dialog-footer-buttons>
+</div>

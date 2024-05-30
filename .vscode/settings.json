@@ -1,0 +1,9 @@
+{
+  "javascript.preferences.importModuleSpecifier": "relative",
+  "cSpell.words": ["lcoale"],
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
+}

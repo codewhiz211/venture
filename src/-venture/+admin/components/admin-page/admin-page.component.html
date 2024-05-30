@@ -1,0 +1,59 @@
+<div class="page-wrapper">
+  <ven-app-content class="admin-content">
+    <ven-click-shield *ngIf="loading"></ven-click-shield>
+    <mat-tab-group [color]="'accent'" (selectedTabChange)="handleTabChange($event)">
+      <!-- CLIENTS TAB -->
+      <mat-tab label="Builds">
+        <div id="clients-tab">
+          <ven-searchable-table
+            [data]="clients$ | async"
+            [columns]="buildColumns"
+            placeholder="Search client or Lot#"
+            (handleRowClick)="handleClientDeleteClicked($event)"
+          >
+          </ven-searchable-table>
+        </div>
+      </mat-tab>
+
+      <!-- USERS TAB -->
+      <mat-tab label="Staff">
+        <div id="users-tab">
+          <ven-searchable-table
+            [data]="users$ | async"
+            [columns]="userColumns"
+            placeholder="Search staff name or email"
+            (handleRowClick)="handleUserRowClicked($event)"
+          >
+          </ven-searchable-table>
+        </div>
+      </mat-tab>
+
+      <!-- SUBBIES TAB -->
+      <mat-tab label="Subbies">
+        <div id="subbies-tab">
+          <ven-searchable-table
+            [data]="subbies$ | async"
+            [columns]="subbieColumns"
+            placeholder="Search business name or email"
+            (handleRowClick)="handleSubbieEdit($event)"
+            [filterPredicate]="subbieFilterAction"
+          >
+          </ven-searchable-table>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </ven-app-content>
+
+  <button *ngIf="usersTabSelected" (click)="handleAddNewUser()" class="add-button-small" mat-mini-fab color="accent">
+    <ven-icon-new icon="add"></ven-icon-new>
+  </button>
+  <button *ngIf="usersTabSelected" (click)="handleAddNewUser()" class="add-button" mat-fab color="accent">
+    <ven-icon-new icon="add"></ven-icon-new>
+  </button>
+  <button *ngIf="subbiesTabSelected" (click)="handleAddNewSubbie()" class="add-button-small" mat-mini-fab color="accent">
+    <ven-icon-new icon="add"></ven-icon-new>
+  </button>
+  <button *ngIf="subbiesTabSelected" (click)="handleAddNewSubbie()" class="add-button" mat-fab color="accent">
+    <ven-icon-new icon="add"></ven-icon-new>
+  </button>
+</div>

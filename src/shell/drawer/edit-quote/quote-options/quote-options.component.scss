@@ -1,0 +1,17 @@
+.full-width {
+  width: 100%;
+}
+
+.bottom-margined {
+  margin-bottom: 12px;
+}
+
+// to put the $ at the center of the input
+:host::ng-deep .mat-form-field-flex {
+  align-items: center;
+}
+
+//if screen is narraw, we need avoid the label overflow from the border
+:host::ng-deep .mat-checkbox-layout {
+  white-space: normal !important;
+}

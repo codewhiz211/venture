@@ -1,0 +1,10 @@
+<div class="sub-drawer-container">
+  <div class="title">
+    <div class="subtitle">{{ title }}</div>
+    <button mat-icon-button (click)="onCloseClick($event)" class="no-print">
+      <ven-icon-new icon="expand_more" colour="black"></ven-icon-new>
+    </button>
+  </div>
+  <!--ITS up to the injected content to add any padding etc-->
+  <ng-content></ng-content>
+</div>

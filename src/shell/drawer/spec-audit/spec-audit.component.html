@@ -1,0 +1,67 @@
+<div class="dialog-wrapper">
+  <p class="dark-high-emphasis">Select a Spec option below to view a complete history of it’s previous values</p>
+
+  <ven-autocomplete
+    (optionChanged)="onSectionChanged($event)"
+    (click)="clearSectionAndField()"
+    [fieldControl]="sectionControl"
+    [fullWidth]="true"
+    [label]="'Section'"
+    [options]="data.sections"
+    [optionLabelKey]="'title'"
+    [optionValueKey]="'title'"
+  ></ven-autocomplete>
+
+  <ven-autocomplete
+    (optionChanged)="onFieldChanged($event)"
+    (click)="optionControl.reset()"
+    [fieldControl]="optionControl"
+    [fullWidth]="true"
+    [label]="'Section Option'"
+    [options]="fieldsList"
+    [optionLabelKey]="'display'"
+    [optionValueKey]="'display'"
+  ></ven-autocomplete>
+
+  <mat-form-field *ngIf="blocks.length > 0" class="audit-select" appearance="outline">
+    <mat-label>Group</mat-label>
+    <mat-select (valueChange)="onGroupChanged($event)">
+      <mat-option *ngFor="let block of blocks" [value]="block"> {{ block.name }} </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field *ngIf="groupFields.length > 0" class="audit-select" appearance="outline">
+    <mat-label>Field</mat-label>
+    <mat-select (valueChange)="onGroupFieldChanged($event)">
+      <mat-option *ngFor="let group of groupFields" [value]="group?.changes"> {{ group?.display }} </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <div class="audit-container" *ngIf="(fieldName && !blocks.length) || changesList.length">
+    <div class="audit-header subtitle primary"><span>Value</span> <span>User</span> <span>Modified</span></div>
+
+    <div class="audit-body body-2 dark-medium-emphasis" *ngFor="let item of changesList">
+      <p *ngIf="!item.block">{{ item?.value }}</p>
+      <pre *ngIf="item.block">{{ item?.value }}</pre>
+      <p>{{ item?.user }}</p>
+      <p>{{ item?.date | date: 'h:mm a, dd/MM/yy' }}</p>
+    </div>
+  </div>
+
+  <div class="audit-container-mobile body-2 dark-high-emphasis" *ngFor="let item of changesList">
+    <p>
+      Value <span class="dark-medium-emphasis">{{ item?.value }}</span>
+    </p>
+    <p>
+      User <span class="dark-medium-emphasis">{{ item?.user }}</span>
+    </p>
+    <p>
+      Modified <span class="dark-medium-emphasis">{{ item?.date | date: 'h:mm a, dd/MM/yy' }}</span>
+    </p>
+  </div>
+
+  <p *ngIf="fieldName && !blocks.length && !changesList?.length" class="dark-high-emphasis">
+    A value for <i>{{ fieldDisplayName }}</i> has not been set
+  </p>
+  <ven-dialog-footer-buttons [closeAction]="closeAction"></ven-dialog-footer-buttons>
+</div>

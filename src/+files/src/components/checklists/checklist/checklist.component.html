@@ -1,0 +1,87 @@
+<div class="progress-text">{{ itemsModel?.length }} of {{ checklistLength }} completed</div>
+<mat-progress-bar mode="determinate" [value]="progress" color="primary"></mat-progress-bar>
+<mat-selection-list [(ngModel)]="itemsModel" (ngModelChange)="onModelChange(itemsModel)" *ngIf="spec">
+  <ng-container *ngFor="let item of checklist?.items; let i = index">
+    <div class="wrap-list-option">
+      <mat-list-option
+        class="item"
+        *ngIf="
+          item?.type !== itemTypeEnum?.heading && item?.type !== itemTypeEnum?.freeText && item?.type !== itemTypeEnum?.note;
+          else textOnly
+        "
+        [ngSwitch]="item?.type"
+        [value]="item?.name"
+      >
+        <ng-container *ngSwitchCase="itemTypeEnum?.call">
+          <ven-checklist-call
+            [item]="item"
+            [name]="spec?.contact_details?.client"
+            [phones]="spec?.contact_details?.phones"
+            [emails]="spec?.contact_details?.emails"
+            [checklist]="checklist"
+            [specId]="spec?.uid"
+          ></ven-checklist-call>
+        </ng-container>
+        <ng-container *ngSwitchCase="itemTypeEnum?.checkHeading">
+          <strong>{{ item.name }}</strong>
+        </ng-container>
+        <ng-container *ngSwitchCase="itemTypeEnum?.item">
+          <span class="body-override">{{ item.name }}</span>
+        </ng-container>
+        <ng-container *ngSwitchDefault>
+          <span class="body-override">{{ item?.name }}</span>
+        </ng-container>
+        <!-- We leave this as when clicked, it will change colour. -->
+        <mat-icon
+          [ngClass]="{ active: item?.actionRequired }"
+          class="btn-failed"
+          *ngIf="item?.type !== itemTypeEnum?.heading"
+          (click)="openFailedText($event, i)"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24">
+            <path fill="none" d="M0 0h24v24H0V0z" />
+            <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z" />
+          </svg>
+        </mat-icon>
+      </mat-list-option>
+      <div class="item-failed" *ngIf="item?.actionRequired || item['actionRequiredText']">
+        <div>Please provide further details of failed result below:</div>
+        <mat-form-field appearance="outline" style="width: 100%">
+          <textarea
+            matInput
+            [(ngModel)]="item['actionRequiredText']"
+            (change)="onActionRequiredTextChange($event, i)"
+            (keydown)="$event.stopPropagation()"
+          >
+          </textarea>
+        </mat-form-field>
+      </div>
+    </div>
+    <ng-template #textOnly>
+      <div class="item item--text-only">
+        <ng-container [ngSwitch]="item?.type">
+          <ng-container *ngSwitchCase="itemTypeEnum?.note">
+            <em class="dark-medium-emphasis">{{ item.name }}</em>
+          </ng-container>
+          <ng-container *ngSwitchCase="itemTypeEnum?.heading">
+            <ven-checklist-heading [item]="item"></ven-checklist-heading>
+          </ng-container>
+        </ng-container>
+      </div>
+    </ng-template>
+  </ng-container>
+</mat-selection-list>
+<ven-checklist-sign #checklistSign (onSigned)="onSignedChecklist($event)" [signed]="checklist?.signed"></ven-checklist-sign>
+<div>
+  <div (click)="openModalSign()" class="signature cta" *ngIf="!checklist?.signed">
+    <ven-icon-new icon="touch_app" colour="#008be5"></ven-icon-new>
+    <span class="left-gap">Sign checklist</span>
+  </div>
+  <div (click)="onAddItemToList()" class="align-center cta">
+    <ven-icon-new icon="add" colour="#008be5"></ven-icon-new>
+    <span class="left-gap">Add item to checklist</span>
+  </div>
+  <div class="cta" *ngIf="displayEmailComponent">
+    <ven-checklist-email [checklist]="checklist" [specId]="spec?.uid" [emails]="spec?.details.emails"></ven-checklist-email>
+  </div>
+</div>

@@ -1,0 +1,59 @@
+@import 'variables';
+@import 'chrome-theme';
+
+:host {
+  z-index: 100;
+}
+
+div {
+  align-items: center;
+  background: white;
+  padding: 8px 20px 8px 12px;
+  border-radius: 24px;
+  border: 1px solid $blue-primary;
+  color: $blue-primary;
+  // display: flex; // if we set flex here, all the button will be shown on desktop
+  flex: 1;
+  flex-direction: row;
+  text-transform: uppercase;
+
+  &.primary {
+    background: $blue-primary;
+    color: white;
+  }
+
+  &:hover {
+    cursor: pointer;
+    opacity: 0.74;
+  }
+}
+
+.round-button {
+  height: 56px;
+  width: 56px;
+  padding: 16px;
+  border-radius: 32px;
+}
+
+span {
+  text-align: center;
+}
+
+ven-icon-new {
+  margin-right: 0 !important; //override rules in ven-icon-new
+}
+
+@media only screen and (min-width: #{$tablet}) {
+  div {
+    display: flex;
+  }
+  .show-on-desktop {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: #{$tablet}) {
+  div {
+    display: flex;
+  }
+}

@@ -1,0 +1,17 @@
+@import 'variables';
+:host::ng-deep.mat-chip-list-wrapper {
+  margin-bottom: 0 !important;
+  margin-right: 0 !important;
+  margin-top: 8px !important;
+  margin-left: 32px !important;
+}
+.mat-chip.mat-standard-chip {
+  background: $color-accent;
+  color: white;
+  padding: 3px 8px;
+
+  &:hover {
+    opacity: 0.5;
+    cursor: pointer;
+  }
+}

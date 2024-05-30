@@ -1,0 +1,21 @@
+.icon-line {
+  margin-top: 16px;
+
+  ven-icon-new {
+    transform: scale(0.75);
+  }
+  span {
+    margin-left: 8px;
+  }
+
+  :hover {
+    cursor: pointer;
+  }
+}
+.icon-line:last-of-type {
+  margin-bottom: 8px;
+}
+
+.price-option-title {
+  margin-bottom: 8px;
+}

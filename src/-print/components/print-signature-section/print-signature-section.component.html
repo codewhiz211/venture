@@ -1,0 +1,46 @@
+<div class="section section-signature">
+  <h4>Health & Safety Information</h4>
+  <p>
+    We understand that watching the building of your new house is exciting, however construction sites can have many hazards. Keeping you
+    safe and meeting our obligations under the health and safety legislation means that we need to work together.
+  </p>
+  <p>
+    Therefore, we ask that you respect our building sites and only enter them with your project manager. We understand that seeing the
+    progression of your build is important to you, but while the construction of your home is underway there is no entry onto our sites.
+    This includes outside of working hours and in the weekends.
+  </p>
+  <p>If you would like to arrange an appointment to walk through your home, please contact you project manager.</p>
+  <p>I have read and understand that I need to have a Venture Developments’ project manager to enter the building site.</p>
+  <div class="signature" *ngIf="!signature; else hasSignature">
+    <div>Signed: <span></span></div>
+    <button mat-raised-button color="accent" (click)="openModalSign()">
+      <mat-icon>
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="24" viewBox="0 0 24 24">
+          <path
+            d="M18.12 14.44l-3.24-1.62c1.29-1 2.12-2.56 2.12-4.32C17 5.47 14.53 3 11.5 3S6 5.47 6 8.5c0 2.13 1.22 3.98 3 4.89v3.26l-1.84-.39-.1-.02c-.1-.02-.2-.03-.32-.03-.53 0-1.03.21-1.41.59l-1.4 1.42 5.09 5.09c.43.44 1.03.69 1.65.69h6.3c.98 0 1.81-.7 1.97-1.67l.8-4.71c.22-1.3-.43-2.58-1.62-3.18zm-.35 2.85l-.8 4.71h-6.3c-.09 0-.17-.04-.24-.1l-3.68-3.68 4.25.89V8.5c0-.28.22-.5.5-.5s.5.22.5.5v6h1.76l3.46 1.73c.4.2.62.63.55 1.06zM8 8.5C8 6.57 9.57 5 11.5 5S15 6.57 15 8.5c0 .95-.38 1.81-1 2.44V8.5C14 7.12 12.88 6 11.5 6S9 7.12 9 8.5v2.44c-.62-.63-1-1.49-1-2.44z"
+          />
+        </svg>
+      </mat-icon>
+      Sign
+    </button>
+  </div>
+  <ng-template #hasSignature>
+    <div class="signature-signed">Signed: <img [src]="signature" alt="Signature" /></div>
+  </ng-template>
+  <div>Date: {{ todaysDate | date }}</div>
+  <div class="signature-signed signature-submission" *ngIf="signed">
+    <mat-icon>
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+        <path fill="none" d="M0 0h24v24H0V0z" />
+        <path
+          d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm4.59-12.42L10 14.17l-2.59-2.58L6 13l4 4 8-8z"
+        />
+      </svg>
+    </mat-icon>
+    Submission successful
+  </div>
+  <div *ngIf="!signed" class="signature-actions">
+    <button mat-raised-button (click)="openModalSign()">Edit</button>
+    <button mat-raised-button color="accent" (click)="onSubmit()">Submit</button>
+  </div>
+</div>

@@ -1,0 +1,25 @@
+<mat-sidenav-container class="container">
+  <mat-drawer-container class="example-container">
+    <mat-drawer-content>
+      <router-outlet name="public"></router-outlet>
+      <!-- header with logo and menu -->
+      <ven-application-header></ven-application-header>
+      <!-- wraps pages in square box that overlaps the header -->
+      <!-- <ven-content> -->
+      <!-- pages injected here -->
+      <router-outlet></router-outlet>
+      <!-- <router-outlet name="button"></router-outlet>
+                <router-outlet name="contents"></router-outlet> -->
+      <!-- </ven-content> -->
+    </mat-drawer-content>
+    <!-- side drawer for editing the spec -->
+    <!-- we need to handle the closed event to ensure open state is reset when user clicks clickshield to close -->
+    <mat-drawer [mode]="'over'" [position]="'end'" [opened]="showDrawer" (closed)="onCloseDrawerClick()">
+      <ng-template venDrawerContent></ng-template>
+      <!-- content needs to be configurable -->
+    </mat-drawer>
+  </mat-drawer-container>
+  <ven-connection-status></ven-connection-status>
+  <!-- TODO only show this on landing page ?-->
+  <ven-application-footer></ven-application-footer>
+</mat-sidenav-container>

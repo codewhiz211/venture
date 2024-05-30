@@ -1,0 +1,54 @@
+<div class="section">
+  <h4>Electrical</h4>
+  <div
+    *ngIf="spec?.electrical?.electricalPmNote"
+    class="textarea"
+    [class.highlight-body]="spec?.highlighted_notes?.electrical?.electricalPmNote"
+  >
+    <h5>PM Notes</h5>
+    <div>{{ getFieldValue(section, { name: 'electricalPmNote' }) }}</div>
+  </div>
+  <ven-electrical-package
+    [houseSize]="spec.section_details.houseSize"
+    [manualPackage]="manualPackage"
+    [spec]="spec"
+    [print]="print"
+    [section]="section"
+  ></ven-electrical-package>
+  <h5>Additional Info</h5>
+  <div class="textarea">{{ getFieldValue(section, { name: 'additionalInfo' }) }}</div>
+  <!-- is sharing ONLY spec or SPEC && extrsas, display optional electrical extras (no price) -->
+  <div *ngIf="spec['extras_optional']['electrical']" class="section-extras-optional">
+    <h4>Electrical Options</h4>
+    <div class="electrical-extras-container">
+      <div *ngFor="let extra of spec['extras_optional']['electrical']">
+        <div class="description">
+          <span
+            >{{ extra.display }} <ng-container *ngIf="extra.quantity"> x {{ extra.quantity }}</ng-container></span
+          >
+          <ven-extra-amount
+            [amount]="extra.amount"
+            [isAddedInQuote]="spec.details.status == 'Prepared for contract' && extra.addedStatus == 'Quote'"
+          ></ven-extra-amount>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="spec['extras_manual'] && spec['extras_manual']['electrical']" class="section-extras-optional">
+    <h4>Electrical Extras</h4>
+    <div class="electrical-extras-container">
+      <div *ngFor="let extra of spec['extras_manual']['electrical']">
+        <div class="description">
+          <span
+            >{{ extra.display }} <ng-container *ngIf="extra.quantity"> x {{ extra.quantity }}</ng-container></span
+          >
+          <ven-extra-amount
+            [amount]="extra.amount"
+            [isAddedInQuote]="spec.details.status == 'Prepared for contract' && extra.addedStatus == 'Quote'"
+          ></ven-extra-amount>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ven-print-section-signature *ngIf="showSign" [section]="section" [signed]="signed" [spec]="spec"></ven-print-section-signature>
+</div>

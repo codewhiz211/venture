@@ -1,0 +1,6 @@
+@import '../shared-styles.scss';
+
+ ::ng-deep input:disabled {
+   color: initial!important;
+   opacity: 0.5!important;
+ }

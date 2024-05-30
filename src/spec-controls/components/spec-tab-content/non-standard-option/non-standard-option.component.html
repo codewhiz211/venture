@@ -1,0 +1,30 @@
+<div class="dialog-wrapper">
+  <p class="dark-high-emphasis">
+    The below Non-Standard options have been added to the spec. Please review each item and add any required extras or notes before
+    dismissing
+  </p>
+  <div class="non-standard-option-cards">
+    <div *ngFor="let item of undismissedCustomOptions" class="bordered body-2">
+      <table>
+        <tr>
+          <td><span class="dark-high-emphasis">Options:</span></td>
+          <td>
+            <span class="dark-medium-emphasis"> {{ item?.sectionName }} - {{ item?.fieldName }} </span>
+          </td>
+        </tr>
+        <tr>
+          <td><span class="dark-high-emphasis">Value:</span></td>
+          <td>
+            <span class="dark-medium-emphasis">{{ item?.value }}</span>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="primary dismiss-button" (click)="dismissCustomValue(item)">DISMISS</div>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <ven-dialog-footer-buttons [closeAction]="closeAction"></ven-dialog-footer-buttons>
+</div>

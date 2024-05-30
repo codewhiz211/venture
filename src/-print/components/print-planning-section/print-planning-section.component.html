@@ -1,0 +1,14 @@
+<div *ngIf="spec?.planning?.planning" class="section" [ngClass]="{ 'alt-styles': useAltStyles }">
+  <h4>Planning</h4>
+  <div
+    *ngIf="spec?.planning?.planningPmNote?.length"
+    class="textarea value"
+    [class.highlight-body]="spec?.highlighted_notes?.planning?.planningPmNote"
+  >
+    <h5>PM Notes</h5>
+    {{ spec?.planning?.planningPmNote }}
+  </div>
+
+  <div class="html" [innerHtml]="spec.planning.planning"></div>
+  <ven-print-section-signature *ngIf="showSign" [section]="section" [signed]="signed" [spec]="spec"></ven-print-section-signature>
+</div>

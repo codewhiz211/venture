@@ -1,0 +1,9 @@
+<div
+  class="mat-elevation-z6"
+  (click)="actionItem.action()"
+  *ngIf="!actionItem.hide"
+  [ngClass]="{ primary: actionItem.primary, 'show-on-desktop': !actionItem.shownOnDesktop, 'round-button': !labelOnButton }"
+>
+  <ven-icon-new [icon]="actionItem?.icon" [colour]="actionItem.colour" margin="12"></ven-icon-new>
+  <span class="left-gap" *ngIf="labelOnButton">{{ actionItem?.label() }}</span>
+</div>

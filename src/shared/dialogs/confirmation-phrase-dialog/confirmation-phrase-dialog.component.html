@@ -1,0 +1,16 @@
+<h1 mat-dialog-title>Do you want to restore this copy?</h1>
+<div mat-dialog-content>
+  <p>
+    You are about to restore the <i>{{ data.snapshot.description }}</i> copy. This will overwrite all details for
+    <i>{{ data.client }}</i> and cannot be undone.
+  </p>
+  <p>If you would like to save a copy of the current version, cancel this and first create a new copy.</p>
+  <p>If you would like to continue, type <b>RESTORE</b> below.</p>
+  <mat-form-field>
+    <input matInput [(ngModel)]="confirmation" />
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button color="default" (click)="onNoClick()">Cancel</button>
+  <button mat-raised-button color="accent" [disabled]="confirmation !== phrase" [mat-dialog-close]="true" cdkFocusInitial>Restore</button>
+</div>

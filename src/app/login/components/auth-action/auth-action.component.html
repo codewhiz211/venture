@@ -1,0 +1,4 @@
+<ng-container [ngSwitch]="authData.mode">
+    <ven-reset-password *ngSwitchCase="'resetPassword'" [authData]="authData"></ven-reset-password>
+    <p *ngSwitchDefault>Ooops, somethings go wrong , please try again.</p>
+</ng-container>

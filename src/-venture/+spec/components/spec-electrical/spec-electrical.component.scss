@@ -1,0 +1,19 @@
+@import 'variables';
+@import 'chrome-theme';
+
+h3 {
+  color: $color-accent;
+  border-bottom: 1px solid $chrome-border-colour-dark;
+  width: 100%;
+  margin-bottom: 16px;
+}
+@media only screen and (max-width: #{$mobile}) {
+  .package-row {
+    display: block;
+    padding-bottom: 8px;
+    width: 100%;
+    span {
+      width: 100%;
+    }
+  }
+}

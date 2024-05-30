@@ -1,0 +1,30 @@
+@import 'variables';
+
+mat-drawer {
+  width: $drawer-width;
+  position: fixed;
+  top: 0;
+
+  &.wide-drawer {
+    width: $drawer-width-wide;
+  }
+}
+
+/* make the bottom sheet full height */
+::ng-deep .mat-bottom-sheet-container {
+  max-height: 100vh !important;
+  height: 100vh;
+}
+/* end make the bottom sheet full height */
+
+@media only screen and (max-width: #{$mobile}) {
+  mat-drawer {
+    width: $drawer-width-mobile;
+  }
+}
+
+@media only screen and (min-width: #{$mobile}) and (max-width: #{$tablet}) {
+  mat-drawer {
+    width: $drawer-width-tablet;
+  }
+}

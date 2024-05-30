@@ -1,0 +1,28 @@
+<form class="ven-spec-dropdown" [class.otherMode]="isOtherMode">
+  <mat-form-field appearance="outline" [class.animateSuccess]="updatedSucceeded" [class.animateFail]="updatedFailed">
+    <mat-label>{{ field.display }}</mat-label>
+    <!-- this input is used both as the search box for the autocomplete but also as the other text entry box -->
+    <input
+      id="input-{{ field.name }}"
+      type="text"
+      aria-label="Number"
+      matInput
+      [class.otherMode]="isOtherMode"
+      [readonly]="!isOtherMode || saveInProgress"
+      [formControl]="fieldControl"
+      [matAutocomplete]="auto"
+      (keydown)="onKeydown($event)"
+      (blur)="onBlur()"
+      (click)="toggleDropdown($event)"
+    />
+    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onSelectionChanged($event)">
+      <mat-option *ngFor="let item of (filteredItems | async)" [value]="item.value"> {{ item.display }} </mat-option>
+    </mat-autocomplete>
+    <div class="mat-select-arrow-wrapper" (click)="toggleDropdown($event)"><div class="mat-select-arrow"></div></div>
+  </mat-form-field>
+
+  <!-- errors etc -->
+  <mat-error *ngIf="fieldControl && fieldControl.invalid">{{ getErrorMessage() }}</mat-error>
+  <div *ngIf="error" class="custom-error">{{ error }}</div>
+  <mat-hint *ngIf="showHint">{{ showHint }}</mat-hint>
+</form>

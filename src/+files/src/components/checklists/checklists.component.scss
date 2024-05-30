@@ -1,0 +1,95 @@
+@import 'variables';
+
+::ng-deep {
+  mat-selection-list,
+  mat-list-option {
+    &:focus {
+      outline: none;
+    }
+  }
+  .item {
+    border-top: 1px solid $border-colour;
+
+    &--text-only {
+      padding: 10px 16px;
+    }
+  }
+  .mat-list-item-disabled {
+    background-color: transparent;
+    cursor: pointer;
+
+    .mat-pseudo-checkbox-checked.mat-pseudo-checkbox-disabled,
+    .mat-pseudo-checkbox-indeterminate.mat-pseudo-checkbox-disabled {
+      background-color: $color-accent;
+      border-radius: 100px;
+    }
+
+    .mat-pseudo-checkbox-disabled {
+      border-radius: 100px;
+    }
+  }
+
+  .mat-list-base .item.mat-list-item,
+  .mat-list-base .item.mat-list-option {
+    display: flex;
+    min-height: 42px;
+    height: auto;
+    justify-content: space-between;
+  }
+
+  .mat-list-base .item.mat-list-item .mat-list-item-content-reverse,
+  .mat-list-base .item.mat-list-option .mat-list-item-content-reverse {
+    padding-top: 8px;
+    padding-bottom: 8px;
+    width: 100%;
+  }
+}
+
+:host {
+  ::ng-deep {
+    .mat-list-base {
+      .mat-list-item {
+        &.mat-list-option .mat-list-item-content-reverse .mat-list-text,
+        &.mat-list-item-with-avatar .mat-list-item-content-reverse .mat-list-text {
+          padding-right: 30px;
+        }
+      }
+      .mat-list-option {
+        &.mat-list-item-with-avatar .mat-list-item-content-reverse .mat-list-text,
+        &.mat-list-option .mat-list-item-content-reverse .mat-list-text {
+          padding-right: 30px;
+        }
+      }
+    }
+    mat-list-option.not-complete {
+      mat-pseudo-checkbox {
+        opacity: 0;
+      }
+
+      .checklist-progress {
+        color: $color-accent;
+        position: absolute;
+        right: 16px;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+    }
+  }
+}
+
+.align-center {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  mat-icon {
+    margin-right: 0;
+  }
+}
+
+.action-required {
+  padding: 10px 12.5px 10px 16px;
+  cursor: pointer;
+  &:hover {
+    background: rgba(0, 0, 0, 0.04);
+  }
+}

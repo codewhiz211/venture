@@ -1,0 +1,103 @@
+@import 'variables';
+
+.box {
+  margin: 32px;
+  background: white;
+  padding: 8px 16px;
+  display: block;
+  width: auto;
+
+  @media only screen and (max-width: 768px) {
+    margin: 0;
+  }
+}
+table {
+  width: 100%;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+th {
+  color: $color-accent;
+}
+tr.mat-header-row {
+  height: 32px;
+}
+tr.mat-row {
+  cursor: pointer;
+  &:hover {
+    background: $color-accent;
+    color: white;
+  }
+}
+tr.mat-footer-row,
+tr.mat-row {
+  height: 32px;
+}
+
+td.mat-cell:last-of-type {
+  padding-right: 24px;
+  text-align: right;
+}
+
+.pull-right {
+  ::ng-deep.mat-sort-header-container {
+    justify-content: flex-end !important;
+    margin-right: -16px;
+  }
+}
+
+.multiple-element-cell {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.chip {
+  border: 1px solid $color-accent;
+  border-radius: 4px;
+  opacity: 0.6;
+  padding: 2px 4px;
+  margin: 2px 8px 2px 0;
+}
+
+@media screen and (max-width: $mobile) {
+  td.mat-cell {
+    padding: 6px 2px;
+  }
+  td.mat-cell:first-of-type,
+  td.mat-footer-cell:first-of-type,
+  th.mat-header-cell:first-of-type {
+    padding-left: 0;
+  }
+  /* The row cells should display as a column, justified left, with a bit of extra padding*/
+  .mat-row {
+    flex-direction: column;
+    align-items: start;
+    padding: 8px 24px;
+  }
+  mat-cell:first-child,
+  mat-footer-cell:first-child,
+  mat-header-cell:first-child {
+    padding-left: 0;
+  }
+
+  .show-on-mobile {
+    display: block;
+  }
+  .show-on-desktop {
+    display: none;
+  }
+}
+
+@media screen and (min-width:#{$mobile+1}) {
+  .show-on-mobile {
+    display: none;
+  }
+  .show-on-desktop {
+    display: block;
+  }
+}

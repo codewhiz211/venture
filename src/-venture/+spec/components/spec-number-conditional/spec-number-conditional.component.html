@@ -1,0 +1,10 @@
+<form>
+  <mat-form-field appearance="outline" [class.error]="error" [class.animateSuccess]="updatedSucceeded" [class.animateFail]="updatedFailed">
+    <mat-label>{{field.display}}</mat-label>
+    <input (blur)="saveField()" [formControl]="fieldControl" matInput type="number" />
+    <span *ngIf="field.suffix" matSuffix>{{field.suffix}}</span>
+    <div *ngIf="error" class="custom-error">{{error}}</div>
+    <mat-error *ngIf="fieldControl.invalid || error">{{getErrorMessage()}}</mat-error>
+    <mat-hint *ngIf="showHint">{{showHint}}</mat-hint>
+  </mat-form-field>
+</form>

@@ -1,0 +1,55 @@
+@import 'variables';
+@import 'chrome-theme';
+
+:host {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+}
+
+mat-drawer-container {
+  height: 100vh;
+  @media only screen and (max-width: #{$tablet}) {
+    height: calc(100% - #{$chrome-mobile-nav-height});
+  }
+  background: transparent;
+}
+.mat-drawer-container {
+  background: transparent !important; //don't flash white in animations
+}
+::ng-deep.mat-drawer-container {
+  background: transparent !important; //don't flash white in animations
+}
+
+// ch3262
+.mat-drawer-content {
+  overflow: initial !important;
+}
+.app-drawer-content {
+  //position: fixed;
+  z-index: 1;
+}
+
+.chrome-drawer-container {
+  // we don't want the page to scroll, just the content area
+  overflow: hidden !important;
+}
+
+ven-application-chrome-side-nav {
+  display: block;
+}
+
+ven-application-footer {
+  display: block;
+}
+
+@media only screen and (max-width: #{$tablet}) {
+  ven-application-chrome-side-nav {
+    display: none;
+  }
+  ven-application-footer {
+    display: none;
+  }
+}

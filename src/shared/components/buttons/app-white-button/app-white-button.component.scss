@@ -1,0 +1,9 @@
+@import 'chrome-theme';
+
+button {
+  padding: 9px; //make cancel button with same height with primary button 20 + 9 * 2 (padding) + 1 * 2 (border)
+  border: $grey-border;
+  background-color: white;
+  color: $blue-primary;
+  width: 100%;
+}

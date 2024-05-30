@@ -1,0 +1,49 @@
+<div [class.default-cursor]="spec.disabled">
+  <h2 class="subtitle" [class.animateSuccess]="updatedSucceeded" [class.animateFail]="updatedFailed">
+    {{ sectionTitle }}
+  </h2>
+  <div *ngIf="extras$ | async as extras" [ngClass]="{ 'no-print-block': extras.length === 0 }">
+    <ul>
+      <p *ngIf="extras.length === 0" class="print-only no-extras-label">No extras selected</p>
+      <li *ngFor="let extra of extras; trackBy: trackItem" class="extra-row">
+        <span>
+          <mat-icon (click)="onRemoveItem(extra)" *ngIf="!spec.disabled" class="no-print-block">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+              <path fill="none" d="M0 0h24v24H0V0z" />
+              <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z" />
+            </svg>
+            <!-- can this just be display ch2645 --> </mat-icon
+          >{{ extra.item || extra.display }}
+        </span>
+        <div>
+          <span>{{ extra.quantity | number }}</span>
+          <ven-extra-amount
+            [amount]="extra.amount"
+            [isAddedInQuote]="spec.details.status == 'Prepared for contract' && extra.addedStatus == 'Quote'"
+          ></ven-extra-amount>
+        </div>
+      </li>
+      <li class="total-price">${{ total | number }}</li>
+    </ul>
+    <form (ngSubmit)="onAddItem(extrasForm, formDirective)" [formGroup]="extrasForm" #formDirective="ngForm" class="no-print">
+      <mat-form-field appearance="outline" [class.animateSuccess]="updatedSucceeded" [class.animateFail]="updatedFailed">
+        <mat-label>Option</mat-label>
+        <mat-select formControlName="item">
+          <mat-option></mat-option>
+          <mat-option *ngFor="let option of items" [value]="option.item">
+            {{ option.display }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="extrasForm.controls.item.invalid">{{ getErrorMessage() }}</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Quantity</mat-label>
+        <input formControlName="quantity" matInput placeholder="Quantity" type="number" />
+        <mat-error *ngIf="extrasForm.controls.quantity.invalid">{{ getErrorMessage() }}</mat-error>
+      </mat-form-field>
+      <mat-error *ngIf="error">{{ error }}</mat-error>
+
+      <ven-app-primary-button label="Add" type="submit" [disabled]="!extrasForm.valid"></ven-app-primary-button>
+    </form>
+  </div>
+</div>

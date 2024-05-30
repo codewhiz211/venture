@@ -1,0 +1,13 @@
+<div *ngIf="authService.isAuthenticated">
+  <ven-icon-new [icon]="'more_vert'" colour="white" [matMenuTriggerFor]="menu" class="no-print"></ven-icon-new>
+
+  <mat-menu class="header-menu" #menu="matMenu">
+    <div *ngFor="let item of menuItems$ | async" class="mat-item-container">
+      <!-- on all devices-->
+      <a mat-menu-item (click)="onItemClick(item)">
+        <ven-icon-new [icon]="item.icon" [colour]="'black'"></ven-icon-new>
+        <span>{{ item.label }}</span>
+      </a>
+    </div>
+  </mat-menu>
+</div>

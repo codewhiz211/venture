@@ -1,0 +1,10 @@
+<mat-nav-list *ngIf="menuItems$">
+  <ven-icon-new
+    *ngFor="let menuItem of menuItems$ | async"
+    (click)="onItemClick(menuItem)"
+    aria-hidden="false"
+    [icon]="menuItem?.icon"
+    [badge]="menuItem?.badge"
+    [margin]="24"
+  ></ven-icon-new>
+</mat-nav-list>

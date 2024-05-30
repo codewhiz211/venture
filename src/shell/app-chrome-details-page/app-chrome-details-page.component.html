@@ -1,0 +1,22 @@
+<div class="app-chrome-details-page">
+  <ven-app-chrome-details-page-header
+    *ngIf="headerConfig"
+    [config]="headerConfig"
+    (onClose)="onClose($event)"
+  ></ven-app-chrome-details-page-header>
+  <div class="content">
+    <ven-application-chrome-details-content
+      *ngIf="contentConfig"
+      [contentConfig]="contentConfig"
+      [currentTab]="currentTab"
+      (tabChanged)="handleTabChanged($event)"
+      (tabChangeFinished)="showFooter$.next(true)"
+    >
+    </ven-application-chrome-details-content>
+  </div>
+  <ven-app-chrome-details-page-footer
+    *ngIf="footerConfig && (showFooter$ | async)"
+    [config]="footerConfig"
+    [currentTab]="currentTab"
+  ></ven-app-chrome-details-page-footer>
+</div>

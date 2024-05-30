@@ -1,0 +1,39 @@
+<div class="dialog-wrapper" [ngClass]="{ 'loader-active': loading }">
+  <div *ngIf="loading; else userDetail" class="loader-wrapper">
+    <mat-progress-spinner [mode]="'indeterminate'" [color]="'accent'"></mat-progress-spinner>
+  </div>
+  <ng-template #userDetail>
+    <form [formGroup]="userForm">
+      <mat-form-field class="half-width" appearance="outline">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" type="email" id="email" name="email" />
+      </mat-form-field>
+      <mat-form-field class="half-width" appearance="outline">
+        <mat-label>Name</mat-label>
+        <input matInput formControlName="name" type="text" id="name" name="name" />
+      </mat-form-field>
+      <div class="body-override">Permissions:</div>
+      <div class="body-override" formArrayName="permissions" *ngFor="let item of userForm.get('permissions')['controls']; let i = index">
+        <mat-checkbox [formControlName]="i">{{ displayedPermissions[permissionsField[i]] }}</mat-checkbox>
+      </div>
+      <div class="delete-user-button" *ngIf="isEditing">
+        <button type="button" mat-flat-button (click)="onDeleteClick()">
+          <div class="span-field-line">
+            <ven-icon-new icon="delete" colour="#008be5"></ven-icon-new>
+            <span class="span-field-label primary">DELETE USER</span>
+          </div>
+        </button>
+      </div>
+      <ven-dialog-footer-buttons [closeAction]="closeAction" [submitAction]="submitAction"></ven-dialog-footer-buttons>
+      <div *ngIf="errorMessage" class="error-message">
+        {{ errorMessage }}
+      </div>
+      <div *ngIf="!userForm.controls.email.valid && userForm.controls.email.dirty" class="error-message">
+        <p>Please enter the user's email</p>
+      </div>
+      <div *ngIf="!userForm.controls.name.valid && userForm.controls.name.dirty" class="error-message">
+        <p>Please enter the user's name</p>
+      </div>
+    </form>
+  </ng-template>
+</div>

@@ -1,0 +1,215 @@
+@import 'variables';
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  line-height: inherit;
+  margin-bottom: 0;
+}
+
+h1 {
+  text-align: right;
+  font-size: 19.74px;
+  font-weight: bold;
+}
+
+h2 {
+  font-size: 19.74px;
+}
+
+h3 {
+  font-size: 16px;
+}
+
+.chrome-warning {
+  background-color: brown;
+  color: white;
+  font-weight: bold;
+  position: fixed;
+  top: 0;
+  padding: 0.5rem 1rem;
+  display: none;
+
+  @media print {
+    display: block;
+  }
+}
+
+.no-spec-message {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+  img {
+    width: 15%;
+  }
+  p {
+    margin-top: 16px;
+    font-size: 1.3rem;
+    opacity: 0.6;
+  }
+}
+
+.print-loader {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.print-button {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+  align-items: center;
+  &:hover {
+    cursor: pointer;
+    color: $color-accent;
+  }
+  mat-icon {
+    margin-left: 8px;
+    margin-bottom: 8px;
+    &:first-child {
+      line-height: 14px;
+    }
+  }
+  @media print {
+    display: none;
+  }
+}
+
+.page-wrapper {
+  padding-top: 1em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 65%;
+  margin: 0 auto;
+  @media only screen and (max-width: #{$mobile}) {
+    width: 95%;
+  }
+  @media only screen and (max-width: #{$tablet}) {
+    width: 85%;
+  }
+  @media print {
+    width: 95%;
+    display: block;
+    position: relative;
+  }
+}
+
+.masthead {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1.5em;
+  div {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+  }
+  img {
+    height: 100px;
+  }
+  h3 {
+    display: none;
+  }
+  @media only screen and (max-width: #{$mobile}) {
+    flex-direction: column;
+    div {
+      align-items: center;
+    }
+    h1 {
+      text-align: center;
+    }
+    img {
+      height: 70px;
+      margin: 0 auto;
+      margin-bottom: 1em;
+    }
+    h1,
+    h2 {
+      font-size: 16px;
+    }
+  }
+  @media print {
+    h3 {
+      display: block;
+    }
+    h1 {
+      text-align: right;
+    }
+  }
+}
+.section-dashed {
+  .row {
+    &:nth-child(2n) {
+      border-bottom: 1px solid #ddd;
+    }
+  }
+}
+
+.section-extras {
+  h4 {
+    margin-bottom: 1em;
+    width: 100%;
+  }
+}
+
+:host {
+  ::ng-deep {
+    .section {
+      .section.section-extras {
+        border-color: rgba(3, 155, 229, 0.25);
+
+        h4 {
+          color: initial;
+          font-weight: 400;
+          border-bottom: none;
+
+          & > span {
+            font-style: initial;
+            color: $color-accent;
+          }
+        }
+      }
+    }
+  }
+}
+
+.pdf-footer {
+  display: none;
+  @media print {
+    display: block;
+    position: fixed;
+    bottom: 0;
+    right: 30px;
+  }
+}
+@media print {
+  ::ng-deep {
+    ven-print-cover-page {
+      position: relative;
+      display: block;
+      width: 100%;
+      z-index: 2;
+      &:before {
+        content: '';
+        width: 100%;
+        background: #fff;
+        position: absolute;
+        display: block;
+        bottom: -28px;
+        left: 0;
+        height: 28px;
+        z-index: 3;
+      }
+    }
+  }
+}

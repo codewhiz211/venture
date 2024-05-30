@@ -1,0 +1,208 @@
+@import 'variables';
+.page-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.contents-wrapper {
+  margin-left: 16px;
+  margin-top: 16px;
+  &.hidden {
+    visibility: hidden;
+  }
+}
+
+.narrow {
+  width: 100%;
+  margin: initial;
+
+  @media (max-width: $mobile) {
+    margin: 0 auto;
+  }
+}
+
+// on small laptop screens (mine) ensure that user can scroll the contents
+@media only screen and (max-height: 650px) {
+  .page-wrapper {
+    height: calc(100vh - 128px);
+  }
+  .contents-wrapper {
+    overflow: auto;
+  }
+}
+
+.menu-button-wrapper {
+  margin-top: -16px;
+  margin-left: 0px;
+  z-index: 1;
+  &.hidden {
+    visibility: hidden;
+  }
+}
+
+.fab-button-wrapper {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 1000;
+}
+
+.spec-content {
+  margin-top: -50px;
+}
+
+// space out the tab buttons equally
+::ng-deep .mat-tab-labels {
+  justify-content: space-between;
+  text-transform: uppercase;
+}
+
+mat-tab-group {
+  height: 100%;
+}
+
+::ng-deep .mat-tab-body {
+  padding: 16px;
+}
+
+.back-link-container {
+  position: absolute;
+  top: -30px;
+  color: white;
+  display: flex;
+  span {
+    margin-left: 16px;
+  }
+}
+
+a {
+  color: white;
+  display: flex;
+  text-decoration: none;
+  &:hover {
+    color: $color-accent;
+  }
+}
+.open-menu-button {
+  margin-top: -30px;
+  margin-left: 16px;
+
+  @media only screen and (max-width: #{$tablet + 1}) {
+    display: none !important;
+  }
+}
+
+.open-menu-button-small {
+  @media only screen and (min-width: #{$tablet + 1}) {
+    display: none !important;
+  }
+
+  @media only screen and (max-width: #{$tablet + 1}) {
+    position: fixed;
+    bottom: 16px;
+    right: 32px;
+    z-index: 200;
+  }
+
+  &.track-mode-mobile {
+    color: initial;
+  }
+}
+
+.shield {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+
+  .spinner-wrappper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  p {
+    z-index: 1001;
+    background: white;
+    color: $color-accent;
+  }
+}
+
+@media only screen and (max-width: #{$mobile}) {
+  .page-wrapper {
+    display: initial;
+  }
+  .spec-content {
+    margin-top: 0px;
+  }
+  :host::ng-deep .mat-tab-header-pagination {
+    background-color: $color-grey;
+  }
+  :host::ng-deep .mat-tab-header-pagination-chevron {
+    border-color: white;
+  }
+  mat-tab-group {
+    margin-top: -49px;
+  }
+  ::ng-deep .mat-tab-label {
+    color: white;
+    opacity: 0.85;
+  }
+  ::ng-deep .mat-tab-body-content {
+    overflow: hidden !important;
+  }
+  ::ng-deep .mat-tab-label-container {
+    background: $color-grey;
+  }
+
+  ::ng-deep {
+    .mat-tab-body {
+      padding-right: 0;
+      padding-left: 0;
+      padding-top: 0;
+    }
+
+    .mat-card,
+    mat-card {
+      border-radius: 0 !important;
+    }
+  }
+}
+
+@media only screen and (min-width: #{$mobile}) and (max-width: #{$tablet}) {
+  .page-wrapper {
+    display: initial;
+  }
+  mat-tab-group {
+    margin-top: -99px;
+  }
+  ::ng-deep .mat-tab-label {
+    color: white;
+    opacity: 0.85;
+  }
+  ::ng-deep .mat-tab-label-container {
+    background: $color-grey;
+  }
+  ::ng-deep .mat-tab-body-content {
+    overflow: hidden !important;
+  }
+}
+
+@media print {
+  ven-action-menu {
+    display: none;
+  }
+  .contents-wrapper,
+  spec-menu-button,
+  .speed-deal-wrapper,
+  .shield {
+    display: none;
+  }
+}

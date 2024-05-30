@@ -1,0 +1,74 @@
+@import 'variables';
+@import 'chrome-theme';
+@import 'chrome-typography';
+
+@media only screen and (min-width: #{$tablet}) {
+  :host {
+    background: $black-primary;
+    position: fixed;
+    left: $chrome-drawer-width;
+    height: $chrome-header-height;
+    right: 0;
+    z-index: 10;
+  }
+  .sub-drawer-header {
+    align-items: center;
+    background: $blue-primary;
+    color: white;
+    border-top-left-radius: 16px;
+    display: flex;
+    height: $chrome-header-height;
+    justify-content: space-between;
+  }
+  .left-hand-side {
+    display: flex;
+    align-items: center;
+    margin-left: 16px;
+  }
+  .right-hand-side {
+    margin-right: 16px;
+  }
+  h6 {
+    color: white;
+  }
+}
+
+@media only screen and (max-width: #{$tablet}) {
+  .sub-drawer-header {
+    align-items: center;
+    display: flex;
+    height: $chrome-header-height;
+    justify-content: space-between;
+    left: 0;
+    right: 0;
+    position: absolute;
+    top: 0;
+  }
+
+  .left-hand-side {
+    display: flex;
+    align-items: center;
+    margin-left: 16px;
+    width: calc(100% - 56px); // 56 = RH icon width + its' margins
+  }
+  .right-hand-side {
+    margin-right: 0px;
+  }
+  .title {
+    display: block;
+    width: 100%;
+  }
+  h6 {
+    color: $text-high-emphasis;
+    white-space: nowrap;
+    //for squeezing on desktop
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: min(80%, 700px);
+  }
+}
+
+.mat-menu-item {
+  display: flex;
+  align-items: center;
+}

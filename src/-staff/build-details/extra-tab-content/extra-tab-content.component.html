@@ -1,0 +1,20 @@
+<div class="double-column-container tab-content-container" *ngIf="spec.details.postContract; else message">
+  <div class="right-container">
+    <div class="bordered">
+      <ven-staff-notification [customValues]="customValues"></ven-staff-notification>
+    </div>
+  </div>
+  <div class="left-container">
+    <!-- Extras Table -->
+    <div class="main-table">
+      <ven-extras-list [spec]="spec" [sections]="sections"></ven-extras-list>
+    </div>
+  </div>
+</div>
+<ng-template #message>
+  <div class="tab-content-container">
+    <h6 class="primary">Client not yet at contract</h6>
+    <p class="dark-high-emphasis">This client has not yet been marked as prepared for contract.</p>
+    <p class="dark-high-emphasis">All extras will be added to the quote until this option has been selected in the spec</p>
+  </div>
+</ng-template>

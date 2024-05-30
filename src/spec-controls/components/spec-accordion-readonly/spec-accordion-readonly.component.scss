@@ -1,0 +1,303 @@
+@import 'variables';
+@import 'chrome-typography';
+@import 'chrome-theme';
+.example-headers-align .mat-expansion-panel-header-title,
+.example-headers-align .mat-expansion-panel-header-description {
+  flex-basis: 0;
+}
+
+.example-headers-align .mat-expansion-panel-header-description {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mat-expansion-panel-header-title {
+  color: $color-accent;
+}
+
+.mat-expansion-panel:not([class*='mat-elevation-z']) {
+  @media print {
+    box-shadow: none;
+  }
+}
+
+ul {
+  padding-left: 16px;
+}
+
+p {
+  margin-bottom: 8px;
+  &.note {
+    margin-bottom: 24px;
+    opacity: 0.6;
+  }
+}
+
+h3 {
+  color: $color-accent;
+  border-bottom: 1px solid $chrome-border-colour-dark;
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+h2.subtitle {
+  color: $color-accent;
+  width: 100%;
+  font-size: 15px;
+  border-bottom: 1px solid $chrome-border-colour-dark;
+  margin-bottom: 8px;
+  padding-bottom: 4px;
+  margin-left: 8px;
+}
+
+.signature {
+  display: flex;
+  margin: 32px 0;
+  div:first-child {
+    display: flex;
+    width: 50%;
+    margin-right: 16px;
+    span {
+      display: flex;
+      width: 100%;
+      border-bottom: 1px solid #666;
+    }
+  }
+}
+
+//TODO to shared?
+.field-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+
+  // and the item is odd
+  &.expandLastField {
+    .spec-field:last-child:nth-child(odd) {
+      flex-grow: 1;
+    }
+  }
+  ven-spec-text-field,
+  ven-spec-text-field-conditional,
+  ven-spec-subtitle-conditional,
+  ven-spec-text-area-conditional,
+  ven-spec-text-field-optional,
+  ven-spec-number-conditional,
+  ven-spec-number,
+  ven-spec-image-select-conditional,
+  ven-spec-colour,
+  ven-spec-image-select,
+  ven-spec-droppicker,
+  ven-spec-image-picker {
+    width: 50%;
+    padding: 0 8px;
+    &.fullWidth {
+      width: 100%;
+    }
+    &.hideField {
+      display: none;
+    }
+  }
+
+  ven-spec-text-area,
+  ven-spec-multi-text-field,
+  ven-spec-text-field-optional,
+  ven-spec-custom-manager,
+  ven-spec-text-area-conditional {
+    width: 100%;
+    padding: 0 8px;
+  }
+
+  ven-spec-subtitle-conditional {
+    width: 100%;
+    padding-left: 0;
+  }
+}
+
+@media only screen and (max-width: #{$mobile}) {
+  .field-wrapper {
+    ven-spec-subtitle-conditional,
+    ven-spec-text-field,
+    ven-spec-text-field-conditional,
+    ven-spec-number,
+    ven-spec-number-conditional,
+    ven-spec-text-area,
+    ven-spec-text-field-optional,
+    ven-spec-colour,
+    ven-spec-image-select-conditional,
+    ven-spec-image-select,
+    ven-spec-droppicker,
+    ven-spec-image-picker {
+      width: 100%;
+      padding: 0;
+    }
+    ven-spec-text-area,
+    ven-spec-text-area-conditional,
+    ven-spec-subtitle-conditional,
+    ven-spec-text-field-optional,
+    ven-spec-custom-manager {
+      margin: 0;
+    }
+  }
+}
+
+.visibility_toggle {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  opacity: 0.6;
+  mat-icon {
+    margin-right: 5px;
+  }
+  @media print {
+    display: none;
+  }
+  &.sub-section {
+    padding: 12px 0 20px;
+  }
+}
+
+.no-print {
+  @media print {
+    display: none !important;
+  }
+}
+
+.section-footer {
+  display: flex;
+  align-items: center;
+
+  & > span {
+    margin-right: 10px;
+  }
+}
+
+::ng-deep .mat-expansion-indicator,
+.mat-expansion-indicator::after {
+  @media print {
+    display: none !important;
+  }
+}
+
+:host {
+  ::ng-deep {
+    mat-panel-title {
+      display: flex;
+      align-items: center;
+
+      mat-icon {
+        margin-left: 5px;
+      }
+    }
+
+    // these styles override the default print styles
+    // this was done to save time (to avoid creating additional components or teaching existing ones about read-only /print page views
+    // We will probably want to do the above at some point though.
+    ven-print-standard-section {
+      width: 100%;
+      padding: 0 1em;
+    }
+
+    .mat-expansion-panel {
+      box-shadow: none;
+      border-bottom: 1px solid $chrome-border-colour-dark;
+      border-radius: 0;
+    }
+
+    ven-extra-amount div {
+      display: none;
+    }
+
+    //
+    .label,
+    .description .description-label {
+      //overline overrides .label in print-item component  (and other print components)
+      font-size: 10px !important;
+      font-weight: normal !important;
+      letter-spacing: 1.5px !important;
+      color: $text-medium-emphasis !important;
+      margin-bottom: 0 !important;
+      opacity: 1 !important;
+      text-transform: uppercase;
+    }
+    .html,
+    .value,
+    .description-value {
+      //body
+      font-size: 16px;
+      line-height: 28px;
+      letter-spacing: 0.5px;
+      color: $text-high-emphasis;
+    }
+    .hint {
+      //caption overrides .hint in print-item component (and other print components)
+      font-size: 12px !important;
+      font-weight: normal !important;
+      color: $text-medium-emphasis !important;
+      margin-bottom: 0 !important;
+      opacity: 1 !important;
+    }
+
+    .section {
+      border: none !important;
+
+      ven-print-standard-section,
+      ven-print-grouped-section {
+        width: 100%;
+      }
+
+      h4 {
+        display: none;
+      }
+
+      &.std-section h4 {
+        display: none;
+      }
+
+      &.section-extras {
+        padding: 0;
+      }
+
+      .section-extras h4 {
+        display: block;
+
+        span {
+          font-size: 15px;
+          margin-top: 1em;
+          margin-bottom: 0.5em;
+          color: #039be5;
+          font-weight: 400;
+          line-height: 32px;
+          letter-spacing: 0px;
+        }
+      }
+
+      .extras-container .description {
+        span:first-child {
+          //overrides print section extras
+          font-size: 16px !important;
+          line-height: 28px !important;
+          letter-spacing: 0.5px !important;
+          color: $text-high-emphasis !important;
+          opacity: 1 !important;
+        }
+      }
+      .grouped-content {
+        .group {
+          border: none !important; //overrides .group style in print-grouped-section.component
+          margin-bottom: 0 !important;
+
+          .subtitle {
+            //subtitle-2
+            font-size: 14px;
+            line-height: 24px;
+            letter-spacing: 0.1px;
+            font-weight: 500;
+            opacity: $medium-emphasis-opacity;
+            color: $blue-primary;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,122 @@
+@import 'variables';
+@import 'chrome-theme';
+
+.dialog-wrapper {
+  .track-title {
+    color: $color-accent;
+    display: flex;
+    align-items: center;
+    margin-bottom: 32px;
+    font-weight: 400;
+  }
+
+  p {
+    margin-bottom: 20px;
+  }
+
+  .track-data-container {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 16px;
+
+    .track-header {
+      width: 100%;
+      span {
+        display: inline-block;
+        width: 60%;
+        &:last-of-type {
+          width: 40%;
+        }
+      }
+      border-bottom: 2px solid $chrome-border-colour-dark;
+    }
+
+    .track-body {
+      display: flex;
+      flex-direction: row;
+      border-bottom: 1px solid $chrome-border-colour-dark;
+      padding: 8px 0;
+
+      p {
+        margin: 0;
+        width: 60%;
+        padding-right: 16px;
+
+        .field {
+          font-style: italic;
+        }
+
+        &:last-of-type {
+          width: 40%;
+          padding-right: 0;
+        }
+      }
+    }
+
+    @media screen and (max-width: $tablet) {
+      display: none;
+    }
+  }
+
+  .track-data-container-mobile {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    border: 1px solid $blue-light;
+    border-radius: 4px;
+    padding: 10px;
+
+    p {
+      color: black;
+      margin: 0;
+
+      span {
+        opacity: 0.6;
+      }
+    }
+
+    @media screen and (min-width: #{$tablet+1}) {
+      display: none;
+    }
+  }
+
+  .track-buttons-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+
+    p {
+      display: none;
+    }
+
+    .button {
+      margin-left: 10px;
+    }
+
+    @media screen and (max-width: $tablet) {
+      align-items: flex-start;
+      flex-direction: column;
+      border: 1px solid $blue-light;
+      border-radius: 4px;
+      padding: 14px;
+
+      p {
+        display: block;
+        margin: 0;
+      }
+
+      .first-button,
+      .button {
+        display: flex;
+        width: 100%;
+        text-align: start;
+        margin-left: 0;
+
+        &:nth-child(2) {
+          order: 3;
+        }
+      }
+    }
+  }
+}

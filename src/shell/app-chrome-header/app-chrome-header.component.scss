@@ -1,0 +1,31 @@
+@import 'chrome-theme';
+@import 'variables';
+
+header {
+  align-items: center;
+  background: transparent;
+  color: white;
+  display: flex;
+  height: $chrome-header-height;
+  justify-content: space-between;
+  left: $chrome-drawer-width;
+  padding: 16px;
+  position: absolute;
+  right: 0;
+
+  > div {
+    display: flex;
+    align-items: center;
+  }
+
+  @media only screen and (max-width: #{$tablet}) {
+    align-items: center;
+    background: $black-primary;
+    height: $chrome-mobile-header-height;
+    left: 0px;
+    padding: 16px;
+    position: fixed;
+    right: 0px;
+    top: 0px;
+  }
+}

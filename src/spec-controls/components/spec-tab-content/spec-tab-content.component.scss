@@ -1,0 +1,87 @@
+@import 'variables';
+@import 'chrome-theme';
+.container {
+  display: flex;
+  flex-direction: row-reverse;
+
+  @media screen and (min-width:#{$tablet+1}) {
+    > div {
+      flex: 1;
+    }
+    div.lhs {
+      flex: 2;
+      height: 100%;
+      overflow-y: auto;
+    }
+    .right-container {
+      height: 100%;
+      overflow: auto;
+    }
+  }
+  div.lhs {
+    > div {
+      border: 1px solid $chrome-border-colour-dark;
+      border-radius: 3px;
+    }
+  }
+
+  .right-container {
+    padding-left: 16px;
+  }
+
+  div.rhs {
+    position: relative;
+
+    //keep the contents in fixed position, the spec (lhs) will scroll if needs to
+    > div {
+      position: absolute;
+      border: 1px solid $chrome-border-colour-dark;
+      border-radius: 3px;
+      padding: 16px;
+      width: 100%;
+    }
+  }
+
+  .bordered {
+    border: 1px solid $chrome-border-colour-dark;
+    border-radius: 3px;
+    padding: 16px;
+    margin-bottom: 16px;
+  }
+
+  .review-button {
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  @media only screen and(max-width: #{$tablet}) {
+    flex-direction: column;
+    // margin-top: 24px;
+    // height: calc(100% - 24px);
+    // overflow: auto;
+    padding: 0;
+    > div {
+      border: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .right-container {
+      padding: 0;
+    }
+
+    div.lhs {
+      > div {
+        border: none;
+      }
+    }
+    div.rhs {
+      display: none;
+    }
+  }
+
+  ::ng-deep .mat-expansion-panel-body {
+    padding: 0;
+  }
+}

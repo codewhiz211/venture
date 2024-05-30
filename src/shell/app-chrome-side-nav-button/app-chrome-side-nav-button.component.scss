@@ -1,0 +1,35 @@
+@import 'chrome-theme';
+@import 'variables';
+
+/* clean-css ignore:start */
+div.side-nav-button {
+  align-items: center;
+  border-bottom: 1px solid $chrome-border-colour;
+  color: white;
+  display: flex;
+  opacity: $emphasis-medium-opacity;
+  padding: $chrome-spacing;
+
+  span {
+    text-transform: uppercase;
+  }
+
+  &:hover {
+    background-color: $black-light;
+    cursor: pointer;
+  }
+  &.active {
+    background-color: $black-light;
+    opacity: 1;
+  }
+}
+/* clean-css ignore:end */
+
+.border-top {
+  border-top: 1px solid $chrome-border-colour;
+}
+
+mat-icon {
+  color: white;
+  margin-right: 8px;
+}

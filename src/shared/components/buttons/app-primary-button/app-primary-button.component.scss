@@ -1,0 +1,24 @@
+@import 'chrome-theme';
+
+button {
+  padding: 8px;
+  display: flex;
+  width: 100%;
+}
+
+ven-icon-new {
+  transform: scale(0.75);
+}
+
+.primary-button {
+  background-color: $blue-primary;
+  color: white;
+}
+.primary-button-disabled {
+  background-color: $black-light;
+  color: white;
+}
+
+:host::ng-deep .mat-button-wrapper {
+  margin: auto;
+}

@@ -1,0 +1,15 @@
+<div class="dialog-wrapper">
+  <div class="dark-high-emphasis">Submit the pricing of this option for review:</div>
+  <div class="border-wrapper">
+    <div *ngFor="let field of fields">
+      <span class="dark-high-emphasis">{{ field.display }}: </span>
+      <span class="dark-medium-emphasis" *ngIf="field.type == 'number'; else text"
+        >${{ pricingToSubmit[field.name] | number: '1.2-2' }}</span
+      >
+      <ng-template #text>
+        <span class="dark-medium-emphasis">{{ pricingToSubmit[field.name] }}</span>
+      </ng-template>
+    </div>
+  </div>
+  <ven-dialog-footer-buttons [submitAction]="submitAction" [closeAction]="closeAction"></ven-dialog-footer-buttons>
+</div>

@@ -1,0 +1,142 @@
+<div *ngIf="spec" class="grid" [ngClass]="{ 'two-columns': !spec.quote?.includeGST }">
+  <!-- header -->
+  <div class="grid-row grid-row-header subtitle">
+    <div><span> </span></div>
+    <div><span>excl. GST</span></div>
+    <div *ngIf="spec.quote?.includeGST"><span>GST</span></div>
+    <div *ngIf="spec.quote?.includeGST"><span>incl. GST</span></div>
+  </div>
+
+  <div class="grid-row body-override dark-high-emphasis">
+    <div><span>Build</span></div>
+    <div>
+      <span>${{ quote.build.net | number: '1.2-2' }}</span>
+    </div>
+    <div>
+      <span *ngIf="spec.quote?.includeGST">${{ quote.build.gst | number: '1.2-2' }}</span>
+    </div>
+    <div>
+      <span *ngIf="spec.quote?.includeGST">${{ quote.build.gross | number: '1.2-2' }}</span>
+    </div>
+  </div>
+  <div *ngFor="let extra of quote.extrasList">
+    <div class="grid-row grid-row-indented body-2 dark-medium-emphasis" [ngClass]="{ 'colspan-values': extra.includeInBuildPrice }">
+      <div>
+        <span>{{ extra.display }}</span>
+      </div>
+
+      <div class="med-row" *ngIf="extra.includeInBuildPrice; else notIncludInBild">
+        <span>Included in build price</span>
+      </div>
+      <ng-template #notIncludInBild>
+        <div>
+          <span *ngIf="extra.amount != 'pending'; else pendingExtra">${{ extra.net | number: '1.2-2' }}</span>
+          <ng-template #pendingExtra>
+            <span>{{ extra.amount }}</span>
+          </ng-template>
+        </div>
+        <div *ngIf="spec.quote?.includeGST">
+          <span *ngIf="extra.amount != 'pending'; else pendingExtra">${{ extra.gst | number: '1.2-2' }}</span>
+          <ng-template #pendingExtra>
+            <span>{{ extra.amount }}</span>
+          </ng-template>
+        </div>
+        <div *ngIf="spec.quote?.includeGST">
+          <span *ngIf="extra.amount != 'pending'; else pendingExtra">${{ extra.amount | number: '1.2-2' }}</span>
+          <ng-template #pendingExtra>
+            <span>{{ extra.amount }}</span>
+          </ng-template>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+  <div class="grid-row body-override dark-high-emphasis" *ngIf="quote.build.gross !== quote.totalBuild.gross">
+    <div><span>Total Build (inc. Options)</span></div>
+    <div>
+      <span>${{ quote.totalBuild.net | number: '1.2-2' }}</span>
+    </div>
+    <div>
+      <span *ngIf="spec.quote?.includeGST">${{ quote.totalBuild.gst | number: '1.2-2' }}</span>
+    </div>
+    <div>
+      <span *ngIf="spec.quote?.includeGST">${{ quote.totalBuild.gross | number: '1.2-2' }}</span>
+    </div>
+  </div>
+
+  <div *ngIf="spec.quote.paymentMethod !== 'Build Only'" class="grid-row body-override dark-high-emphasis">
+    <div><span>Land</span></div>
+    <div>
+      <span>${{ quote.land.net | number: '1.2-2' }}</span>
+    </div>
+    <div>
+      <span *ngIf="spec.quote?.includeGST">${{ quote.land.gst | number: '1.2-2' }}</span>
+    </div>
+    <div>
+      <span *ngIf="spec.quote?.includeGST">${{ quote.land.gross | number: '1.2-2' }}</span>
+    </div>
+  </div>
+
+  <div class="grid-row body-override dark-high-emphasis" *ngIf="spec.quote.paymentMethod === 'Turnkey Payment method'">
+    <div><span>Turnkey fee</span></div>
+    <div>
+      <span>${{ quote.turnKey.net | number: '1.2-2' }}</span>
+    </div>
+    <div>
+      <span *ngIf="spec.quote?.includeGST">${{ quote.turnKey.gst | number: '1.2-2' }}</span>
+    </div>
+    <div>
+      <span *ngIf="spec.quote?.includeGST">${{ quote.turnKey.gross | number: '1.2-2' }}</span>
+    </div>
+  </div>
+  <div class="grid-row body-override dark-high-emphasis">
+    <div><span>Initial commitment</span></div>
+    <div>
+      <span>$({{ quote.commitment.net | number: '1.2-2' }})</span>
+    </div>
+    <div>
+      <span *ngIf="spec.quote?.includeGST">$({{ quote.commitment.gst | number: '1.2-2' }})</span>
+    </div>
+    <div>
+      <span *ngIf="spec.quote?.includeGST">$({{ quote.commitment.gross | number: '1.2-2' }})</span>
+    </div>
+  </div>
+</div>
+
+<div class="grid">
+  <div class="grid-row padded">
+    <h3 class="body-override">THIS QUOTE</h3>
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+</div>
+
+<div class="grid">
+  <div class="grid-row noUnderline body-override dark-high-emphasis">
+    <div><span>Net amount excluding GST</span></div>
+    <div></div>
+    <div></div>
+    <div>
+      <span>${{ quote.net | number: '1.2-2' }}</span>
+    </div>
+  </div>
+
+  <div class="grid-row body-override dark-high-emphasis" *ngIf="spec.quote?.includeGST">
+    <div><span>GST this quote</span></div>
+    <div></div>
+    <div></div>
+    <div>
+      <span>${{ quote.gst | number: '1.2-2' }}</span>
+    </div>
+  </div>
+
+  <div class="grid-row body-override bold dark-high-emphasis" *ngIf="spec.quote?.includeGST">
+    <div><span>Amount this quote including GST</span></div>
+    <div></div>
+    <div></div>
+    <div>
+      <span class="test-total-gross">${{ quote.gross | number: '1.2-2' }}</span>
+    </div>
+  </div>
+</div>
+<p class="caption dark-high-emphasis">This quote is valid 60 days from issue</p>

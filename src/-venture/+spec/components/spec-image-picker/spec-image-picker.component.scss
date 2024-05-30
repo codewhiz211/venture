@@ -1,0 +1,128 @@
+@import '../shared-styles.scss';
+:host {
+  margin-top: 0.25em;
+}
+
+.input-wrapper {
+  width: 100%;
+  position: relative;
+  ::ng-deep.mat-select-arrow-wrapper {
+    @media print {
+      display: none;
+    } // use padding to create click target, and negative margin to fix bloated alignment
+    cursor: pointer;
+    padding: 1rem; //margin-top: -0.85rem;
+    margin-right: -1rem;
+    margin-bottom: -1rem;
+    margin-top: -0.25rem;
+  }
+  .input-bar {
+    display: flex;
+    flex-direction: row;
+  }
+  .value-text {
+    text-overflow: ellipsis;
+  }
+  ::ng-deep.mat-select-arrow {
+    cursor: pointer;
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid;
+    margin: 0 4px;
+    z-index: 100;
+  }
+
+  .mat-hint {
+    position: relative;
+    top: -10px;
+    left: 10px;
+  }
+}
+
+input {
+  cursor: pointer;
+}
+
+.trigger,
+.input {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-width: 0;
+  padding: 1em 0.75em 1em 0.75em;
+  margin: 0.25em 0;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 5px;
+  span {
+    opacity: 0.7;
+  }
+}
+
+.input:hover {
+  border: 2px solid rgba(0, 0, 0, 1);
+}
+
+.default-cursor {
+  .trigger,
+  .input {
+    border: 1px solid rgba(0, 0, 0, 0.05);
+  }
+}
+
+.label {
+  position: absolute;
+  top: 0;
+  margin-top: -10px;
+  background: white;
+  font-size: 11px;
+  padding: 0 0.5em;
+  left: 5px;
+}
+.placeholder {
+  width: 100%;
+  cursor: pointer;
+}
+
+.image-list {
+  display: flex;
+  flex-wrap: wrap;
+  > div {
+    display: flex;
+  }
+}
+
+.input {
+  > div {
+    display: flex;
+    align-items: center;
+  }
+}
+
+img {
+  max-height: 100px;
+  display: flex;
+}
+
+.other-text {
+  /* text box for other */
+  ::ng-deep.mat-form-field-appearance-outline .mat-form-field-flex {
+    min-height: 55px;
+  }
+  /* text box for other */
+  ::ng-deep.mat-form-field-appearance-outline .mat-form-field-infix {
+    @media screen {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      //padding: 0;
+    }
+  }
+  ::ng-deep.mat-select-arrow-wrapper {
+    /* click target to open dialog to choose image (reset other) */
+    padding: 1em;
+    cursor: pointer;
+    margin-top: 1em;
+  }
+}

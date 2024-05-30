@@ -1,0 +1,27 @@
+<div class="add-container" role="button" *ngIf="!displayField && !spec?.disabled" (click)="addField()">
+  <mat-icon class="emphasis-med">
+    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
+      <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" />
+      <path d="M0 0h24v24H0z" fill="none" />
+    </svg>
+  </mat-icon>
+  <span class="emphasis-med">{{ addText }}</span>
+</div>
+<form *ngIf="displayField" class="optional-form">
+  <mat-form-field class="optional" appearance="outline" [class.animateSuccess]="updatedSucceeded" [class.animateFail]="updatedFailed">
+    <mat-label>{{ field.display }}</mat-label>
+    <input (blur)="updateField()" [formControl]="fieldControl" matInput /> <span *ngIf="field.suffix" matSuffix>{{ field.suffix }}</span>
+    <mat-error *ngIf="fieldControl.invalid">{{ getErrorMessage() }}</mat-error>
+  </mat-form-field>
+</form>
+<div class="remove-wrapper">
+  <div class="remove-container" role="button" (click)="removeField()" *ngIf="displayField && !spec?.disabled">
+    <mat-icon class="emphasis-med">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
+        <path d="M19 13H5v-2h14v2z" />
+        <path d="M0 0h24v24H0z" fill="none" />
+      </svg>
+    </mat-icon>
+    <span class="emphasis-med">Remove {{ field.display }}</span>
+  </div>
+</div>

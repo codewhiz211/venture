@@ -1,0 +1,12 @@
+<h1 mat-dialog-title>For best results, please use Google Chrome</h1>
+<div mat-dialog-content>
+  <p>
+    To get the best Printing experience we recommend you print this page using the Google Chrome browser. Copy the shareable link below and
+    paste it into Chrome for the best results.
+  </p>
+  <i class="selectable">{{ url }}</i>
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button color="default" (click)="onNoClick()">Cancel</button>
+  <button mat-raised-button color="defualt" [mat-dialog-close]="true">Print anyway</button>
+</div>

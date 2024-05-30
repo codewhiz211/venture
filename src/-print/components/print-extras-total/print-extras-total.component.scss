@@ -1,0 +1,15 @@
+.total {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    border-bottom: 1px solid black;
+    border-top: 1px solid black;
+
+    div {
+        display: flex;
+        justify-content: space-between;
+        &.bold {
+            font-weight: bold;
+        }
+    }
+}

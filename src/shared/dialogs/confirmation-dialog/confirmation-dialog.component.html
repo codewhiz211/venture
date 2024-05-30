@@ -1,0 +1,9 @@
+<div class="dialog-wrapper">
+  <div class="dialog-content body-override dark-high-emphasis">
+    <p *ngIf="data.text">
+      <b>{{ data.text }}</b>
+    </p>
+    <p *ngIf="data.html" [innerHTML]="data.html"></p>
+  </div>
+  <ven-dialog-footer-buttons [closeAction]="closeAction" [submitAction]="submitAction"></ven-dialog-footer-buttons>
+</div>

@@ -1,0 +1,17 @@
+@import 'variables';
+
+.coming-soon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 52px;
+
+  @media only screen and (max-width: #{$tablet}) {
+    padding-top: 28px;
+  }
+
+  &-icon {
+    transform: scale(1.6);
+    padding-bottom: 20px;
+  }
+}

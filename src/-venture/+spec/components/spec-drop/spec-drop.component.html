@@ -1,0 +1,21 @@
+<form class="ven-spec-drop" [class.default-cursor]="spec?.disabled">
+  <mat-form-field appearance="outline" [class.animateSuccess]="updatedSucceeded" [class.animateFail]="updatedFailed">
+    <mat-label>{{ field.display }}</mat-label>
+
+    <mat-select [value]="fieldControl?.value" [disabled]="spec?.disabled" (selectionChange)="onSelectionChanged($event)">
+      <mat-option class="option" *ngFor="let item of items" [value]="item?.value">
+        {{ item.display }}
+        <ng-container *ngIf="item?.customValue && item?.display">
+          <ven-edit-custom-value [currentValue]="item.display" (value)="saveCustomEdits($event)"></ven-edit-custom-value>
+        </ng-container>
+      </mat-option>
+      <mat-option class="option" *ngIf="historyItem" [value]="historyItem.value" disabled> {{ historyItem.display }} </mat-option>
+    </mat-select>
+    <!-- errors etc -->
+    <mat-error *ngIf="fieldControl && fieldControl?.invalid">{{ getErrorMessage() }}</mat-error>
+    <div *ngIf="error" class="custom-error">{{ error }}</div>
+    <mat-hint *ngIf="showHint || displayCustomOptionHint">
+      {{ showHint }} <span class="warning" *ngIf="displayCustomOptionHint"> NOTE: Non-std option selected. PM to review </span>
+    </mat-hint>
+  </mat-form-field>
+</form>

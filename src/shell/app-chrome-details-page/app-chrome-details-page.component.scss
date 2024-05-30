@@ -1,0 +1,60 @@
+@import 'variables';
+@import 'chrome-theme';
+@import 'chrome-typography';
+
+@media only screen and (min-width: #{$tablet}) {
+  :host {
+    background: white;
+    position: fixed;
+    left: $chrome-drawer-width;
+    right: 0;
+    bottom: 0;
+    top: $chrome-header-height;
+  }
+
+  .app-chrome-details-page {
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .mat-tab-body.mat-tab-body-active {
+    overflow: hidden;
+  }
+
+  .content {
+    padding-top: 56px; //height of the blue header bar
+    height: 100%;
+  }
+}
+
+@media only screen and (max-width: #{$tablet}) {
+  :host {
+    background: white;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+  }
+
+  :host::ng-deep .mat-tab-body {
+    padding: 0 16px;
+  }
+
+  .app-chrome-details-page {
+    background: white;
+    display: flex;
+    flex-direction: column;
+
+    // we don't want the page to scroll, just the content area
+    overflow: hidden !important;
+
+    // This place only works when squeesh window on desktop
+    padding: 56px 0 0 0;
+
+    .content {
+      overflow: hidden auto;
+      height: calc(100vh - #{$chrome-header-height} - 32px);
+    }
+  }
+}

@@ -1,0 +1,9 @@
+<div class="bordered tab-content-container-with-fab">
+  <ven-table
+    [disableHover]="true"
+    [data]="staffs$ | async"
+    [columns]="columns"
+    initialSortedColumn="lastModified"
+    (onOperatorClick)="editStaff($event)"
+  ></ven-table>
+</div>

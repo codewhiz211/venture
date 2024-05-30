@@ -1,0 +1,29 @@
+@import 'variables';
+@import 'chrome-theme';
+
+:host {
+  background: transparent;
+  bottom: 0;
+  padding: 0 16px 16px 0;
+  position: absolute;
+  right: 0;
+  z-index: 10;
+
+  @media screen and (max-width: $tablet) {
+    padding: 0 16px 16px 0;
+  }
+}
+
+mat-nav-list {
+  align-items: flex-end;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+mat-nav-list ven-fab-button {
+  margin-bottom: 24px;
+}
+mat-nav-list ven-fab-button:last-child {
+  margin-bottom: 0;
+}

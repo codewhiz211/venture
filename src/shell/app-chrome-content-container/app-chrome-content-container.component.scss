@@ -1,0 +1,79 @@
+@import 'chrome-theme';
+@import 'variables';
+@import 'print';
+
+body {
+  background: #{$color-primary-200};
+}
+
+.ven-content mat-card {
+  margin: 20px;
+}
+
+.container {
+  z-index: 20;
+  display: inherit;
+  padding: 0;
+
+  @media print {
+    position: relative;
+  }
+}
+
+mat-drawer {
+  width: $drawer-width;
+
+  &.wide-drawer {
+    width: $drawer-width-wide;
+  }
+}
+
+.app-drawer-content {
+  height: 100%;
+  padding-bottom: 56px; //For showing all the content when scrolling down to the bottom. 56px = height of mat-nav-list on ven-application-chrome-bottom-nav
+}
+
+@media only screen and (max-width: #{$tablet}) {
+  .app-drawer-content {
+    overflow: hidden; // removes extra tiny scrollbar that scrolls nothing
+  }
+}
+
+.app-drawer-container {
+  padding: 16px; // safari want this to be 0
+  padding-top: 0; // TODO review. Might need to be 16px
+}
+
+mat-drawer-container {
+  // background-color: rgba(255, 255, 255, 0.8);
+  background-color: transparent;
+  height: calc(100% - #{$chrome-header-height});
+  width: 100%;
+}
+
+@media only screen and (max-width: #{$tablet}) {
+  ::ng-deep .mat-drawer-content {
+    height: 100%;
+  }
+
+  mat-drawer-container {
+    // this needs to be auto for page content scrolling to work
+    // but Safari needs this to be 100% or content is truncated
+    height: auto;
+  }
+}
+
+@media only screen and (max-width: #{$tablet}) {
+  mat-drawer {
+    width: $drawer-width-mobile;
+  }
+  mat-drawer-container {
+    //height: calc(100% - #{$chrome-header-height} - #{$chrome-mobile-nav-height});
+  }
+}
+
+@media only screen and (min-width: #{$mobile}) and (max-width: #{$tablet}) {
+  mat-drawer {
+    width: $drawer-width-tablet;
+  }
+}

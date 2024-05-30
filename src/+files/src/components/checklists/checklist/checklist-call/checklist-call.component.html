@@ -1,0 +1,10 @@
+<strong>{{ item.name }}</strong>
+<div class="align-center">
+  <ven-icon-new icon="person" colour="#008be5" [filled]="true"></ven-icon-new>
+  <span class="left-gap">{{ name }}</span>
+</div>
+<div class="align-center">
+  <ven-icon-new icon="call" colour="#008be5" [filled]="true"></ven-icon-new>
+  <a href="tel:{{ phone }}" class="left-gap">{{ phone }}</a>
+</div>
+<div class="align-center"><ven-checklist-email [specId]="specId" [checklist]="checklist" [emails]="emails"></ven-checklist-email></div>

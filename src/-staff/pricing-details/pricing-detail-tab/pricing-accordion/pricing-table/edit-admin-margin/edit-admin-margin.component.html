@@ -1,0 +1,10 @@
+<div class="dialog-wrapper">
+  <form [formGroup]="adminMarginForm">
+    <mat-form-field class="full-width" appearance="outline">
+      <mat-label>Admin fee</mat-label>
+      <input matInput formControlName="margin" type="number" id="margin" name="margin" />
+      <span matSuffix>%</span>
+    </mat-form-field>
+  </form>
+  <ven-dialog-footer-buttons [submitAction]="submitAction" [closeAction]="closeAction"></ven-dialog-footer-buttons>
+</div>

@@ -1,0 +1,11 @@
+// only styles specific to image component should go in here
+// ideally this component will simply use the styles injected by PrintItemComponent
+// see print-item/print-item.component.scss
+.image-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+img {
+  width: 100%;
+}

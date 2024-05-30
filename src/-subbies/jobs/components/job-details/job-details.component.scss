@@ -1,0 +1,12 @@
+@import 'variables';
+@import 'chrome-theme';
+
+:host {
+  padding: 16px;
+}
+
+@media only screen and (min-width: #{$tablet+1}) {
+}
+
+@media only screen and (max-width: #{$tablet}) {
+}

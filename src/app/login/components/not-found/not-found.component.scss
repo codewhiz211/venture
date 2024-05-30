@@ -1,0 +1,42 @@
+@import 'chrome-theme';
+@import 'variables';
+
+.content {
+  padding: 16px;
+}
+.logo {
+  display: none;
+}
+
+.welcome-message {
+  padding-top: 16px;
+  h2 {
+    line-height: 72px;
+  }
+  h6 {
+    color: white;
+
+    a {
+      color: $blue-primary;
+    }
+  }
+
+  @media only screen and (max-width: #{$tablet}) {
+    h2 {
+      font-size: 48px;
+      line-height: 56px;
+    }
+  }
+}
+
+@media only screen and (max-width: #{$tablet}) {
+  .logo {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 32px;
+
+    img {
+      width: 136px;
+    }
+  }
+}

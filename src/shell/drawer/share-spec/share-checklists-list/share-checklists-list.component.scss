@@ -1,0 +1,12 @@
+@import 'variables';
+
+.share-checklist-container {
+  display: flex;
+  flex-direction: column;
+
+  @media screen and (max-width: $mobile) {
+    mat-checkbox {
+      padding: 6px 0;
+    }
+  }
+}

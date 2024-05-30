@@ -1,0 +1,36 @@
+<div class="wrapper">
+  <img src="/assets/img/logo.svg" class="logo" />
+  <div class="box">
+    <h6 class="bold">Dev Login</h6>
+
+    <ng-container *ngIf="loading; else signin">
+      <mat-progress-spinner [mode]="'indeterminate'" [color]="'accent'" *ngIf="loading; else signin"></mat-progress-spinner>
+    </ng-container>
+
+    <ng-template #signin>
+      <form (ngSubmit)="onSignIn()" [formGroup]="loginForm">
+        <!-- EMAIL -->
+        <mat-form-field class="full-width" appearance="outline">
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email" type="email" id="email" name="email" />
+          <mat-error *ngIf="!loginForm.controls.email.valid && loginForm.controls.email.touched">Please enter a valid email</mat-error>
+        </mat-form-field>
+
+        <!-- PWD -->
+        <mat-form-field class="full-width" appearance="outline">
+          <mat-label>Password</mat-label>
+          <input matInput formControlName="password" type="password" id="password" name="password" />
+          <mat-error *ngIf="!loginForm.controls.password.valid && loginForm.controls.password.touched"
+            >Please enter a valid password</mat-error
+          >
+        </mat-form-field>
+
+        <button mat-raised-button color="accent" type="submit" [disabled]="!loginForm.valid">Login</button>
+
+        <div *ngIf="errorMessage" class="error-message">
+          {{ errorMessage }}
+        </div>
+      </form>
+    </ng-template>
+  </div>
+</div>

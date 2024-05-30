@@ -1,0 +1,69 @@
+<!-- Header -->
+<mat-toolbar *ngIf="showHeader" color="primary" [ngClass]="{ 'tall-header': !client }">
+  <ng-container *ngIf="client; else logo">
+    <a class="back-link" (click)="goToClients()">
+      <ven-icon-new icon="keyboard_backspace"></ven-icon-new>
+      Back To Clients</a
+    >
+  </ng-container>
+  <ng-template #logo>
+    <span *ngIf="!hideLogo"
+      ><a href="/"><img [src]="logoImage" /></a
+    ></span>
+  </ng-template>
+
+  <!-- Menu -->
+  <span class="spacer"></span>
+
+  <span class="spacer-light"></span>
+
+  <div *ngIf="authService.isAuthenticated">
+    <span class="mat-caption email">{{ userEmail }}</span>
+    <button mat-icon-button [matMenuTriggerFor]="menu" class="no-print">
+      <ven-icon-new icon="expand_more" colour="white"></ven-icon-new>
+    </button>
+
+    <mat-menu class="header-menu" #menu="matMenu">
+      <div class="mat-item-container">
+        <!-- on all mobile  / tablet devices-->
+        <a *ngIf="client && selectedTab == 0 && !hideOption" class="not-on-desktop not-on-mobile" mat-menu-item (click)="addNewSection()">
+          <ven-icon-new icon="add_photo_alternate" colour="black" title="Add new section"></ven-icon-new>
+          <span>Add new section</span>
+        </a>
+        <a *ngIf="client && selectedTab !== 3" class="not-on-desktop" mat-menu-item (click)="takeSnapshot()">
+          <ven-icon-new icon="add_photo_alternate" colour="black" title="Save a copy"></ven-icon-new>
+          <span>Save a copy</span>
+        </a>
+        <a *ngIf="client && selectedTab !== 3" class="not-on-desktop" mat-menu-item (click)="viewSnapshots()">
+          <ven-icon-new icon="history" colour="black" title="View Saved Copies"></ven-icon-new>
+          <span>View saved copies</span>
+        </a>
+        <a *ngIf="client && selectedTab !== 3" class="not-on-desktop not-on-mobile" mat-menu-item (click)="shareSpec()">
+          <ven-icon-new icon="share" colour="black" title="Share Live Spec"></ven-icon-new>
+          <span>Share<span class="not-mobile">live spec</span></span>
+        </a>
+        <a *ngIf="client && selectedTab === 4" class="not-on-desktop share-files-item" mat-menu-item (click)="shareSpec()">
+          <ven-icon-new icon="share" colour="black" title="Share Files"></ven-icon-new>
+          <span>Share Files</span>
+        </a>
+
+        <!-- admin only -->
+        <a *ngIf="showAdmin" mat-menu-item routerLink="/venture/admin" [class.share-files-item]="selectedTab === 3">
+          <ven-icon-new icon="people" title="Admin" colour="black"></ven-icon-new>
+          <span>Admin</span>
+        </a>
+
+        <a *ngIf="showSpec" mat-menu-item routerLink="/venture/clients">
+          <ven-icon-new icon="description" title="To Spec" colour="black"></ven-icon-new>
+          <span>To Spec</span>
+        </a>
+
+        <!-- on all devices-->
+        <a mat-menu-item (click)="onLogout()" [class.share-files-item]="selectedTab === 3">
+          <ven-icon-new icon="lock" title="Logout" colour="black"></ven-icon-new>
+          <span>Logout</span>
+        </a>
+      </div>
+    </mat-menu>
+  </div>
+</mat-toolbar>

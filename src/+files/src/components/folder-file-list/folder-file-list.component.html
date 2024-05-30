@@ -1,0 +1,180 @@
+<div cdkDropListGroup>
+  <!-- HEADER -->
+  <div class="folder-files-header">
+    <!-- BREADCRUMB -->
+    <ul class="folder-breadcrumb primary">
+      <li
+        (click)="handleFolderChange('root'); checklist = null"
+        [ngClass]="{ hover: currentFolder }"
+        class="folder-drop-target"
+        cdkDropList
+        id="base"
+        (cdkDropListDropped)="handleDrop($event)"
+      >
+        <h6>Folders</h6>
+      </li>
+      <li *ngIf="currentFolder" (click)="onHandleCurrentFolderClick()" [ngClass]="{ hover: checklist }">
+        <ven-icon-new icon="chevron_right" colour="#008be5" hover="#008be5"></ven-icon-new>
+        <h6 *ngIf="currentFolder !== 'root'" class="small-left-margined">{{ currentFolder }}</h6>
+      </li>
+      <li *ngIf="checklist">
+        <ven-icon-new icon="chevron_right" colour="#008be5" hover="#008be5"></ven-icon-new>
+        <h6 class="small-left-margined">{{ checklist.name }}</h6>
+      </li>
+    </ul>
+    <div *ngIf="currentFolder !== 'root'" (click)="onGoBack()">
+      <ven-icon-new icon="arrow_back" colour="#008be5" hover="#008be5"></ven-icon-new>
+      <span class="not-mobile primary linked-point">Back</span>
+    </div>
+  </div>
+  <!-- FOLDER LIST -->
+
+  <ul class="folder-list" *ngIf="currentFolder === 'root'">
+    <!-- CHECKLIST -->
+    <li *ngIf="checklists && checklists.length > 0" (click)="openFolder('Checklists')">
+      <div>
+        <ven-icon-new icon="folder" colour="black" hover="black"></ven-icon-new>
+        <span>Checklists</span>
+        <mat-icon class="required-icon" *ngIf="checklistsRequired">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+            <path fill="none" d="M0 0h24v24H0V0z" />
+            <path
+              color="red"
+              d="M11 15h2v2h-2zm0-8h2v6h-2zm.99-5C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"
+            />
+          </svg>
+        </mat-icon>
+      </div>
+    </li>
+    <li *ngFor="let folder of folders" (click)="openFolder(folder)">
+      <div class="folder-drop-target" cdkDropList id="{{ folder }}" (cdkDropListDropped)="handleDrop($event)">
+        <ven-icon-new icon="folder" colour="black" hover="black"></ven-icon-new>
+        <span *ngIf="editingFolder !== folder" class="large-left-margined"> {{ folder }} </span>
+        <ven-rename-folder
+          *ngIf="editingFolder === folder"
+          [name]="folder"
+          (folderChanged)="handleFolderRenamed($event)"
+        ></ven-rename-folder>
+      </div>
+      <ven-folder-menu
+        *ngIf="!editingFolder && folder !== folderNames.signedSpecSheet && folder !== folderNames.subbieUploads"
+        [folder]="folder"
+        (renameFolderClicked)="handleRenameFolder($event)"
+        (deleteFolderClicked)="handleFolderDelete($event)"
+      ></ven-folder-menu>
+    </li>
+  </ul>
+
+  <!-- folder files -->
+  <div
+    *ngIf="currentFolder.toLocaleLowerCase() !== folderNames.checklists && currentFolder !== folderNames.signedSpecSheet"
+    class="file-list folder-drop-target"
+    cdkDropList
+    id="{{ currentFolder }}"
+    (cdkDropListDropped)="handleDrop($event)"
+  >
+    <div *ngFor="let file of activeFiles$ | async" class="file-list-card bordered" cdkDrag [id]="file.fuid">
+      <div class="image-wrapper">
+        <img
+          *ngIf="file.isImage"
+          (click)="handleViewImage(file.url, file.filename)"
+          mat-card-image
+          [src]="file.url"
+          [alt]="file.filename"
+        />
+        <img
+          *ngIf="file.isEmail"
+          (click)="handleViewImage(file.url, file.filename)"
+          mat-card-image
+          [src]="placholderEmail"
+          [alt]="file.filename"
+        />
+        <img
+          *ngIf="file.isPdf"
+          (click)="handleDownloadFile(file.url, file.filename)"
+          mat-card-image
+          [src]="placholderPdf"
+          [alt]="file.filename"
+        />
+        <img
+          *ngIf="!file.isImage && !file.isEmail && !file.isPdf"
+          (click)="handleDownloadFile(file.url, file.filename)"
+          [src]="placholderImage"
+          [alt]="file.filename"
+        />
+      </div>
+      <mat-card-footer>
+        <div>
+          <div class="filename dark-high-emphasis">{{ file.filename }}</div>
+          <div class="uploaded-by body-2 dark-medium-emphasis" [title]="file.uploadedBy">{{ file.uploadedBy }}</div>
+          <div class="body-2 dark-medium-emphasis">{{ file.uploadedDate | date }}</div>
+        </div>
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+          <ven-icon-new icon="more_vert" colour="black" hover="black"></ven-icon-new>
+        </button>
+        <mat-menu #menu="matMenu">
+          <div class="mat-item-container">
+            <!-- on all devices-->
+            <a mat-menu-item (click)="handleDeleteFile(file.fuid, file.filename)" *ngIf="currentFolder != folderNames.subbieUploads">
+              <ven-icon-new icon="delete" colour="black" hover="black"></ven-icon-new>
+              <span>Delete</span>
+            </a>
+          </div>
+          <div class="mat-item-container">
+            <!-- on all devices-->
+            <a mat-menu-item (click)="handleDownloadFile(file.url, file.filename)">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                <path fill="none" d="M0 0h24v24H0V0z" />
+                <path
+                  d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM19 18H6c-2.21 0-4-1.79-4-4 0-2.05 1.53-3.76 3.56-3.97l1.07-.11.5-.95C8.08 7.14 9.94 6 12 6c2.62 0 4.88 1.86 5.39 4.43l.3 1.5 1.53.11c1.56.1 2.78 1.41 2.78 2.96 0 1.65-1.35 3-3 3zm-5.55-8h-2.9v3H8l4 4 4-4h-2.55z"
+                />
+              </svg>
+              <span>Download</span>
+            </a>
+          </div>
+        </mat-menu>
+      </mat-card-footer>
+    </div>
+    <div *ngIf="(activeFiles$ | async).length === 0" class="empty-state"><span>No files in this folder.</span></div>
+  </div>
+
+  <!-- Checklist folder only -->
+  <ven-checklists
+    *ngIf="currentFolder.toLocaleLowerCase() === folderNames.checklists"
+    [checklists]="checklists"
+    [activeChecklist]="checklist"
+    (activeChecklistChange)="onSetActiveChecklist($event)"
+    (updateChecklistChange)="onUpdateChecklistChange($event)"
+  ></ven-checklists>
+</div>
+<div *ngIf="currentFolder === folderNames.signedSpecSheet" class="folder-list">
+  <ul class="folder-list" *ngIf="(activeFiles$ | async).length !== 0">
+    <li *ngFor="let file of activeFiles$ | async" class="item">
+      <a (click)="toPreview(file)" *ngIf="editedSpec !== file.fuid"> {{ file.filename }} </a>
+      <ven-rename-folder
+        *ngIf="editedSpec === file.fuid"
+        [name]="file.filename"
+        (folderChanged)="renameSignedSpec($event, file)"
+      ></ven-rename-folder>
+      <div class="folder-date-wrapper">
+        <span> {{ file.date | date: 'short' }} </span>
+        <div *ngIf="editedSpec !== file.fuid">
+          <button mat-icon-button [matMenuTriggerFor]="menu">
+            <ven-icon-new icon="more_vert" colour="black" hover="black"></ven-icon-new>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="editedSpec = file.fuid">
+              <ven-icon-new icon="create_new_folder" colour="grey" hover="grey"></ven-icon-new>
+              Rename
+            </button>
+            <button mat-menu-item (click)="deleteSignedSpec(file)">
+              <ven-icon-new icon="delete_forever" colour="grey" hover="grey"></ven-icon-new>
+              Delete
+            </button>
+          </mat-menu>
+        </div>
+      </div>
+    </li>
+  </ul>
+  <div *ngIf="(activeFiles$ | async).length === 0" class="empty-state"><span>No files in this folder.</span></div>
+</div>

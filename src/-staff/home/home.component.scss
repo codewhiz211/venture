@@ -1,0 +1,16 @@
+@import 'variables';
+.logo {
+  display: none;
+}
+
+@media only screen and (max-width: #{$tablet}) {
+  .logo {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 32px;
+
+    img {
+      width: 136px;
+    }
+  }
+}

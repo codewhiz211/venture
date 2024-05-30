@@ -1,0 +1,22 @@
+
+.select-disabled {
+  display: flex;
+  flex-direction: column;
+  padding: .75em;
+  width: 200px;
+  background-color: rgba(0, 0, 0, 0.04);
+  border-bottom: 1px solid black;
+  margin-bottom: 1.34375em;
+
+  span {
+    line-height: initial;
+    &:first-of-type {
+      font-size: 12px;
+      color: rgba(0, 0, 0, 0.6);
+    }
+  }
+}
+
+::ng-deep.mat-form-field-appearance-fill .mat-form-field-underline {
+  position: initial!important;
+}

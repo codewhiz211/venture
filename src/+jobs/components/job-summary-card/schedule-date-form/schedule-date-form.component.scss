@@ -1,0 +1,10 @@
+@import 'variables';
+
+h2,
+span {
+  display: flex;
+  color: $color-accent;
+  margin-left: 8px;
+  align-items: center;
+  font-weight: 400;
+}

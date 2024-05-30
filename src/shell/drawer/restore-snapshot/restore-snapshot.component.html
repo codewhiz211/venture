@@ -1,0 +1,65 @@
+<div class="dialog-wrapper" [ngClass]="{ 'loader-active': loading }">
+  <div *ngIf="loading; else snapshots" class="loader-wrapper">
+    <mat-progress-spinner [mode]="'indeterminate'" [color]="'accent'"></mat-progress-spinner>
+  </div>
+  <ng-template #snapshots>
+    <ng-container *ngIf="specSnapshots.length === 0">
+      <p>There are currently no copies saved for {{ data.spec.contact_details.client }}.</p>
+      <p>
+        To create a copy, look for the copy icon in the menu.
+        <ven-icon-new icon="add_photo_alternate" colour="#008be5"></ven-icon-new>
+      </p>
+      <ven-dialog-footer-buttons [closeAction]="closeAction"></ven-dialog-footer-buttons>
+    </ng-container>
+    <ng-container *ngIf="specSnapshots.length > 0">
+      <p class="body-override dark-high-emphasis">Restore copy for {{ data.spec.contact_details.client }}.</p>
+      <div *ngIf="!isMobile" class="grid">
+        <!-- header -->
+        <div class="grid-row grid-row-header subtitle primary">
+          <div><span> </span></div>
+          <div><span>Description</span></div>
+          <div><span>Created</span></div>
+          <div><span>Created by</span></div>
+        </div>
+        <div class="grid-row" *ngFor="let snapshot of specSnapshots">
+          <div>
+            <span class="emphasis-high">
+              <mat-radio-button class="example-radio-button" [value]="snapshot" (change)="radioChange($event)"> </mat-radio-button>
+            </span>
+          </div>
+          <div>
+            <span class="body-2 dark-medium-emphasis">{{ snapshot.description }}</span>
+          </div>
+          <div>
+            <span class="body-2 dark-medium-emphasis">{{ snapshot.created | date: 'medium' }}</span>
+          </div>
+          <div>
+            <span class="body-2 dark-medium-emphasis">{{ snapshot.createdBy }}</span>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="isMobile">
+        <div class="tile body-2" *ngFor="let snapshot of specSnapshots" (click)="onTileClick(snapshot)">
+          <div>
+            <span class="dark-high-emphasis">Description</span><span class="dark-medium-emphasis">{{ snapshot.description }}</span>
+          </div>
+          <div>
+            <span class="dark-high-emphasis">Created</span><span class="dark-medium-emphasis">{{ snapshot.created | date: 'medium' }}</span>
+          </div>
+          <div>
+            <span class="dark-high-emphasis">Created by</span><span class="dark-medium-emphasis">{{ snapshot.createdBy }}</span>
+          </div>
+        </div>
+      </div>
+      <ven-dialog-footer-buttons
+        *ngIf="!isMobile; else mobile"
+        [closeAction]="closeAction"
+        [submitAction]="submitAction"
+        [disabled]="!snapshotSelected"
+      ></ven-dialog-footer-buttons>
+      <ng-template #mobile>
+        <ven-dialog-footer-buttons [closeAction]="closeAction"></ven-dialog-footer-buttons>
+      </ng-template>
+    </ng-container>
+  </ng-template>
+</div>

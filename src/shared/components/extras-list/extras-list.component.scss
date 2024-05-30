@@ -1,0 +1,70 @@
+@import 'variables';
+@import 'chrome-theme';
+h6 {
+  color: $color-accent;
+  font-size: 15px;
+  border-bottom: 1px solid $chrome-border-colour-dark;
+  padding-bottom: 8px;
+  padding-top: 16px;
+  span {
+    margin-left: 16px;
+    margin-right: 16px;
+  }
+
+  text-align: right;
+}
+
+ul {
+  list-style: none;
+
+  li {
+    display: flex;
+    flex-direction: column;
+
+    div {
+      display: flex;
+      justify-content: space-between;
+      padding: 9px 0;
+      border-bottom: 1px solid $chrome-border-colour-dark;
+      span {
+        margin-left: 16px;
+        margin-right: 16px;
+      }
+    }
+  }
+
+  li:last-of-type div:last-of-type {
+    border-bottom: none;
+  }
+
+  div.bold {
+    font-weight: bold;
+  }
+
+  span > span {
+    font-size: 10px;
+  }
+
+  span.small-text {
+    font-size: 0.8em;
+  }
+
+  span.red {
+    color: red;
+  }
+  li:last-child {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 8px;
+    flex-direction: column;
+    div:first-of-type {
+      height: 50px;
+    }
+  }
+}
+
+.extras-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

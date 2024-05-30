@@ -1,0 +1,18 @@
+@import 'variables';
+@import 'chrome-theme';
+
+:host {
+  width: 100%;
+}
+
+.footer-button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 13px 16px 13px 0;
+  border-top: 1px solid $chrome-border-colour-dark;
+}
+
+.icon-button {
+  padding: 0 5px;
+}

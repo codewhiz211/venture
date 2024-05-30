@@ -1,0 +1,242 @@
+<mat-accordion #myaccordion="matAccordion" multi="openAll">
+  <mat-expansion-panel
+    id="section_{{ section.id }}"
+    *ngFor="let section of sections; trackBy: trackSectionChange"
+    [expanded]="activeSection === section.id"
+    (opened)="setStep(section.id)"
+    [ngClass]="{ 'no-print': (spec?.hiddenSections)[section?.name] }"
+    (afterExpand)="scrollToMe(section.id)"
+    (afterCollapse)="afterCollapse(section.id)"
+  >
+    <mat-expansion-panel-header>
+      <mat-panel-title class="subtitle primary">
+        {{ section.title }}
+        <ven-spec-accordion-menu [spec]="spec" [activeSection]="activeSection" [section]="section"></ven-spec-accordion-menu>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <ng-template matExpansionPanelContent>
+      <div class="accordion-content" *ngIf="(spec?.hiddenSections)[section?.name] !== true">
+        <div
+          id="section_contents_{{ section?.id }}"
+          *ngIf="section.fields"
+          [class.expandLastField]="section.expandLastField"
+          [class.noPrint]="spec.hiddenSections | isHidden: section?.name"
+          class="field-wrapper"
+        >
+          <ng-container *ngFor="let field of section.fields; trackBy: trackSectionChange; index as index">
+            <ng-container [ngSwitch]="field?.type">
+              <p *ngSwitchCase="'note'" class="body-2 emphasis-med note">{{ field.text }}</p>
+              <div *ngIf="field?.text" class="subtitle-container">
+                <h2 *ngSwitchCase="'subtitle'" class="subtitle-2 light-blue">
+                  {{
+                    spec['custom_fields'][section?.name] &&
+                    (spec['custom_fields'][section?.name][field?.name] || spec['custom_fields'][section?.name][field?.text])
+                      ? spec['custom_fields'][section?.name][field?.text] || spec['custom_fields'][section?.name][field?.name]
+                      : field?.text
+                  }}
+                  <ven-spec-accordion-menu
+                    [spec]="spec"
+                    [activeSection]="activeSection"
+                    [section]="section"
+                    [field]="field"
+                    [colour]="'#62bbff'"
+                  ></ven-spec-accordion-menu>
+                </h2>
+              </div>
+              <ven-spec-subtitle-conditional
+                *ngSwitchCase="'subtitle-conditional'"
+                [spec]="spec"
+                [section]="section"
+                [field]="field"
+                class="spec-field"
+                >{{ field.text }}
+              </ven-spec-subtitle-conditional>
+
+              <ng-container *ngIf="!(spec.hiddenSections | isHidden: section?.name:field?.canHide); else showHiddenSubsection">
+                <ven-spec-droppicker
+                  *ngSwitchCase="'dropdown'"
+                  [spec]="spec"
+                  [section]="section"
+                  [field]="field"
+                  class="spec-field"
+                ></ven-spec-droppicker>
+                <div *ngSwitchCase="'dropdown-conditional'">
+                  You need to change 'dropdown-conditional' to 'dropdown' for {{ field.name }}
+                </div>
+                <ven-spec-number
+                  *ngSwitchCase="'number'"
+                  [spec]="spec"
+                  [section]="section"
+                  [field]="field"
+                  class="spec-field"
+                ></ven-spec-number>
+                <ven-spec-number-conditional
+                  *ngSwitchCase="'number-conditional'"
+                  [spec]="spec"
+                  [section]="section"
+                  [field]="field"
+                  class="spec-field"
+                ></ven-spec-number-conditional>
+                <ven-spec-text-field
+                  *ngSwitchCase="'text'"
+                  [spec]="spec"
+                  [section]="section"
+                  [field]="field"
+                  class="spec-field"
+                ></ven-spec-text-field>
+                <ven-spec-text-field-conditional
+                  *ngSwitchCase="'text-conditional'"
+                  [spec]="spec"
+                  [section]="section"
+                  [field]="field"
+                  class="spec-field"
+                ></ven-spec-text-field-conditional>
+                <ven-spec-text-field-optional
+                  *ngSwitchCase="'text-optional'"
+                  [spec]="spec"
+                  [section]="section"
+                  [field]="field"
+                  class="spec-field"
+                >
+                </ven-spec-text-field-optional>
+                <ven-spec-multi-text-field
+                  *ngSwitchCase="'multi-text'"
+                  [spec]="spec"
+                  [section]="section"
+                  [field]="field"
+                  [type]="field.textType"
+                  class="spec-field"
+                ></ven-spec-multi-text-field>
+                <ven-spec-text-area
+                  *ngSwitchCase="'textarea'"
+                  [spec]="spec"
+                  [section]="section"
+                  [field]="field"
+                  class="spec-field"
+                ></ven-spec-text-area>
+                <ven-spec-text-area-conditional
+                  *ngSwitchCase="'textarea-conditional'"
+                  [spec]="spec"
+                  [section]="section"
+                  [field]="field"
+                  class="spec-field"
+                ></ven-spec-text-area-conditional>
+                <ven-spec-image-picker
+                  *ngSwitchCase="'image-picker'"
+                  [spec]="spec"
+                  [section]="section"
+                  [field]="field"
+                  class="spec-field"
+                ></ven-spec-image-picker>
+                <ven-spec-custom-manager [section]="section" *ngSwitchCase="'custom-blocks'" [field]="field" [spec]="spec">
+                </ven-spec-custom-manager>
+                <ven-spec-attach-image *ngSwitchCase="'attach-image'" [specId]="spec.uid" [section]="section"> </ven-spec-attach-image>
+              </ng-container>
+              <ng-template #showHiddenSubsection>
+                <div
+                  *ngIf="
+                    field?.canHide !== section.fields[index + 1]?.canHide &&
+                    (field?.canHide === field?.hideWhenConditional?.canHide || !field?.hideWhenConditional) &&
+                    !spec.disabled
+                  "
+                  (click)="showSubSection(section.name, field?.canHide)"
+                  class="visibility_toggle sub-section"
+                >
+                  <mat-icon class="mat-icon material-icons" role="img" title="Show section" aria-hidden="true">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                      <path fill="none" d="M0 0h24v24H0V0z" />
+                      <path
+                        d="M12 6c3.79 0 7.17 2.13 8.82 5.5C19.17 14.87 15.79 17 12 17s-7.17-2.13-8.82-5.5C4.83 8.13 8.21 6 12 6m0-2C7 4 2.73 7.11 1 11.5 2.73 15.89 7 19 12 19s9.27-3.11 11-7.5C21.27 7.11 17 4 12 4zm0 5c1.38 0 2.5 1.12 2.5 2.5S13.38 14 12 14s-2.5-1.12-2.5-2.5S10.62 9 12 9m0-2c-2.48 0-4.5 2.02-4.5 4.5S9.52 16 12 16s4.5-2.02 4.5-4.5S14.48 7 12 7z"
+                      />
+                    </svg> </mat-icon
+                  >Show section
+                </div>
+              </ng-template>
+              <!-- TODO replace abve with this <ng-template #showHiddenSubsection>
+                <ng-container *ngIf="field?.canHide !== section.fields[index + 1]?.canHide && !spec.disabled">
+                  <ven-visibility-toggle (onClicked)="showSubSection(section.name, field?.canHide)"></ven-visibility-toggle>
+                </ng-container>
+              </ng-template> -->
+            </ng-container>
+          </ng-container>
+        </div>
+
+        <ul *ngIf="section.list" id="section_contents_{{ section.id }}">
+          <li *ngFor="let item of section.list; trackBy: trackSectionChange">{{ item }}</li>
+        </ul>
+
+        <ven-spec-electrical
+          *ngIf="section.component && section.component === 'spec-electrical'"
+          [spec]="spec"
+          [sections]="sections"
+        ></ven-spec-electrical>
+
+        <ven-spec-extras
+          *ngIf="section.hasExtras && !(section.component === 'spec-electrical')"
+          [spec]="spec"
+          [section]="section"
+        ></ven-spec-extras>
+        <ng-container *ngIf="section?.additionalNote">
+          <p class="body-2 emphasis-med note">{{ section?.additionalNote }}</p>
+        </ng-container>
+      </div>
+      <div *ngIf="section?.canHide && !spec?.disabled" class="no-print section-footer">
+        <span *ngIf="spec.hiddenSections | isHidden: section?.name" (click)="showSection(section.name)" class="visibility_toggle">
+          <mat-icon class="mat-icon material-icons" role="img" title="Show section" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+              <path fill="none" d="M0 0h24v24H0V0z" />
+              <path
+                d="M12 6c3.79 0 7.17 2.13 8.82 5.5C19.17 14.87 15.79 17 12 17s-7.17-2.13-8.82-5.5C4.83 8.13 8.21 6 12 6m0-2C7 4 2.73 7.11 1 11.5 2.73 15.89 7 19 12 19s9.27-3.11 11-7.5C21.27 7.11 17 4 12 4zm0 5c1.38 0 2.5 1.12 2.5 2.5S13.38 14 12 14s-2.5-1.12-2.5-2.5S10.62 9 12 9m0-2c-2.48 0-4.5 2.02-4.5 4.5S9.52 16 12 16s4.5-2.02 4.5-4.5S14.48 7 12 7z"
+              />
+            </svg> </mat-icon
+          >Show section</span
+        >
+        <!-- TODO replace above with this <ven-visibility-toggle (onClicked)="showSection(section.name)"></ven-visibility-toggle> -->
+
+        <span
+          *ngIf="spec.custom_sections && spec.custom_sections[section.name] && !spec?.disabled"
+          (click)="deleteSection(section)"
+          class="visibility_toggle"
+        >
+          <mat-icon class="mat-icon material-icons" role="img" title="Delete section" aria-hidden="true">
+            <svg height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M0 0h24v24H0V0z" fill="none"></path>
+              <path
+                d="M14.12 10.47L12 12.59l-2.13-2.12-1.41 1.41L10.59 14l-2.12 2.12 1.41 1.41L12 15.41l2.12 2.12 1.41-1.41L13.41 14l2.12-2.12zM15.5 4l-1-1h-5l-1 1H5v2h14V4zM6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM8 9h8v10H8V9z"
+              ></path>
+            </svg> </mat-icon
+          >Delete section</span
+        >
+      </div>
+    </ng-template>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel id="999">
+    <mat-expansion-panel-header>
+      <mat-panel-title class="subtitle primary"> Health & Safety Information </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <ng-template matExpansionPanelContent>
+      <div class="accordion-content hos-content">
+        <p class="body-2">
+          We understand that watching the building of your new house is exciting, however construction sites can have many hazards. Keeping
+          you safe and meeting our obligations under the health and safety legislation means that we need to work together.
+        </p>
+        <p class="body-2">
+          Therefore, we ask that you respect our building sites and only enter them with your project manager. We understand that seeing the
+          progression of your build is important to you, but while the construction of your home is underway there is no entry onto our
+          sites. This includes outside of working hours and in the weekends.
+        </p>
+        <p class="body-2">If you would like to arrange an appointment to walk through your home, please contact you project manager.</p>
+        <p class="body-2">
+          I have read and understand that I need to have a Venture Developments’ project manager to enter the building site.
+        </p>
+        <div class="signature">
+          <div class="body-2">Signed: <span></span></div>
+          <div class="body-2">Date: {{ todaysDate | date }}</div>
+        </div>
+      </div>
+    </ng-template>
+  </mat-expansion-panel>
+</mat-accordion>

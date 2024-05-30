@@ -1,0 +1,80 @@
+@import 'chrome-theme';
+@import 'chrome-typography';
+@import 'variables';
+
+mat-calendar {
+  color: $text-light-medium-emphasis !important;
+
+  @media screen and (min-width: $mobile) {
+    display: flex;
+    align-items: baseline;
+  }
+}
+
+.hide-board-on-desktop {
+  display: none;
+  @media only screen and (max-width: $mobile) {
+    display: block;
+  }
+}
+
+@media screen and (min-width: #{$mobile+1}) {
+  :host::ng-deep ven-card-calendar-header {
+    width: 33.3%;
+  }
+  :host::ng-deep .mat-calendar-content {
+    width: 66.6%;
+    padding: 8px;
+  }
+  :host::ng-deep th {
+    font-size: 15.8px;
+  }
+}
+
+@media screen and (max-width: $mobile) {
+  :host::ng-deep .mat-calendar-content {
+    padding: 0 0 8px 0;
+  }
+}
+
+:host::ng-deep .mat-calendar-table-header,
+:host::ng-deep .mat-calendar-body-label,
+:host::ng-deep .mat-calendar-body-cell-content {
+  color: $text-light-high-emphasis;
+}
+
+:host::ng-deep .mat-calendar-arrow {
+  border-top-color: $text-light-high-emphasis !important;
+}
+
+:host::ng-deep .mat-calendar-header {
+  padding: 0 8px;
+}
+
+:host::ng-deep .mat-calendar-body-today:not(.mat-calendar-body-selected) {
+  border-color: $text-light-high-emphasis !important;
+}
+
+:host::ng-deep .mat-calendar-body-cell-content {
+  width: 50%;
+  height: 50%;
+  top: 25%;
+  left: 25%;
+}
+:host::ng-deep .mat-calendar-body-selected {
+  background-color: rgba(0, 0, 0, 0) !important;
+  .mat-calendar-body-cell-content {
+    color: $text-light-high-emphasis !important;
+  }
+  div {
+    background-color: $blue-primary;
+    border-radius: 50%;
+  }
+}
+
+//disabled cell font
+:host::ng-deep .disabled-cell-font {
+  .mat-calendar-body-cell-content {
+    color: $text-light-medium-emphasis;
+  }
+}

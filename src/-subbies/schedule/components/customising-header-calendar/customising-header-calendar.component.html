@@ -1,0 +1,7 @@
+<mat-calendar
+  [headerComponent]="headerComponent"
+  [dateClass]="renderSelectedDates"
+  [startAt]="today"
+  (monthSelected)="handleMonthChanges($event)"
+></mat-calendar>
+<ven-subbie-schedule-summary-board class="hide-board-on-desktop"></ven-subbie-schedule-summary-board>

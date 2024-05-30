@@ -1,0 +1,35 @@
+@import 'variables';
+
+:host {
+  display: block;
+
+  ::ng-deep {
+    .mat-dialog-actions {
+      justify-content: flex-end;
+      display: flex;
+
+      & > * {
+        margin-left: 8px;
+      }
+    }
+  }
+}
+
+.mat-dialog-content {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.mat-dialog-actions {
+  margin-top: 20px;
+}
+
+.dialog-wrapper {
+  .sign-all-container {
+    margin-top: 16px;
+  }
+}
+
+p {
+  margin-bottom: 20px;
+}

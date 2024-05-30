@@ -1,0 +1,37 @@
+@import 'chrome-theme';
+@import 'variables';
+
+.non-standard-option-dialog {
+  @media screen and (max-width:#{$tablet+1}) {
+    padding: 16px;
+  }
+  height: calc(100% - 58px); // 42px (button height) + 8px * 2 (margin)
+  overflow-y: auto;
+  p {
+    margin-bottom: 9px;
+  }
+  .non-standard-option-cards {
+    div:last-of-type {
+      margin-bottom: 8px;
+    }
+  }
+}
+
+:host::ng-deep mat-dialog-actions {
+  @media screen and (max-width:#{$tablet+1}) {
+    margin-bottom: 76px !important;
+  }
+}
+
+.dismiss-button {
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.bordered {
+  border: 1px solid $blue-light;
+  border-radius: 3px;
+  padding: 16px;
+  margin-bottom: 16px;
+}

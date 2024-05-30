@@ -1,0 +1,139 @@
+<div class="page-wrapper">
+  <div *ngIf="showDownloadShield" class="shield">
+    <div class="spinner-wrappper">
+      <mat-progress-spinner [mode]="'indeterminate'" [color]="'accent'"></mat-progress-spinner>
+      <!-- make message configurable -->
+      <p>Preparing for print...</p>
+    </div>
+  </div>
+  <ven-action-menu [activeSpec]="spec" [selectedTab]="selectedTab"></ven-action-menu>
+  <ven-app-content class="spec-content">
+    <!-- TABS -->
+    <mat-tab-group [color]="'accent'" (selectedTabChange)="handleTabChange($event)" #clientTab>
+      <!-- SPEC TAB -->
+      <mat-tab label="Spec">
+        <ng-container *ngIf="spec; else loading">
+          <div class="mat-elevation-z4" id="spec-tab">
+            <ven-spec-custom-value-notification *ngIf="spec?.custom_value || {} | customValuesExist"></ven-spec-custom-value-notification>
+            <ven-spec-header [spec]="spec" [projectManagers]="projectManagers" [consultants]="consultants"></ven-spec-header>
+            <ven-spec-accordion id="spec-accordion" [spec]="spec" [sections]="sections"></ven-spec-accordion>
+          </div>
+        </ng-container>
+
+        <ng-template #loading> <ven-loader [height]="'initial'"></ven-loader> </ng-template>
+      </mat-tab>
+
+      <!-- QUOTE TAB -->
+      <mat-tab label="Quote">
+        <ng-template matTabContent>
+          <div class="mat-elevation-z4" id="quote-tab">
+            <ng-container *ngIf="!spec?.details?.synced; else syncedQuote">
+              <ven-quote-header [spec]="spec"></ven-quote-header>
+              <ven-quote-summary [spec]="spec"></ven-quote-summary>
+              <mat-card> <ven-quote-amount [spec]="spec"></ven-quote-amount> </mat-card>
+            </ng-container>
+            <ng-template #syncedQuote> <ven-synced-blank-state></ven-synced-blank-state> </ng-template>
+          </div>
+        </ng-template>
+      </mat-tab>
+
+      <!-- SUBBIES TAB-->
+      <mat-tab label="Subbies">
+        <ng-template matTabContent>
+          <div class="mat-elevation-z4" id="subbies-tab">
+            <ven-subbie-job-board [specUid]="uid"></ven-subbie-job-board>
+          </div>
+        </ng-template>
+      </mat-tab>
+
+      <!-- EXTRAS TAB -->
+      <mat-tab label="Extras">
+        <ng-template matTabContent>
+          <div class="mat-elevation-z4" id="extras-tab">
+            <ng-container *ngIf="!spec?.details?.synced; else syncedExtras">
+              <ng-container *ngIf="spec.details.postContract; else message">
+                <ven-extras-header [spec]="spec"></ven-extras-header>
+                <mat-card>
+                  <ven-extras-list [spec]="spec" [sections]="sections"></ven-extras-list>
+                </mat-card>
+              </ng-container>
+              <ng-template #message> <ven-extras-pre-contract-message></ven-extras-pre-contract-message> </ng-template>
+            </ng-container>
+            <ng-template #syncedExtras> <ven-synced-blank-state></ven-synced-blank-state> </ng-template>
+          </div>
+        </ng-template>
+      </mat-tab>
+
+      <!-- FILE TAB -->
+      <mat-tab label="Files">
+        <ng-template matTabContent>
+          <div class="mat-elevation-z4 narrow" id="files-tab">
+            <ng-container *ngIf="!spec?.details?.synced; else syncedFile">
+              <mat-card> <ven-files-container [specUid]="uid"></ven-files-container> </mat-card>
+            </ng-container>
+            <ng-template #syncedFile> <ven-synced-blank-state></ven-synced-blank-state> </ng-template>
+          </div>
+        </ng-template>
+      </mat-tab>
+    </mat-tab-group>
+    <!-- END TABS -->
+  </ven-app-content>
+  <div class="menu-button-wrapper">
+    <ng-container *ngIf="(selectedTab === 1 || selectedTab === 3) && spec">
+      <button *ngIf="showEditExtrasButton" (click)="onEditQuoteClick()" class="open-menu-button-small" mat-mini-fab color="accent">
+        <mat-icon>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+            <path fill="none" d="M0 0h24v24H0V0z" />
+            <path
+              d="M14.06 9.02l.92.92L5.92 19H5v-.92l9.06-9.06M17.66 3c-.25 0-.51.1-.7.29l-1.83 1.83 3.75 3.75 1.83-1.83c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.2-.2-.45-.29-.71-.29zm-3.6 3.19L3 17.25V21h3.75L17.81 9.94l-3.75-3.75z"
+            />
+          </svg>
+        </mat-icon>
+      </button>
+      <button
+        *ngIf="showEditExtrasButton && !spec?.details?.synced"
+        (click)="onEditQuoteClick()"
+        class="open-menu-button"
+        mat-fab
+        color="accent"
+      >
+        <mat-icon>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+            <path fill="none" d="M0 0h24v24H0V0z" />
+            <path
+              d="M14.06 9.02l.92.92L5.92 19H5v-.92l9.06-9.06M17.66 3c-.25 0-.51.1-.7.29l-1.83 1.83 3.75 3.75 1.83-1.83c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.2-.2-.45-.29-.71-.29zm-3.6 3.19L3 17.25V21h3.75L17.81 9.94l-3.75-3.75z"
+            />
+          </svg>
+        </mat-icon>
+      </button>
+    </ng-container>
+    <ng-container *ngIf="selectedTab === 2 && spec">
+      <button
+        (click)="onCreateSubbieJob()"
+        [ngClass]="{ 'open-menu-button': !isMobile && !isTablet, 'open-menu-button-small': isMobile || isTablet }"
+        mat-fab
+        color="accent"
+      >
+        <mat-icon>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+            <path fill="none" d="M0 0h24v24H0V0z" />
+            <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" />
+          </svg>
+        </mat-icon>
+      </button>
+    </ng-container>
+    <ng-container *ngIf="selectedTab === 4 && spec && currentlySelectedFileFolder.toLowerCase() !== 'checklists' && !spec?.details?.synced">
+      <ven-file-uploader [specId]="spec.uid" [folder]="currentlySelectedFileFolder"> </ven-file-uploader>
+    </ng-container>
+  </div>
+
+  <div class="contents-wrapper" [ngClass]="{ hidden: !showContents }">
+    <ven-spec-contents [sections]="sections" [spec]="spec"></ven-spec-contents>
+  </div>
+
+  <div class="fab-button-wrapper">
+    <ng-container *ngIf="selectedTab === 0 && (isMobile || isTablet)">
+      <ven-spec-speed-dial [spec]="spec" (trackDialog)="showTrackingDialog()"></ven-spec-speed-dial>
+    </ng-container>
+  </div>
+</div>

@@ -1,0 +1,44 @@
+// CHROME styles
+
+$blue-primary: #008be5;
+$blue-light: #62bbff;
+$blue-dark: #005eb2;
+
+$black-primary: #414042;
+$black-light: #6c6b6d;
+$black-dark: #1b1a1b;
+
+$chrome-background-colour: $black-primary;
+$chrome-border-colour: rgba(255, 255, 255, 0.76);
+$chrome-border-colour-dark: rgba(0, 0, 0, 0.12); // OR perhaps rgba(0,0,0,0.12);
+
+$chrome-drawer-width: 249px;
+$chrome-header-height: 56px;
+$chrome-mobile-header-height: 56px;
+$chrome-mobile-nav-height: 56px;
+$chrome-mobile-page-height: calc(100vh - #{$chrome-mobile-nav-height} - #{$chrome-mobile-header-height});
+$chrome-spacing: 24px;
+
+$chrome-logo-width: 200px;
+$chrome-drawer-width-wide: 160px;
+$chrome-drawer-width-mobile: 100%;
+$chrome-drawer-width-tablet: 75%;
+
+$high-emphasis-opacity: 0.87;
+$medium-emphasis-opacity: 0.67;
+$primary-high-emphasis-opacity: 1;
+$primary-medium-emphasis-opacity: 0.74;
+
+$thick-scrim: rgba(0, 0, 0, 0.6);
+
+//override angular material scrim
+.cdk-overlay-dark-backdrop {
+  background: $thick-scrim;
+}
+
+.mat-bottom-sheet-container {
+  background: transparent;
+}
+
+$grey-border: 1px solid $chrome-border-colour-dark;
+$secondary-blue-border: 1px solid $blue-light;

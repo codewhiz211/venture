@@ -1,0 +1,7 @@
+<div class="dialog-wrapper">
+  <p>Enter a custom option in the box below</p>
+  <div mat-dialog-content>
+    <mat-form-field appearance="outline"> <input matInput [(ngModel)]="other" (keyup)="onKeyUp($event)" /> </mat-form-field>
+  </div>
+  <ven-dialog-footer-buttons [closeAction]="closeAction" [submitAction]="submitAction"></ven-dialog-footer-buttons>
+</div>

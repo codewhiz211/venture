@@ -1,0 +1,103 @@
+@import 'variables';
+@import 'chrome-theme';
+
+mat-card {
+  margin-bottom: 16px;
+}
+.mast {
+  border-bottom: 1px solid $chrome-border-colour-dark;
+}
+
+.grid {
+  margin-bottom: 16px;
+}
+.grid-row {
+  display: grid;
+  //four columns; first is twice width of the rest
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  border-bottom: 1px solid $chrome-border-colour-dark;
+  padding: 11px 0;
+
+  & > div {
+    margin-left: 16px;
+    margin-right: 16px;
+    &:not(:first-child) {
+      text-align: right;
+    }
+  }
+
+  &.padded {
+    padding-bottom: 16px;
+  }
+
+  &.noUnderline {
+    border-bottom: none;
+  }
+  &.bold {
+    font-weight: bold;
+    border-bottom: 1px solid $chrome-border-colour-dark;
+  }
+
+  &.colspan-values {
+    grid-template-columns: 2fr 3fr;
+
+    & > div {
+      &:not(:first-child) {
+        text-align: center;
+      }
+    }
+  }
+  @media only screen and (max-width: #{$mobile}) {
+    grid-template-columns: 3fr 1fr;
+
+    &:not(.padded) {
+      div:nth-child(2),
+      div:nth-child(3) {
+        display: none;
+      }
+    }
+    &.noUnderline {
+      border-bottom: none;
+    }
+    &.bold {
+      font-weight: bold;
+      border-bottom: 1px solid $chrome-border-colour-dark;
+    }
+  }
+}
+.grid-row-indented {
+  // font-size: 0.75em;
+
+  div:first-child {
+    padding-left: 1em;
+  }
+}
+.grid-row-header {
+  span {
+    color: $color-accent;
+  }
+  border-bottom: 1px solid $chrome-border-colour-dark;
+
+  @media screen and (max-width: $tablet) {
+    grid-template-columns: 1fr 2fr;
+  }
+}
+h3 {
+  margin-left: 16px;
+  margin-right: 16px;
+  color: $color-accent;
+  width: 100%;
+}
+
+.underline {
+  border-bottom: 1px solid $chrome-border-colour-dark;
+}
+.two-columns {
+  .grid-row {
+    grid-template-columns: 2fr 1fr;
+  }
+}
+
+p {
+  margin: 0 16px 16px 16px;
+}

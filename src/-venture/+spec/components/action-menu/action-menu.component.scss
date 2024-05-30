@@ -1,0 +1,49 @@
+@import 'variables';
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  margin-right: 16px;
+  background: #f2f1f7;
+  padding: 0 8px;
+  color: #666;
+  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+
+  mat-icon,
+  ven-icon {
+    margin-bottom: 8px;
+    &:first-child {
+      margin-top: 8px;
+    }
+    &:hover {
+      cursor: pointer;
+      color: $color-accent;
+    }
+
+    &.edit-mode {
+      color: $color-accent;
+    }
+    &.disabled {
+      color: rgba(211, 211, 211, 0.918);
+    }
+  }
+}
+
+@media only screen and (max-width: #{$tablet}) {
+  .menu {
+    display: none;
+    // flex-direction: row;
+    // margin-right: 0;
+    // justify-content: space-around;
+    // align-items: center;
+  }
+}
+
+::ng-deep .mat-tooltip {
+  color: black !important;
+  background-color: white;
+  font-size: 14px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+}

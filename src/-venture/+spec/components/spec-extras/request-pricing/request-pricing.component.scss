@@ -1,0 +1,17 @@
+@import 'variables';
+.upload-file-list {
+  padding: 8px 0;
+}
+
+.with-hint {
+  margin-bottom: 21px; // fix the hint was overlayed with the controller under it on mobile
+}
+
+.icon-line {
+  ven-icon-new {
+    transform: scale(0.7);
+  }
+  span {
+    margin-left: 2px;
+  }
+}

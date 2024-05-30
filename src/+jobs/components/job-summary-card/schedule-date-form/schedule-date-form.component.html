@@ -1,0 +1,25 @@
+<div class="dialog-wrapper">
+  <form [formGroup]="scheduleDateForm">
+    <mat-form-field class="full-width" color="accent" appearance="outline">
+      <mat-label>Start Date</mat-label>
+      <input
+        matInput
+        [matDatepicker]="picker1"
+        formControlName="start"
+        [min]="today"
+        [max]="maxSelectable"
+        (dateChange)="startDaySelected($event)"
+      />
+      <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+      <mat-datepicker #picker1></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field class="full-width" color="accent" appearance="outline">
+      <mat-label>End Date</mat-label>
+      <input matInput [matDatepicker]="picker2" formControlName="end" [min]="minSelectable" (dateChange)="endDaySelected($event)" />
+      <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+      <mat-datepicker #picker2></mat-datepicker>
+    </mat-form-field>
+  </form>
+  <ven-dialog-footer-buttons [closeAction]="closeAction" [submitAction]="submitAction"></ven-dialog-footer-buttons>
+</div>

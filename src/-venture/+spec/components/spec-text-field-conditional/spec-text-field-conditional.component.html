@@ -1,0 +1,18 @@
+<form>
+  <mat-form-field appearance="outline" [class.animateSuccess]="updatedSucceeded" [class.animateFail]="updatedFailed">
+    <mat-label>{{ field.display }}</mat-label>
+    <input
+      [matAutocomplete]="auto"
+      (focus)="setAutoComplete(fieldControl.value)"
+      (keyup)="setAutoComplete(fieldControl.value)"
+      (blur)="updateField()"
+      [formControl]="fieldControl"
+      matInput
+    />
+    <span *ngIf="field.suffix" matSuffix>{{ field.suffix }}</span>
+    <mat-error *ngIf="fieldControl.invalid">{{ getErrorMessage() }}</mat-error>
+  </mat-form-field>
+  <mat-autocomplete #auto="matAutocomplete">
+    <mat-option *ngFor="let option of autocompleteList" (click)="saveField()" [value]="option"> {{ option }} </mat-option>
+  </mat-autocomplete>
+</form>

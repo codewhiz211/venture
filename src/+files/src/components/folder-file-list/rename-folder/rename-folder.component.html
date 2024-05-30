@@ -1,0 +1,5 @@
+<mat-form-field *ngIf="!changingName; else inProgress" appearance="outline">
+  <input matInput [formControl]="newFolderName" venAutoFocus required type="text" (blur)="save()" (keydown)="onKeydown($event)" />
+  <mat-error *ngIf="newFolderName.invalid">{{ getErrorMessage() }}</mat-error>
+</mat-form-field>
+<ng-template #inProgress> <i>Updating folder name...</i> </ng-template>

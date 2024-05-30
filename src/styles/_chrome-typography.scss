@@ -1,0 +1,199 @@
+// STYLE / FONT / WEIGHT / SIZE:
+@import 'chrome-theme';
+@import 'variables';
+
+/*
+H1/Roboto/Light/96px
+H2/Roboto/Light/60px
+H3/Roboto/Regular/48px
+H4/Roboto/Regular/34px
+H5/Roboto/Regular/24px
+H6/Roboto/Medium/20px
+Subtitle 1/Roboto/Regular/16px
+Subtitle 2/Roboto/Medium/14px
+Body 1/Roboto/Regular/16px
+Body 2/Roboto/Regular/14px
+BUTTON/Roboto/Medium/14px
+Caption/Roboto/Regular/12px
+OVERLINE/Roboto/Regular/10px
+*/
+
+$text-high-emphasis: rgba(0, 0, 0, $high-emphasis-opacity);
+$text-medium-emphasis: rgba(0, 0, 0, $medium-emphasis-opacity);
+$text-light-high-emphasis: rgba(255, 255, 255, $primary-high-emphasis-opacity);
+$text-light-medium-emphasis: rgba(255, 255, 255, $primary-medium-emphasis-opacity);
+
+//If some icon is loaded without it character, we need to add the selector to this rule
+*:not(ven-icon, i) {
+  font-family: 'Roboto', sans-serif !important;
+}
+
+h1 {
+  font-size: 96px;
+  line-height: 130px;
+  letter-spacing: 1.5px;
+  font-weight: lighter;
+}
+h2 {
+  font-size: 60px;
+  line-height: 81px;
+  letter-spacing: 0.5px;
+  font-weight: lighter;
+}
+h3 {
+  font-size: 48px;
+  line-height: 65px;
+  letter-spacing: 0px;
+  font-weight: normal;
+}
+h4 {
+  font-size: 34px;
+  line-height: 46px;
+  letter-spacing: 0.25px;
+  font-weight: normal;
+}
+h5 {
+  font-size: 24px;
+  line-height: 32px;
+  letter-spacing: 0px;
+  font-weight: normal;
+}
+h6,
+.h6 {
+  font-size: 20px;
+  line-height: 24px;
+  letter-spacing: 0.15px;
+  font-weight: 500;
+}
+.subtitle {
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0.15px;
+  font-weight: 400;
+}
+.subtitle-2 {
+  font-size: 14px;
+  line-height: 24px;
+  letter-spacing: 0.1px;
+  font-weight: 500;
+}
+
+.primary {
+  color: $blue-primary;
+}
+
+.light-blue {
+  color: $blue-light;
+}
+// WHEN re move old styles restore, currently this is set in styles.scss
+// body {
+//   font-size: 16px;
+//   line-height: 28px;
+//   letter-spacing: 0.5px;
+// }
+// body.small,
+// .body-2 {
+//   font-size: 14px;
+//   line-height: 20px;
+//   letter-spacing: 0.25px;
+// }
+
+.caption,
+caption {
+  font-size: 12px;
+  letter-spacing: 0.4px;
+  font-weight: normal;
+  line-height: 16px;
+}
+.overline {
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 16px;
+  letter-spacing: 1.5px;
+}
+
+//to fix that mat-dialog-title style overrived by h1
+h1[mat-dialog-title],
+h2[mat-dialog-title] {
+  font: 500 20px/32px Open Sans, sans-serif;
+  letter-spacing: normal;
+}
+
+// Emphasis
+
+// High Emphasis: #000000 (87% opacity)
+// Medium Emphasis: #000000 (67% opacity)
+.emphasis-high {
+  opacity: $high-emphasis-opacity;
+}
+.emphasis-med {
+  opacity: $medium-emphasis-opacity;
+}
+
+// High Emphasis: #FFFFFF (100% opacity)
+// Medium Emphasis: #FFFFFF (74% opacity)
+.primary {
+  .emphasis-high {
+    opacity: $primary-high-emphasis-opacity;
+  }
+  .emphasis-med {
+    opacity: $primary-medium-emphasis-opacity;
+  }
+}
+
+.light-medium-emphasis {
+  color: $text-light-medium-emphasis;
+}
+.light-high-emphasis {
+  color: $text-light-high-emphasis;
+}
+.dark-medium-emphasis {
+  color: $text-medium-emphasis;
+}
+.dark-high-emphasis {
+  color: $text-high-emphasis;
+}
+
+.accent-colour {
+  color: $blue-primary;
+}
+
+.small-icon {
+  svg {
+    margin: 3px;
+  }
+}
+
+.icon-on-line {
+  //override the rule in :host of ven-icon-new
+  margin-right: 12px !important;
+}
+
+.icon-title {
+  display: flex;
+  flex-direction: row;
+  justify-items: center;
+  ven-icon-new {
+    margin-right: 18px !important; // override the rules in :host of ven-icon-new for title
+  }
+  margin-top: 25px;
+  margin-bottom: 16px;
+}
+
+.icon-line {
+  display: flex;
+  flex-direction: row;
+  justify-items: center;
+}
+
+//this rule only works here but not the one in app-chrome-content-container
+.mat-bottom-sheet-container {
+  padding: 0 0 !important; //overrrider .mat-bottom-sheet-container padding:8px 16px;
+}
+
+//hide some section on mobile
+@media screen and (max-width: $tablet) {
+  .hide-on-mobile {
+    display: none;
+  }
+}

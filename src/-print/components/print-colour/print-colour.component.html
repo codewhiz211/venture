@@ -1,0 +1,17 @@
+<ng-container *ngIf="field.colour; let colour; else: nocolour">
+  <div class="print-item">
+    <div class="label">{{ field.display }}</div>
+    <div *ngIf="colour.display">{{ colour.display }}</div>
+    <div *ngIf="!colour.display">{{ colour }}</div>
+    <div class="colour-badge" [ngStyle]="{ 'background-color': colour.hex }"></div>
+    <div class="hint">{{ field.hint }}</div>
+    <div class="hint warning" *ngIf="spec?.custom_value | customValueHint: section?.name:field?.name">
+      (NOTE: Non-std option selected. PM to review)
+    </div>
+  </div>
+</ng-container>
+<ng-template #nocolour>
+  <div class="print-item">
+    <span>{{ field.display }} </span> <span>n/a</span> <span class="hint"> {{ field.hint }}</span>
+  </div>
+</ng-template>

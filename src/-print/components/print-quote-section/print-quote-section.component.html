@@ -1,0 +1,16 @@
+<div class="section section-quote">
+<h4>Quote</h4>
+<div>
+  <p class="subtitle-2 emphasis-med">
+    Thank you for the opportunity to provide you with a quote for your {{ spec.layout.bedrooms }} bedroom,
+    {{ spec.layout.bathrooms }} bathroom, {{ spec.section_details.sectionSize }} SQM Section &
+    {{ spec.section_details.houseSize }} SQM dwelling at Lot {{ spec.section_details.lot }} {{ spec.details.subdivision }}.
+  </p>
+  <p class="subtitle-2 emphasis-med">
+    To complete the project works as per plans and specifications, including all insurances, Council Consent and a 10 year Master
+    Build Guarantee.
+  </p>
+  <p class="subtitle-2 emphasis-med">This Quote is based on the {{ spec.quote.paymentMethod }}.</p>
+</div>
+<ven-quote-amount [spec]="spec"></ven-quote-amount>
+</div>

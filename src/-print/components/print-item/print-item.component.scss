@@ -1,0 +1,43 @@
+@import 'variables';
+
+:host {
+  width: 48%;
+  @media only screen and (max-width: #{$mobile}) {
+    width: 100%;
+  }
+}
+:host ::ng-deep {
+  padding-bottom: 0.15em;
+  border-bottom: 1px solid #eee;
+  margin-bottom: 0.5em;
+  white-space: pre-line;
+
+  .print-item {
+    @media print {
+      page-break-inside: avoid;
+      display: block;
+      div {
+        float: left;
+        width: 100%;
+      }
+      span.suffix {
+        width: auto;
+        display: inline-block;
+      }
+    }
+    .label {
+      opacity: 0.6;
+      font-size: 12px;
+      margin-bottom: -0.5em;
+    }
+    .hint {
+      opacity: 0.4;
+      font-size: 10px;
+      font-style: italic;
+      margin-bottom: -0.5em;
+    }
+    .warning {
+      opacity: 0.6;
+    }
+  }
+}

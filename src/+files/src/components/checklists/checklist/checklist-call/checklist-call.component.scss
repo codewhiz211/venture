@@ -1,0 +1,12 @@
+@import 'variables';
+
+.align-center {
+  display: flex;
+  align-items: center;
+  color: $color-accent;
+  margin-top: 8px;
+}
+
+mat-icon {
+  margin-right: 16px;
+}

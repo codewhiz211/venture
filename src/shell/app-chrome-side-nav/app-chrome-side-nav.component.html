@@ -1,0 +1,9 @@
+<mat-drawer #drawer class="chrome-sidenav" mode="side" opened="true">
+  <img src="/assets/img/logo.svg" class="logo" />
+
+  <ven-application-chrome-side-nav-button
+    *ngFor="let menuItem of menuItems$ | async; first as isFirst"
+    [action]="menuItem"
+    [top]="isFirst"
+  ></ven-application-chrome-side-nav-button>
+</mat-drawer>

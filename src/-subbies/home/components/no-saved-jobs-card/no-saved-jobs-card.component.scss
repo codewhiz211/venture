@@ -1,0 +1,56 @@
+@import 'variables';
+@import 'chrome-theme';
+
+.mat-card {
+  padding: 0px;
+  display: flex;
+
+  flex-direction: column;
+  border: 1px solid $chrome-border-colour-dark;
+}
+.job-item {
+  display: flex;
+  flex-direction: column;
+  height: 136px;
+  padding: 16px 16px 0 16px;
+}
+
+.job-item-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.job-item-title {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex-grow: 3;
+}
+
+p {
+  font-size: 14px;
+}
+
+:host::ng-deep .accent-colour {
+  color: $color-accent;
+}
+
+.footer-button {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 16px 16px 16px 0;
+  border-top: 1px solid $chrome-border-colour-dark;
+  button {
+    color: $color-accent;
+  }
+}
+
+.icon-button {
+  padding: 0 5px;
+}
+
+mat-icon {
+  color: #039be5;
+}

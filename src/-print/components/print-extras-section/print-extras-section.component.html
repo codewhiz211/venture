@@ -1,0 +1,19 @@
+<div *ngIf="extras[section?.name] && extras[section?.name]?.extras.length" class="section section-extras">
+  <h4>
+    <span>{{ section?.title }} Extras</span>
+  </h4>
+  <div class="extras-container">
+    <div *ngFor="let extra of extras[section?.name].extras">
+      <div class="description">
+        <span
+          >{{ extra?.display }} <ng-container *ngIf="extra?.quantity"> x {{ extra?.quantity }}</ng-container
+          ><ng-container *ngIf="extra?.optional"> (Opt)</ng-container></span
+        >
+        <ven-extra-amount
+          [amount]="includeGST ? extra.amount : extra?.net"
+          [isAddedInQuote]="specStatus && extra.addedStatus == 'Quote'"
+        ></ven-extra-amount>
+      </div>
+    </div>
+  </div>
+</div>

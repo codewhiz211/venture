@@ -1,0 +1,21 @@
+@import 'chrome-theme';
+
+button,
+.button {
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 1.25px;
+  font-weight: 500;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-radius: 4px;
+}
+
+.primary-button {
+  background-color: $blue-primary;
+  color: white;
+}
+
+.outline-button {
+  background-color: white;
+}

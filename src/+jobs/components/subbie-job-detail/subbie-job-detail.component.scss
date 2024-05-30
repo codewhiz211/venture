@@ -1,0 +1,67 @@
+@import 'variables';
+
+.dialog-wrapper {
+  &.loader-active {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+  }
+}
+
+ven-icon-new {
+  //override the one defined in ven-icon-new :host
+  margin-right: 8px !important;
+}
+.loader-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+h2,
+span {
+  display: flex;
+  color: $color-accent;
+  align-items: center;
+  font-weight: 400;
+}
+
+.message {
+  display: flex;
+  margin: 0 0 8px 0;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  // padding: 8px 8px 8px 8px;
+}
+
+.mat-card-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 0;
+}
+
+.detail {
+  margin-bottom: 16px;
+}
+
+.onboard-tip {
+  padding: 5px;
+  color: gray;
+}
+
+:host::ng-deep .mat-form-field-wrapper {
+  margin: 0;
+  padding-bottom: 18px;
+}
+
+@media screen and (min-width: #{$mobile+1}) {
+  .header-icon {
+    display: none;
+  }
+}

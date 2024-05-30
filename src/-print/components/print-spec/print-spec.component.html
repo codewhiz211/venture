@@ -1,0 +1,57 @@
+<div id="printcontent" *ngIf="spec; else loading" class="page-wrapper">
+  <ng-container *ngIf="spec && spec.details != null">
+    <ng-container *ngFor="let section of sections">
+      <!-- Always display planning section (if print spec) -->
+      <ven-print-planning-section
+        *ngIf="section.name === 'planning'"
+        [spec]="spec"
+        [section]="section"
+        [signed]="isSigned"
+      ></ven-print-planning-section>
+
+      <ng-container *ngIf="spec && !(spec.hiddenSections | isHidden: section?.name) && section?.name !== 'planning'">
+        <!-- electrical section -->
+        <ven-print-electrical-section
+          *ngIf="section.name === 'electrical'"
+          [spec]="spec"
+          [extras]="extras"
+          [section]="section"
+          [signed]="isSigned"
+        ></ven-print-electrical-section>
+
+        <!-- ALL other sections -->
+        <!-- are either standard OR grouped by subtitle -->
+        <!-- both might contain custom block fields -->
+        <ng-container>
+          <ng-container *ngIf="!section.groupBySubtitle; else grouped">
+            <ven-print-standard-section
+              *ngIf="section.name !== 'electrical'"
+              [spec]="spec"
+              [extras]="extras"
+              [section]="section"
+              [signed]="isSigned"
+              [showSign]="printSpec && !printExtras && !printQuote"
+            ></ven-print-standard-section>
+          </ng-container>
+          <ng-template #grouped>
+            <ven-print-grouped-section
+              *ngIf="section.name !== 'electrical'"
+              [spec]="spec"
+              [extras]="extras"
+              [section]="section"
+              [signed]="isSigned"
+              [showSign]="printSpec && !printExtras && !printQuote"
+            ></ven-print-grouped-section>
+          </ng-template>
+        </ng-container>
+      </ng-container>
+    </ng-container>
+  </ng-container>
+</div>
+
+<ng-template #loading>
+  <div class="print-loader">
+    <div>Generating...</div>
+    <div>{{ progress }}</div>
+  </div>
+</ng-template>

@@ -1,0 +1,31 @@
+<div class="dialog-wrapper">
+  <form [formGroup]="formController">
+    <div class="field-item" *ngFor="let field of fields">
+      <ng-container [ngSwitch]="field.type">
+        <div *ngSwitchCase="'text'">
+          <mat-form-field class="half-width" appearance="outline">
+            <mat-label>{{ field.name | titlecase }}</mat-label>
+            <input matInput [formControlName]="field.name" type="text" [id]="field.name" [name]="field.name" />
+          </mat-form-field>
+        </div>
+        <div *ngSwitchCase="'number'">
+          <mat-form-field class="half-width" appearance="outline">
+            <mat-label>{{ field.name | titlecase }}</mat-label>
+            <span matPrefix *ngIf="field.prefix">{{ field.prefix }}&nbsp;</span>
+            <input matInput [formControlName]="field.name" type="number" [id]="field.name" [name]="field.name" />
+            <span matSuffix *ngIf="field.suffix">&nbsp;{{ field.suffix }}</span>
+          </mat-form-field>
+        </div>
+        <div *ngSwitchCase="'option'">
+          <mat-form-field class="half-width" appearance="outline">
+            <mat-label>{{ field.name | titlecase }}</mat-label>
+            <mat-select [formControlName]="field.name">
+              <mat-option *ngFor="let option of field.options" [value]="option">{{ option }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </ng-container>
+    </div>
+  </form>
+  <ven-dialog-footer-buttons [submitAction]="submitAction" [closeAction]="closeAction"></ven-dialog-footer-buttons>
+</div>

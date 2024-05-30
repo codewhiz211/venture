@@ -1,0 +1,18 @@
+@import 'chrome-theme';
+@import 'chrome-typography';
+@import 'variables';
+
+//calendar header button
+:host::ng-deep .mat-calendar-period-button {
+  .mat-button-wrapper {
+    font-size: 15.8px !important;
+    color: $text-light-high-emphasis !important;
+  }
+}
+
+.hide-board-on-mobile {
+  display: block;
+  @media only screen and (max-width: $mobile) {
+    display: none;
+  }
+}

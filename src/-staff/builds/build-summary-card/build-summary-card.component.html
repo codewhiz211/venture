@@ -1,0 +1,9 @@
+<ven-summary-card [status]="build.status" [id]="id" [description]="build.client" [chips]="chips">
+  <ven-details-view-button
+    title="VIEW BUILD"
+    [saved]="isSaved"
+    [routeArray]="['/staff/build/', build.uid]"
+    (saveToggled)="handleSaveToggled($event)"
+  >
+  </ven-details-view-button>
+</ven-summary-card>

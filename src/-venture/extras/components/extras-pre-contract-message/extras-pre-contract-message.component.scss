@@ -1,0 +1,22 @@
+@import 'variables';
+
+mat-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  min-height: 50vh;
+  h2 {
+    color: $color-accent;
+    font-size: 2em;
+  }
+  @media (max-width: $mobile) {
+    align-items: flex-start;
+    h2 {
+      font-size: 1em;
+    }
+    p {
+      margin-bottom: 1em;
+    }
+  }
+}

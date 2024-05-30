@@ -1,0 +1,31 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": ".",
+    "outDir": "./dist/out-tsc",
+    "sourceMap": true,
+    "declaration": false,
+    "downlevelIteration": true,
+    "experimentalDecorators": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "target": "es2015",
+    "lib": ["es2018", "dom"],
+    "paths": {
+      "@auth/*": ["src/-auth/*"],
+      "@clients/*": ["src/-venture/+clients/*"],
+      "@extras/*": ["src/-venture/extras/*"],
+      "@interfaces/*": ["src/shared/interfaces/*"],
+      "@jobs/*": ["src/+jobs/*"],
+      "@print/*": ["src/-print/*"],
+      "@quote/*": ["src/-venture/quote/*"],
+      "@services/*": ["src/shared/services/*"],
+      "@shared/*": ["src/shared/*"],
+      "@shell/*": ["src/shell/*"],
+      "@spec/*": ["src/-venture/+spec/*"],
+      "@subbies/*": ["src/-venture/subbies/*"],
+      "@styles/*": ["src/styles/*"]
+    }
+  }
+}

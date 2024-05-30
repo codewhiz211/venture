@@ -1,0 +1,24 @@
+<div class="dialog-wrapper" [ngClass]="{ 'loader-active': loading }">
+  <div *ngIf="loading; else snapshot" class="loader-wrapper">
+    <mat-progress-spinner [mode]="'indeterminate'" [color]="'accent'"></mat-progress-spinner>
+  </div>
+  <ng-template #snapshot>
+    <form [formGroup]="snapshotForm">
+      <p class="body-override dark-high-emphasis">Save a copy of {{ data.spec.contact_details.client }}'s current information</p>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Copy Description</mat-label>
+        <input matInput formControlName="description" type="text" id="description" name="description" />
+      </mat-form-field>
+      <ven-dialog-footer-buttons
+        *ngIf="!isMobile; else mobile"
+        [closeAction]="closeAction"
+        [submitAction]="submitAction"
+        [disabled]="snapshotForm.value.description == ''"
+      ></ven-dialog-footer-buttons>
+      <div *ngIf="errorMessage" class="error-message">
+        {{ errorMessage }}
+      </div>
+    </form>
+  </ng-template>
+</div>

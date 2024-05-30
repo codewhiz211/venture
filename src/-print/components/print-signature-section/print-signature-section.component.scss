@@ -1,0 +1,79 @@
+@import 'variables';
+@import '../../styles/shared-print-styles.scss';
+/* use shared styles where possible - ovveride print styles where required */
+
+.section-signature {
+  @media print {
+    display: block;
+    break-before: always;
+  }
+  p {
+    margin: 1em 0;
+  }
+  .signature {
+    display: flex;
+    margin: 32px 0;
+    div:first-child {
+      display: flex;
+      width: 50%;
+      margin-right: 16px;
+      span {
+        display: flex;
+        width: 100%;
+        border-bottom: 1px solid #666;
+      }
+    }
+    ::ng-deep {
+      button {
+        text-transform: uppercase;
+      }
+    }
+
+    @media print {
+      button {
+        display: none;
+      }
+    }
+  }
+}
+
+.signature-signed {
+  display: flex;
+  align-items: center;
+
+  img {
+    max-height: 100px;
+    margin-left: 10px;
+  }
+  @media print {
+    page-break-inside: avoid;
+  }
+}
+
+.signature-submission {
+  padding-top: 10px;
+
+  mat-icon {
+    color: $color-accent;
+    margin-right: 10px;
+  }
+}
+
+.signature-actions {
+  display: flex;
+  justify-content: flex-end;
+
+  @media only screen and (max-width: #{$mobile}) {
+    margin-top: 20px;
+  }
+
+  button {
+    text-transform: uppercase;
+    width: 100px;
+    margin-left: 10px;
+  }
+
+  @media print {
+    display: none;
+  }
+}

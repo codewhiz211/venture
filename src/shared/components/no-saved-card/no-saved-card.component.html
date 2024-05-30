@@ -1,0 +1,10 @@
+<mat-card class="mat-elevation-z0">
+  <div class="card-message">
+    <p class="body-2 dark-medium-emphasis" *ngFor="let passage of passages">{{ passage }}</p>
+  </div>
+  <div class="footer-button">
+    <button mat-icon-button class="icon-button">
+      <ven-icon-new icon="star" colour="#008be5" [filled]="true"></ven-icon-new>
+    </button>
+  </div>
+</mat-card>

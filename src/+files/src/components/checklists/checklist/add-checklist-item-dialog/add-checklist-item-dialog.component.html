@@ -1,0 +1,9 @@
+<div class="dialog-wrapper">
+  <form [formGroup]="newItemGroup">
+    <mat-form-field class="full-width" appearance="outline">
+      <mat-label>Item name</mat-label>
+      <input matInput formControlName="name" />
+    </mat-form-field>
+  </form>
+  <ven-dialog-footer-buttons [submitAction]="submitAction" [closeAction]="closeAction"></ven-dialog-footer-buttons>
+</div>

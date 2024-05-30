@@ -1,0 +1,75 @@
+@import 'variables';
+
+:host {
+  ::ng-deep {
+    .mat-form-field-wrapper {
+      padding-bottom: 1.34375em !important;
+    }
+
+    .mat-dialog-actions {
+      justify-content: flex-end;
+      display: flex;
+
+      & > * {
+        margin-left: 8px;
+      }
+    }
+  }
+}
+
+.drawer-wrapper {
+  padding: 32px;
+
+  @media only screen and (max-width: #{$mobile}) {
+    padding: 32px 8px;
+  }
+
+  .button-toggle-wrapper {
+    display: flex;
+    justify-content: center;
+    margin: 50px 0 10px;
+
+    mat-button-toggle {
+      width: 150px;
+      font-size: 14px;
+    }
+  }
+}
+
+h2 {
+  color: $color-accent;
+  display: flex;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+.update-radio-group {
+  display: flex;
+  flex-direction: column;
+  margin-top: 8px;
+  .update-radio-button {
+    margin: 6px 0;
+  }
+}
+
+p {
+  margin-bottom: 20px;
+}
+
+form {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 16px;
+}
+
+form > * {
+  width: 45%;
+  margin: 0 2.5%;
+}
+
+@media only screen and (max-width: #{$mobile}) {
+  form > * {
+    width: 100%;
+    margin: 0;
+  }
+}

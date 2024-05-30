@@ -1,0 +1,25 @@
+<!-- Only 'Saved Jobs' title can be shown when there are no jobs under it-->
+<div class="job-board" *ngIf="jobs?.length > 0 || title == 'Saved Jobs'">
+  <div class="job-board-header">
+    <ven-icon-new *ngIf="titleIcon" [icon]="titleIcon" colour="white" [filled]="true"></ven-icon-new>
+    <h6 class="light-high-emphasis">{{ title | uppercase }}</h6>
+  </div>
+  <div class="job-cards-container">
+    <ven-subbie-job-summary-card
+      *ngFor="let jobItem of jobs"
+      [job]="jobItem.job"
+      [jobUid]="jobItem.jobUid"
+      [subbieUid]="jobItem.subbieUid"
+      [specUid]="jobItem.specUid"
+      [content]="content"
+    >
+      <ven-details-view-button
+        title="VIEW DETAILS"
+        [routeArray]="['/subbies/jobs/', jobItem.specUid, jobItem.subbieUid, jobItem.jobUid]"
+        [saved]="(savedJobRecords$ | async)[jobItem.jobUid]"
+        (saveToggled)="handleSavedToggled(jobItem.jobUid, $event)"
+      >
+      </ven-details-view-button>
+    </ven-subbie-job-summary-card>
+  </div>
+</div>

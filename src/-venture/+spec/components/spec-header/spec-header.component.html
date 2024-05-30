@@ -1,0 +1,21 @@
+<mat-card>
+  <div class="header-wrapper">
+    <div class="header-container">
+      <h6 class="bold">
+        Lot
+        {{ spec?.section_details?.lot }}
+        {{ spec?.section_details?.subdivision }}
+      </h6>
+      <h6 class="pad-for-print">{{ spec?.contact_details?.client }}</h6>
+    </div>
+    <div class="status-container no-print">
+      <ven-status-dropdown
+        #statusDropdown
+        (setToPostContract)="setToPostContract($event)"
+        (showSnackBar)="showSnackBar($event)"
+        [spec]="spec"
+      ></ven-status-dropdown>
+    </div>
+  </div>
+  <img [src]="logoImage" />
+</mat-card>

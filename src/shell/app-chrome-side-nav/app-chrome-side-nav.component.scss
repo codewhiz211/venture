@@ -1,0 +1,29 @@
+@import 'chrome-theme';
+@import 'variables';
+
+mat-drawer {
+  background: transparent;
+  border-right: 1px solid $chrome-border-colour;
+  width: $chrome-drawer-width;
+
+  &.wide-drawer {
+    width: $chrome-drawer-width-wide;
+  }
+
+  .logo {
+    margin: $chrome-spacing;
+    width: $chrome-logo-width;
+  }
+}
+
+@media only screen and (max-width: #{$mobile}) {
+  mat-drawer {
+    width: $chrome-drawer-width-mobile;
+  }
+}
+
+@media only screen and (min-width: #{$mobile}) and (max-width: #{$tablet}) {
+  mat-drawer {
+    width: $chrome-drawer-width-tablet;
+  }
+}

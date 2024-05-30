@@ -1,0 +1,6 @@
+<div *ngIf="(scheduledJobs$ | async)?.length > 0; else blankSchedule">
+  <ven-subbie-schedule-summary-card *ngFor="let item of scheduledJobs$ | async" [jobSummary]="item"></ven-subbie-schedule-summary-card>
+</div>
+<ng-template #blankSchedule>
+  <ven-subbie-blank-schedule-card [activeDate]="activeDate$ | async"></ven-subbie-blank-schedule-card>
+</ng-template>

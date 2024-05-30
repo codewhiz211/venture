@@ -1,0 +1,14 @@
+<div>
+    <b>{{groupTitle}}</b>
+    <ul>
+        <li>
+            <mat-checkbox class="option" [(ngModel)]="selectedOptions['any']" (change)="onOptionChange('any')">Any</mat-checkbox>
+        </li>
+        <li *ngFor="let option of groupOptions; let i = index">
+            <mat-checkbox *ngIf="i < 4 || showMore" class="option" [(ngModel)]="selectedOptions[option]" (change)="onOptionChange()">{{option}}</mat-checkbox>
+        </li>
+        <li (click)="showMore = !showMore" *ngIf="groupOptions.length > 4 && !showMore" class="toggle">More ({{groupOptions.length
+            - 4}})</li>
+        <li (click)="showMore = !showMore" *ngIf="showMore" class="toggle">Less</li>
+    </ul>
+</div>

@@ -1,0 +1,13 @@
+<div class="footer-button">
+  <!-- another option here is to use [state]="job"...-->
+  <button mat-flat-button class="primary" *ngIf="routeArray; else behaviourButton" [routerLink]="routeArray">{{ title }}</button>
+  <ng-template #behaviourButton>
+    <button mat-flat-button class="primary" (click)="onTitleClicked.emit()">{{ title }}</button>
+  </ng-template>
+  <button mat-icon-button class="icon-button" *ngIf="!hideIcon" (click)="toggleSavedStatus()">
+    <ven-icon-new icon="star" colour="gray" *ngIf="!saved; else savedState"></ven-icon-new>
+    <ng-template #savedState>
+      <ven-icon-new [icon]="'star'" colour="#008be5" [filled]="true"></ven-icon-new>
+    </ng-template>
+  </button>
+</div>

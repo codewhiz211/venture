@@ -1,0 +1,48 @@
+<div class="dialog-wrapper">
+  <div>
+    <p *ngIf="trackData?.length; else blankData" class="dark-high-emphasis">
+      Below is a summary of changes to the Spec for {{ spec?.contact_details?.client }} since entering Tracked mode at
+      {{ trackingStartedAt | date: 'h:mm a, M/d/yy' }}
+    </p>
+    <ng-template #blankData>
+      <p class="dark-high-emphasis">
+        Any changes you make to the Spec while in Tracked mode will be summarised below. You can view this summary at any time by tapping
+        the Tracked Changes button again.
+      </p>
+    </ng-template>
+  </div>
+
+  <div class="track-data-container" *ngIf="trackData?.length">
+    <div class="track-header subtitile primary"><span>Option</span> <span>New Value</span></div>
+
+    <div class="track-body body-2 dark-high-emphasis" *ngFor="let item of trackData">
+      <p>
+        {{ item?.section }} <span class="field" *ngIf="item?.field"> - {{ item?.field }}</span>
+      </p>
+      <p>{{ item?.value }}</p>
+    </div>
+  </div>
+
+  <div class="track-data-container-mobile body-2 dark-high-emphasis" *ngFor="let item of trackData">
+    <p>
+      Option <span class="dark-medium-emphasis">{{ item?.section }}</span>
+      <span class="field dark-medium-emphasis" *ngIf="item?.field"> - {{ item?.field }}</span>
+    </p>
+    <p>
+      New value <span class="dark-medium-emphasis">{{ item?.value }}</span>
+    </p>
+  </div>
+
+  <div mat-dialog-actions class="track-buttons-container">
+    <p>What do you want to do ?</p>
+    <ven-app-cancel-button class="first-button" label="Exit Tracking" (onClick)="exitTracking()"></ven-app-cancel-button>
+    <ven-app-primary-button
+      class="button"
+      *ngIf="trackData?.length"
+      label="Copy Changes"
+      icon="content_copy"
+      (onClick)="copyToClipboard()"
+    ></ven-app-primary-button>
+    <ven-app-primary-button class="button" label="Resume Tracking" icon="track_changes" (onClick)="resumeTrack()"></ven-app-primary-button>
+  </div>
+</div>

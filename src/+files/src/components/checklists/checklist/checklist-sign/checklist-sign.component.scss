@@ -1,0 +1,44 @@
+@import 'variables';
+:host {
+  mat-icon {
+    ::ng-deep {
+      fill: $color-accent;
+    }
+  }
+}
+
+.signature-signed {
+  display: flex;
+  align-items: center;
+
+  img {
+    max-height: 100px;
+    margin-left: 10px;
+  }
+}
+
+.signature-actions {
+  display: flex;
+  justify-content: space-between;
+
+  @media only screen and (max-width: #{$mobile}) {
+    margin-top: 20px;
+  }
+
+  button {
+    text-transform: uppercase;
+    width: 100px;
+    margin-left: 10px;
+    padding: 9px; //make cancel button with same height with primary button 20 + 9 * 2 (padding) + 1 * 2 (border)
+    border: 1px solid black;
+    background-color: white;
+  }
+
+  @media print {
+    display: none;
+  }
+}
+
+.signature {
+  padding: 5px 15px;
+}

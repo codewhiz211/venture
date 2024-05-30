@@ -1,0 +1,12 @@
+.button-container {
+  display: flex;
+  margin-bottom: 16px;
+  justify-content: flex-end;
+  width: 200%;
+}
+.button-container > * {
+  margin-right: 16px;
+}
+mat-form-field {
+  width: 100%;
+}

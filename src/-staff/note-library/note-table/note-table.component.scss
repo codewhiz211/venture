@@ -1,0 +1,14 @@
+@import 'variables';
+
+@media screen and (max-width: $tablet) {
+  .tab-content-container {
+    margin: 24px 16px;
+  }
+
+  :host::ng-deep.add-padding {
+    padding: 10px 0;
+  }
+  :host::ng-deep.pull-right button {
+    text-align: right;
+  }
+}

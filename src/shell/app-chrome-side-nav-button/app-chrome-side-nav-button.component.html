@@ -1,0 +1,4 @@
+<div class="side-nav-button" (click)="handleLinkClick(action)" [class.active]="active" [ngClass]="{ 'border-top': top }">
+  <mat-icon [ngClass]="{ 'material-icons': active, 'material-icons-outlined': !active }" aria-hidden="false">{{ action?.icon }}</mat-icon>
+  <span>{{ action?.label }}</span>
+</div>

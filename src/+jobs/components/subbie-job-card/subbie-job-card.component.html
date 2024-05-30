@@ -1,0 +1,27 @@
+<div class="job-card">
+  <div class="job-card-header">
+    <h6 class="primary">{{ jobTitle }}</h6>
+  </div>
+  <div class="job-items">
+    <ven-subbie-job-summary-card
+      class="job-summary-card"
+      *ngFor="let item of jobs"
+      [specUid]="specUid"
+      [job]="item.job"
+      [jobUid]="item.key"
+      [subbieUid]="item.subbieUid"
+      [content]="content"
+    >
+      <ven-remedial-job-activity
+        *ngIf="isRemedial; else standardActivity"
+        [specUid]="specUid"
+        [job]="item.job"
+        [jobUid]="item.key"
+        [subbieUid]="item.subbieUid"
+      ></ven-remedial-job-activity>
+      <ng-template #standardActivity>
+        <ven-standard-job-activity [activity]="item.job.activity"></ven-standard-job-activity>
+      </ng-template>
+    </ven-subbie-job-summary-card>
+  </div>
+</div>

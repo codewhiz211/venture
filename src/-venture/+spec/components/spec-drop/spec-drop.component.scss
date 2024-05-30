@@ -1,0 +1,44 @@
+@import '../shared-styles.scss';
+.ven-spec-drop {
+  position: relative;
+  cursor: pointer;
+
+  // these styles align the hint to the right and move it closer to the field outline
+  ::ng-deep.mat-form-field-appearance-outline ::ng-deep.mat-form-field-subscript-wrapper {
+    margin-top: 0;
+  }
+  ::ng-deep.mat-select-arrow-wrapper {
+    @media print {
+      display: none;
+    } // use padding to create click target, and negative margin to fix bloated alignment
+    cursor: pointer;
+    margin-right: -1rem;
+    margin-bottom: -1rem;
+    margin-top: -0.75rem;
+  }
+  ::ng-deep.mat-select-arrow {
+    cursor: pointer;
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid;
+    margin: 0 4px;
+    z-index: 100;
+  }
+
+  //&.default-cursor *{
+  //  ::ng-deep mat-form-field, [disabled="true"] {
+  //    color: rgba(0, 0, 0, 0.38)!important;
+  //    opacity: 1!important;
+  //  }
+  //}
+
+  .mat-hint {
+    margin-top: 12px !important;
+  }
+}
+
+.option {
+  position: relative;
+}

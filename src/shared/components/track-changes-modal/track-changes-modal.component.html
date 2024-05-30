@@ -1,0 +1,10 @@
+<h1 mat-dialog-title>Are you sure?</h1>
+<div mat-dialog-content>
+  <p>You are currently in Tracked Changes mode.</p>
+  <p>If you exit the spec now all tracked changes will be lost.</p>
+</div>
+<mat-dialog-actions>
+  <ven-app-cancel-button label="Exit Spec" (onClick)="closeModal('exit')"></ven-app-cancel-button>
+  <ven-app-primary-button label="Resume Tracking" (onClick)="closeModal('resume')"></ven-app-primary-button>
+  <ven-app-primary-button label="View Changes Summary" (onClick)="closeModal('view')"></ven-app-primary-button>
+</mat-dialog-actions>

@@ -1,0 +1,13 @@
+@import 'variables';
+
+.subtitle {
+  display: flex;
+  margin-bottom: 16px;
+  ven-icon-new {
+    margin-right: 8px !important;
+  }
+}
+
+mat-form-field {
+  padding: 16px 0;
+}

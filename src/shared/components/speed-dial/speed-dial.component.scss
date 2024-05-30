@@ -1,0 +1,65 @@
+@import 'chrome-theme';
+
+.fab-label {
+  position: absolute;
+  padding: 4px 6px;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.4);
+  top: 4px;
+  right: 48px;
+  background-color: white;
+  color: $blue-primary;
+  text-transform: uppercase;
+}
+
+.fab-button {
+  background-color: $blue-primary;
+}
+eco-fab-speed-dial-actions {
+  ven-icon-new {
+    margin-top: 5px;
+  }
+}
+
+.edit-mode {
+  background-color: #8fccf8;
+}
+
+.mat-mini-fab {
+  border-radius: 50%;
+  padding: 2px 0 0 0;
+}
+
+::ng-deep.mat-mini-fab .mat-button-wrapper {
+  padding: 0 !important;
+  //height: 34px; // to get scale(1) icons to align properly
+}
+::ng-deep.mat-fab .mat-button-wrapper {
+  padding: 0 !important;
+}
+
+:host ::ng-deep .main-fab {
+  border-radius: 50%;
+
+  mat-icon {
+    // only transform so that we don't see the old icon fade out
+    transition: transform 0.3s;
+    transform: rotate(0deg);
+    opacity: 0;
+
+    position: absolute;
+    top: 30%;
+    left: 30%;
+
+    &.show {
+      opacity: 1;
+    }
+  }
+
+  &.rotate {
+    mat-icon {
+      transform: rotate(360deg);
+      transition: all 0.3s ease-in;
+    }
+  }
+}

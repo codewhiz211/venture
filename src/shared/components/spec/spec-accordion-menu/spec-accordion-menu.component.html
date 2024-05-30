@@ -1,0 +1,51 @@
+<ven-icon-new *ngIf="activeSection === section.id && onlyEdit" (click)="onEditTitle(section)" icon="edit" colour="#039be5"></ven-icon-new>
+<button
+  mat-button
+  class="dropdown-menu"
+  [mat-menu-trigger-for]="title_menu"
+  [disabled]="spec?.disabled"
+  (click)="$event.stopPropagation()"
+  *ngIf="activeSection === section.id && !onlyEdit"
+>
+  <ven-icon-new icon="more_vert" [colour]="colour" [size]="0.85"></ven-icon-new>
+</button>
+<mat-menu #title_menu="matMenu" xPosition="after">
+  <button mat-menu-item [disabled]="spec?.disabled" (click)="onEditTitle(section)">Edit Heading</button>
+  <button mat-menu-item *ngIf="!checkPMField(section)" (click)="onEditPMNote(section, false)">Add PM Notes</button>
+  <button mat-menu-item *ngIf="checkPMField(section)" (click)="onEditPMNote(section, true)">Remove PM Notes</button>
+  <!-- SECTION -->
+  <button
+    mat-menu-item
+    *ngIf="section.canHide && !field && !(spec.hiddenSections | isHidden: section?.name)"
+    (click)="hideSection(section?.name)"
+  >
+    Hide Section
+  </button>
+  <button
+    mat-menu-item
+    *ngIf="section.canHide && !field && (spec.hiddenSections | isHidden: section?.name)"
+    (click)="showSection(section?.name)"
+  >
+    Show Section
+  </button>
+  <!-- END -->
+  <!-- SUB-SECTION -->
+  <button
+    mat-menu-item
+    *ngIf="field && section.canHide && !(spec.hiddenSections | isHidden: section?.name:field?.name)"
+    (click)="hideSubSection(section?.name, field?.name)"
+  >
+    Hide Section
+  </button>
+  <button
+    mat-menu-item
+    *ngIf="field && section.canHide && (spec.hiddenSections | isHidden: section?.name:field?.name)"
+    (click)="showSubSection(section?.name, field?.name)"
+  >
+    Show Section
+  </button>
+  <!-- END -->
+  <button mat-menu-item *ngIf="spec?.custom_sections && (spec?.custom_sections)[section?.name]" (click)="deleteSection(section)">
+    Delete Section
+  </button>
+</mat-menu>

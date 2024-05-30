@@ -1,0 +1,71 @@
+@import 'variables';
+@import 'chrome-theme';
+.job-card {
+  margin-bottom: 16px;
+}
+
+.job-card-header {
+  margin-bottom: 8px;
+  padding-bottom: 8px;
+}
+
+.job-items {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.job-summary-card {
+  padding: 0 16px 16px 0;
+  width: min(33.3%, 500px);
+
+  @media only screen and (min-width: #{$mobile+1}) and (max-width:#{$tablet}) {
+    width: 50%;
+    padding: 0 0 16px 0;
+  }
+
+  @media only screen and (max-width: #{$mobile}) {
+    width: 100%;
+    padding: 0 0 16px 0;
+  }
+}
+
+:host::ng-deep .font-line {
+  font-size: 10px;
+  letter-spacing: 1.5px;
+}
+
+:host::ng-deep .accent-colour {
+  color: $color-accent;
+}
+
+mat-accordion {
+  border-top: 1px solid $chrome-border-colour-dark;
+}
+
+//disable hover style for chips
+:host::ng-deep .mat-standard-chip:hover::after {
+  opacity: 0 !important;
+}
+:host::ng-deep .mat-standard-chip:focus::after {
+  opacity: 0 !important;
+}
+
+//disable hover style for stepper header
+:host::ng-deep .mat-step-header:hover {
+  background-color: rgba(0, 0, 0, 0);
+}
+
+//expand all stepper
+:host::ng-deep .mat-vertical-stepper-content {
+  visibility: visible !important;
+  height: 100% !important;
+}
+
+:host::ng-deep .mat-expansion-panel-body {
+  padding: 0;
+}
+
+:host::ng-deep .mat-expansion-panel-header {
+  height: 48px;
+}

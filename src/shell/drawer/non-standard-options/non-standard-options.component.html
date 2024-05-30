@@ -1,0 +1,48 @@
+<div class="drawer-wrapper">
+  <h2 class="subtitle">
+    <span>
+      <mat-icon>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18px" height="18px">
+          <path d="M0 0h24v24H0z" fill="none" />
+          <path d="M14 6l-1-2H5v17h2v-7h5l1 2h7V6h-6zm4 8h-4l-1-2H7V6h5l1 2h5v6z" />
+        </svg> </mat-icon
+      >Non-Standard Options
+    </span>
+  </h2>
+
+  <p>
+    The below Non-Standard options have been added to the spec. Please review each item and add any required extras or notes before
+    dismissing
+  </p>
+
+  <div class="options-container">
+    <div class="options-header"><span>Option</span> <span>Value</span></div>
+
+    <div class="options-body" *ngFor="let item of customValues">
+      <p>
+        {{ item?.sectionName }} - <i>{{ item?.fieldName }}</i>
+      </p>
+      <p>{{ item?.value }}</p>
+      <button class="dismiss" (click)="dismissCustomValue(item)">Dismiss</button>
+    </div>
+  </div>
+
+  <ng-container *ngFor="let item of customValues">
+    <div class="options-container-mobile">
+      <p>
+        Option
+        <span
+          >{{ item?.sectionName }} - <i>{{ item?.fieldName }}</i></span
+        >
+      </p>
+      <p>
+        Value <span>{{ item?.value }}</span>
+      </p>
+      <button class="dismiss" (click)="dismissCustomValue(item)">Dismiss</button>
+    </div>
+  </ng-container>
+
+  <mat-card-actions class="button">
+    <button mat-raised-button color="default" type="button" (click)="onCancelClick()">Cancel</button>
+  </mat-card-actions>
+</div>

@@ -1,0 +1,55 @@
+@import 'variables';
+.page-wrapper {
+  display: flex;
+  justify-content: center;
+}
+mat-icon {
+  color: white;
+}
+
+.clients-content {
+  margin-top: -50px;
+
+  @media only screen and (max-width: #{$mobile}) {
+    margin-top: 0;
+
+    ::ng-deep {
+      .mat-card {
+        padding-right: 16px;
+        padding-left: 16px;
+      }
+    }
+  }
+  @media only screen and (max-width: #{$tablet}) {
+    margin-top: 0;
+  }
+}
+
+.add-client-button {
+  position: absolute;
+  margin-top: -30px;
+  right: 10%;
+
+  @media only screen and (max-width: #{$tablet + 1}) {
+    display: none !important;
+  }
+}
+
+.add-client-button-small {
+  @media only screen and (min-width: #{$tablet + 1}) {
+    display: none !important;
+  }
+
+  @media only screen and (max-width: #{$tablet}) {
+    position: absolute;
+    margin-top: -22px;
+    right: 32px;
+  }
+
+  @media only screen and (max-width: #{$mobile}) {
+    position: fixed;
+    bottom: 16px;
+    right: 32px;
+    z-index: 200;
+  }
+}

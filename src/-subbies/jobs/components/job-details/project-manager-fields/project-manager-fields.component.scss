@@ -1,0 +1,16 @@
+@import 'variables';
+div {
+  @media screen and (max-width: $tablet) {
+    padding: 8px;
+  }
+  > div {
+    display: flex;
+    padding-top: 24px;
+    span,
+    a {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      text-decoration: none;
+    }
+  }
+}

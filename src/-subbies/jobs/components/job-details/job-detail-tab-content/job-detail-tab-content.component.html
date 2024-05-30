@@ -1,0 +1,26 @@
+<div class="job-datail-tab-content">
+  <div class="status-container" *ngIf="data">
+    <div class="status">
+      <mat-slider color="accent" [value]="progress" [min]="1" [max]="progressLabels?.length" [disabled]="true"></mat-slider>
+      <div class="progress-labels">
+        <span class="overline dark-medium-emphasis" *ngFor="let item of progressLabels">
+          {{ item }}
+        </span>
+      </div>
+    </div>
+  </div>
+  <div class="job-info-container">
+    <div class="job-detail-container">
+      <h6 class="job-detail-title">Job Details</h6>
+      <div class="job-detail-field" *ngFor="let item of infoKeys">
+        <div class="dark-medium-emphasis overline">{{ fieldDisplayNames[item] | uppercase }}</div>
+        <div class="job-detail-field-value dark-high-emphasis">{{ jobDetails[item] || 'N/A' }}</div>
+      </div>
+    </div>
+    <div class="project-manager-container">
+      <h6 class="project-manager-title">Project Manager</h6>
+
+      <ven-project-manager-fields [projectManager]="projectManager"></ven-project-manager-fields>
+    </div>
+  </div>
+</div>

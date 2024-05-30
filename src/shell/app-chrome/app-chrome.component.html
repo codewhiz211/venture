@@ -1,0 +1,19 @@
+<mat-drawer-container class="chrome-container">
+  <mat-drawer-content class="chrome-drawer-container">
+    <ng-container *ngIf="authService.isAuthenticated">
+      <ven-application-chrome-side-nav></ven-application-chrome-side-nav>
+    </ng-container>
+
+    <!-- THE MAIN HEADER -->
+    <ven-application-chrome-header></ven-application-chrome-header>
+
+    <!-- THE MAIN CONTENT AREA -->
+    <ven-application-chrome-content></ven-application-chrome-content>
+
+    <ven-connection-status></ven-connection-status>
+
+    <ven-application-footer></ven-application-footer>
+  </mat-drawer-content>
+</mat-drawer-container>
+
+<ven-app-chrome-notification-panel *ngIf="showReleaseNotes$ | async"></ven-app-chrome-notification-panel>

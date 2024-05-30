@@ -1,0 +1,13 @@
+<div class="section section-quote">
+  <h4>Extras</h4>
+  <ng-container *ngFor="let section of sections">
+    <ven-print-extras-section
+      [includeGST]="spec?.quote?.includeGST"
+      *ngIf="section.hasExtras"
+      [section]="section"
+      [extras]="extras"
+      [specStatus]="false"
+    ></ven-print-extras-section>
+  </ng-container>
+  <ven-print-extras-total [spec]="spec"></ven-print-extras-total>
+</div>

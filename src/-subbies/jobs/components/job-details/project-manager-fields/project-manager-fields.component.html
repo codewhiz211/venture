@@ -1,0 +1,14 @@
+<div>
+  <div>
+    <ven-icon-new icon="account_circle" colour="black" margin="8"></ven-icon-new>
+    <span class="dark-high-emphasis body-override">{{ projectManager.name || 'N/A' }}</span>
+  </div>
+  <div class="pointer">
+    <ven-icon-new icon="call" colour="#008be5" margin="8"></ven-icon-new>
+    <a [href]="'tel:' + projectManager.phone" class="accent-colour body-override">{{ projectManager.phone || 'N/A' }}</a>
+  </div>
+  <div class="pointer">
+    <ven-icon-new icon="email" colour="#008be5" margin="8"></ven-icon-new>
+    <a [href]="'mailto: ' + projectManager.email" class="accent-colour body-override">{{ projectManager.email || 'N/A' }}</a>
+  </div>
+</div>

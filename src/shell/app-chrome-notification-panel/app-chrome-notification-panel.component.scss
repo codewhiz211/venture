@@ -1,0 +1,73 @@
+@import 'chrome-theme';
+@import 'variables';
+
+:host {
+  background: white;
+  bottom: 0;
+  box-shadow: -2px 3px 5px 5px rgb(0 0 0 / 20%);
+
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 20%;
+  z-index: 1;
+  max-width: 400px; // todo review
+}
+
+@media only screen and (max-width: #{$tablet}) {
+  :host {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+> div {
+  position: relative;
+}
+
+.header {
+  align-items: center;
+  background: #039be5;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  padding: 16px;
+
+  ::ng-deep.mat-chip-list-wrapper {
+    display: inline-flex;
+  }
+
+  ::ng-deep.mat-chip.mat-standard-chip {
+    color: white;
+    background: #62bbff;
+  }
+}
+
+.list {
+  height: calc(100vh - 56px);
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.note {
+  > div {
+    color: rgba(0, 0, 0, 0.87);
+    padding: 16px;
+  }
+
+  .title {
+    background: #62bbff;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+.note::ng-deep {
+  img {
+    max-width: 100% !important;
+  }
+}

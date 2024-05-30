@@ -1,0 +1,19 @@
+<mat-card class="mat-elevation-z0">
+  <div class="summary-body">
+    <div class="overline dark-medium-emphasis">{{ status | uppercase }}</div>
+    <div class="subtitle dark-high-emphasis">{{ id }}</div>
+    <div class="body-2 dark-medium-emphasis">{{ description }}</div>
+    <mat-chip-list class="chips">
+      <mat-chip [disableRipple]="true" *ngFor="let chip of chips">
+        <ven-icon-new *ngIf="chip.icon" [icon]="chip.icon" class="small-icon-new" colour="#6c6b6d"></ven-icon-new>
+        <div *ngIf="chip.link; else plainText" class="body-2 dark-high-emphasis">
+          <a [href]="chip.link">{{ chip.label }}</a>
+        </div>
+        <ng-template #plainText>
+          <div class="body-2 dark-high-emphasis">{{ chip.label }}</div>
+        </ng-template>
+      </mat-chip>
+    </mat-chip-list>
+  </div>
+  <ng-content></ng-content>
+</mat-card>

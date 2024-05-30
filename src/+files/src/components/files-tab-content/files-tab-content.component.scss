@@ -1,0 +1,16 @@
+.main-table {
+  padding: 16px;
+}
+
+.icon-line,
+.linked-point {
+  display: flex;
+  cursor: pointer;
+  span {
+    margin-left: 10px;
+  }
+}
+
+.icon-line {
+  margin-top: 16px;
+}

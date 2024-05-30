@@ -1,0 +1,16 @@
+@import 'chrome-theme';
+@import 'variables';
+
+.chrome-sidenav-content {
+  left: $chrome-drawer-width;
+  position: absolute;
+  right: 0;
+  top: $chrome-header-height; //safari wants this zero ($chrome-header-height;
+  height: 100%; // to display all page content this needs to be - 56px, but then the page only scrolls in emulator!
+
+  @media only screen and (max-width: #{$tablet}) {
+    left: 0;
+    top: $chrome-mobile-header-height;
+    right: 0;
+  }
+}

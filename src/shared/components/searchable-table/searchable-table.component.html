@@ -1,0 +1,52 @@
+<ven-table-search-bar (searchChanged)="applyFilter($event)" [placeholder]="placeholder"></ven-table-search-bar>
+
+<div *ngIf="data; else loading" class="box mat-elevation-z4">
+  <table mat-table [dataSource]="dataSource" matSort>
+    <ng-container *ngFor="let item of columns" [matColumnDef]="item.accessor">
+      <ng-container *ngIf="item.type != 'operator'; else operatorRow">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header [ngStyle]="{ width: item.width }">{{ item.label }}</th>
+        <td mat-cell *matCellDef="let row" [ngStyle]="{ width: item.width }">
+          <div *ngIf="!item.complex; else complexCell">
+            <ng-container *ngIf="!item.format"> {{ row[item.accessor] }}</ng-container>
+            <ng-container *ngIf="item.format == 'shortDate'">{{ row[item.accessor] | date: 'short' }}</ng-container>
+          </div>
+          <ng-template #complexCell>
+            <div class="multiple-element-cell" *ngIf="item.complex == 'multi-elements'">
+              <ng-container *ngIf="item.adapter; else titlecase">
+                <span [ngClass]="item.wrap" *ngFor="let childItem of row[item.accessor]">{{ item.adapter[childItem] }}</span>
+              </ng-container>
+              <ng-template #titlecase>
+                <span [ngClass]="item.wrap" *ngFor="let childItem of row[item.accessor]">{{ childItem | titlecase }}</span>
+              </ng-template>
+            </div>
+            <div class="parent-children-cell" *ngIf="item.complex == 'parent-children'">
+              <div>{{ row[item.accessor] }}</div>
+              <div class="emphasis-med show-on-mobile">
+                {{ row[item.children][0][item.fieldName]
+                }}<span *ngIf="row[item.children].length > 1"> & {{ row[item.children].length - 1 }} others</span>
+              </div>
+              <div class="emphasis-med show-on-desktop" *ngFor="let child of row[item.children]">{{ child[item.fieldName] }}</div>
+            </div>
+          </ng-template>
+        </td>
+      </ng-container>
+      <ng-template #operatorRow>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="pull-right" [ngStyle]="{ width: item.width }">{{ item.label }}</th>
+        <td mat-cell *matCellDef="let row" [ngStyle]="{ width: item.width }">
+          <div>
+            <ven-icon-new (click)="onAction(row)" [icon]="item.icon" colour="black"></ven-icon-new>
+          </div>
+        </td>
+      </ng-template>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+
+    <!-- should be id -->
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+  <mat-paginator [pageSize]="10" [length]="dataSource?.filteredData?.length"></mat-paginator>
+</div>
+<ng-template #loading>
+  <ven-table-placeholder></ven-table-placeholder>
+</ng-template>

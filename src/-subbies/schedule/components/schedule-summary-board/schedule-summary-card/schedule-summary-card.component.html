@@ -1,0 +1,17 @@
+<mat-card class="flex-row">
+  <div class="flex-column date-card">
+    <h6 class="dark-high-emphasis date-span">{{ date }}</h6>
+    <div class="overline dark-medium-emphasis">{{ month | uppercase }}</div>
+  </div>
+  <div class="content-body flex-column">
+    <div class="subtitle dark-high-emphasis">{{ job.address }}</div>
+    <div class="body-2 dark-medium-emphasis">{{ job.description }}</div>
+    <button
+      mat-flat-button
+      class="view-details-button"
+      [routerLink]="['/subbies/jobs/', jobSummary.specUid, jobSummary.subbieUid, jobSummary.jobUid]"
+    >
+      VIEW DETAILS
+    </button>
+  </div>
+</mat-card>

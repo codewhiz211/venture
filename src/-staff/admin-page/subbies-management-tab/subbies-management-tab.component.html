@@ -1,0 +1,9 @@
+<div class="bordered tab-content-container-with-fab">
+  <ven-table
+    [disableHover]="true"
+    [data]="subbie$ | async"
+    [columns]="columns"
+    initialSortedColumn="lastModified"
+    (onOperatorClick)="editSubbie($event)"
+  ></ven-table>
+</div>

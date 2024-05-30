@@ -1,0 +1,11 @@
+@import 'variables';
+
+mat-dialog-actions {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+
+  @media screen and (max-width: $tablet) {
+    margin-bottom: 16px;
+  }
+}

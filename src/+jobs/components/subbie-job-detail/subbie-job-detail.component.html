@@ -1,0 +1,48 @@
+<div class="dialog-wrapper" [ngClass]="{ 'loader-active': loading }">
+  <div *ngIf="loading; else addJob" class="loader-wrapper">
+    <mat-progress-spinner [mode]="'indeterminate'" [color]="'accent'"></mat-progress-spinner>
+  </div>
+  <ng-template #addJob>
+    <form [formGroup]="subbieJobForm">
+      <h2 class="subtitle detail primary">Job Details</h2>
+      <mat-form-field class="half-width subtitle" appearance="outline">
+        <mat-label>Job type</mat-label>
+        <mat-select formControlName="type">
+          <mat-option value="remedial">Remedial</mat-option>
+          <mat-option value="standard">Standard</mat-option>
+          <mat-option value="standard-electrical">Standard - Electrical</mat-option>
+          <mat-option value="standard-plumbing">Standard - Plumbing</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="half-width subtitle" appearance="outline">
+        <mat-label>Job Description</mat-label>
+        <textarea matInput formControlName="description" id="description" name="description"></textarea>
+      </mat-form-field>
+      <mat-form-field class="half-width subtitle" appearance="outline">
+        <mat-label>Subbie</mat-label>
+        <mat-select formControlName="subbie">
+          <mat-option *ngFor="let item of subbieList$ | async" [value]="item.uid">{{ item.name }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div class="half-width message" appearance="outline" *ngIf="showUrgent">
+        <mat-checkbox formControlName="isUrgent" id="isUrgent" name="isUrgent" class="body-2 dark-high-emphasis"
+          >Mark as Urgent</mat-checkbox
+        >
+      </div>
+      <div class="half-width message" appearance="outline">
+        <mat-checkbox formControlName="message" id="message" name="message">
+          <span class="body-2 dark-high-emphasis">Send Notification</span>
+        </mat-checkbox>
+      </div>
+    </form>
+    <ven-email-form
+      *ngIf="showEmailForm; else showButton"
+      [emailData]="emailData"
+      (formSubmitted)="onSaveClick($event)"
+      (formCancelled)="onCancelClick()"
+    ></ven-email-form>
+    <ng-template #showButton>
+      <ven-dialog-footer-buttons [closeAction]="closeAction" [submitAction]="submitAction"></ven-dialog-footer-buttons>
+    </ng-template>
+  </ng-template>
+</div>

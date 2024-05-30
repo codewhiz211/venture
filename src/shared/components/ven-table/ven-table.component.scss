@@ -1,0 +1,48 @@
+@import 'variables';
+@import 'chrome-theme';
+
+.box {
+  border-radius: 4px;
+  border: 1px solid $chrome-border-colour;
+
+  table {
+    width: 100%;
+    //add border here is to eliminate white sharp corner cover on box border round corner
+    border-radius: 3px 3px 0 0; // Here 3px but not 4 is to eliminate the gap between box border and table
+    border: 1px solid white;
+
+    .table-header-label {
+      color: $blue-primary;
+    }
+    tr.mat-row {
+      cursor: pointer;
+      &:not(.hover-disabled):hover {
+        background: $blue-primary;
+        color: white;
+      }
+    }
+
+    tr.hover-disabled {
+      cursor: inherit;
+    }
+    .operator-column {
+      text-align: end;
+    }
+
+    .pull-right {
+      ::ng-deep.mat-sort-header-container {
+        justify-content: flex-end !important;
+        margin-right: -16px;
+      }
+      text-align: right;
+    }
+  }
+}
+
+.operator-cell {
+  margin-top: 8px; // align operators in height
+}
+
+.mat-chip.mat-standard-chip::after {
+  background-color: rgba(0, 0, 0, 0); // disable that a chip under hover becomes darker
+}

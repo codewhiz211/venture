@@ -1,0 +1,10 @@
+<ven-app-chrome-loader *ngIf="loading; else jobsContent"></ven-app-chrome-loader>
+
+<ng-template #jobsContent>
+  <ven-subbie-jobs-board
+    class="subbie-jobs-board"
+    title="Outstanding Remedials"
+    [jobs]="outStandingRemedialJobs$ | async"
+  ></ven-subbie-jobs-board>
+  <ven-subbie-jobs-board class="subbie-jobs-board" title="All jobs" [jobs]="allJobs$ | async"></ven-subbie-jobs-board>
+</ng-template>

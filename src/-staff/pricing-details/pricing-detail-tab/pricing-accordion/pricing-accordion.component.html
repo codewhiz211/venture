@@ -1,0 +1,67 @@
+<mat-accordion>
+  <mat-expansion-panel *ngFor="let item of pricingSections">
+    <mat-expansion-panel-header>
+      <mat-panel-title class="subtitle primary"> {{ item.title }} </mat-panel-title>
+    </mat-expansion-panel-header>
+    <ng-container *ngIf="item.fields">
+      <div class="text-fields">
+        <ng-container *ngFor="let field of item.fields">
+          <ng-container [ngSwitch]="field.type">
+            <ng-container *ngIf="!(field.hide && pricing[field.hide.field] == field.hide.value)">
+              <div *ngSwitchCase="'text'" class="text-field" [ngClass]="field.class">
+                <div class="dark-medium-emphasis overline">{{ field.display | uppercase }}</div>
+                <div class="text-value dark-high-emphasis body-override">
+                  {{ pricing[field.name] || pricing[field.secondField] || 'N/A' }}
+                </div>
+              </div>
+            </ng-container>
+            <div *ngSwitchCase="'attachment'" [ngClass]="field.class">
+              <div *ngFor="let file of pricing.attachment" class="attachment-item icon-line">
+                <ven-icon-new icon="attach_file" colour="#008be5" size="0.75"></ven-icon-new>
+                <span class="body-2">
+                  <a [href]="file.url">{{ file.filename }}</a>
+                </span>
+              </div>
+            </div>
+            <div *ngSwitchCase="'texearea'" [ngClass]="field.class">
+              <ven-textarea
+                *ngIf="editable; else readonlyTextarea"
+                [styleClass]="field.class"
+                [label]="field.display"
+                [value]="pricing[field.name]"
+                (valueChanged)="valueChanged($event, field.name)"
+              ></ven-textarea>
+              <ng-template #readonlyTextarea>
+                <div class="text-field">
+                  <div class="text-value dark-high-emphasis body-override">
+                    {{ pricing[field.name] }}
+                  </div>
+                </div>
+              </ng-template>
+            </div>
+            <div *ngSwitchCase="'button'" [ngClass]="field.class">
+              <span class="primary" *ngIf="editable" (click)="action(field.name, field.target)">{{ field.display | uppercase }}</span>
+            </div>
+          </ng-container>
+        </ng-container>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="item.table">
+      <ven-pricing-table
+        [pricingSection]="pricing[item.id]"
+        [field]="item.id"
+        [uid]="pricing.uid"
+        [table]="item.table"
+        [editable]="editable"
+      ></ven-pricing-table>
+    </ng-container>
+    <ng-container *ngIf="item.id == 'summary'">
+      <ven-pricing-option-summary-section
+        [optionId]="optionId"
+        [client]="client"
+        [uid]="pricing.uid"
+        [specUid]="specUid"
+      ></ven-pricing-option-summary-section>
+    </ng-container>
+  </mat-expansion-panel>
+</mat-accordion>

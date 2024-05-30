@@ -1,0 +1,90 @@
+@import 'variables';
+@import '../../styles/shared-print-styles.scss';
+
+:host {
+  width: 100%;
+}
+
+.description {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  span:first-child {
+    opacity: 0.6;
+    font-size: 12px;
+    margin-bottom: -0.5em;
+  }
+
+  @media print {
+    display: table-row;
+    page-break-inside: avoid;
+    span {
+      display: table-cell;
+      width: 48%;
+    }
+  }
+}
+
+.section-custom {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
+  @media print {
+    display: block;
+    page-break-inside: avoid;
+  }
+  h4 {
+    margin-bottom: 1em;
+    width: 100%;
+    font-size: 16px;
+    font-weight: bold;
+    color: $color-accent;
+  }
+  .block-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
+    border: 1px solid rgba(3, 155, 229, 0.17);
+    border-radius: 3px;
+    padding: 1em;
+    margin-bottom: 2em;
+    @media print {
+      display: block;
+      page-break-inside: avoid;
+    }
+    > div {
+      width: 48%;
+      padding-bottom: 0.15em;
+      border-bottom: 1px solid #eee;
+      margin-bottom: 0.5em;
+      &:after {
+        clear: left;
+      }
+      @media print {
+        width: 100%;
+        display: table;
+        margin-bottom: 0.5rem;
+      }
+      @media only screen and (max-width: #{$mobile}) {
+        width: 100%;
+      }
+    }
+    .textarea {
+      width: 100%;
+    }
+  }
+
+  .textarea {
+    width: 100%;
+    margin-bottom: 8px;
+
+    &.highlight-body {
+      background-color: #badffa;
+      border-radius: 6px;
+      padding: 8px 6px 6px;
+    }
+  }
+}

@@ -1,0 +1,71 @@
+@import 'variables';
+@import '../../styles/shared-print-styles.scss';
+/*
+ dont show the cover page in print preview, as styles will be off
+ show it only when the use hits CTRL + P
+*/
+
+.print-cover-page {
+  display: none;
+  @media print {
+    display: block;
+    position: relative;
+    background: #fff;
+    color: #000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    // this line is required to force print to show the background colour / image
+    page-break-after: always;
+    -webkit-print-color-adjust: exact;
+    //:For Firefox
+    color-adjust: exact;
+    // not 100vh as this causes cover page to spill into next page
+    min-height: 95vh;
+    .main-logo {
+      margin-top: 20%;
+    }
+    .text-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      height: 150px;
+      margin-top: 50px;
+    }
+    .large-text {
+      font-size: 3rem;
+    }
+    .medium-text {
+      font-size: 2rem;
+    }
+    .small-text {
+      font-size: 1rem;
+    }
+    .logo-container {
+      display: flex;
+      width: 190px;
+      justify-content: space-between;
+      position: absolute;
+      bottom: 20px;
+
+      img {
+        max-height: 100%;
+      }
+      div {
+        display: flex;
+        align-items: center;
+      }
+    }
+  }
+}
+
+.bg-image {
+  // display image at the bottom of the page, cover the width
+  background-image: url('/assets/img/blue-wave.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center bottom;
+  -webkit-print-color-adjust: exact;
+}

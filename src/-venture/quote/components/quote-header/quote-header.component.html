@@ -1,0 +1,26 @@
+<mat-card>
+  <div class="mast">
+    <h6 class="bold">Lot {{ spec.section_details.lot }} {{ spec.section_details.subdivision }}</h6>
+    <h6>{{ spec.contact_details.client }}</h6>
+    <span class="subtitle">{{ todaysDate | date }}</span>
+    <img [src]="logoImage" />
+  </div>
+  <div class="details">
+    <div><span class="emphasis-high">Email:</span></div>
+    <div>
+      <div *ngFor="let email of clientEmails" class="emphasis-med ellipsis">{{ clientEmails }}</div>
+    </div>
+    <div><span class="emphasis-high">Phone:</span></div>
+    <div>
+      <div *ngFor="let phone of clientPhones" class="emphasis-med ellipsis">{{ clientPhones }}</div>
+    </div>
+    <div><span class="emphasis-high">Consultant:</span></div>
+    <div>
+      <div class="emphasis-med">
+        <div class="ellipsis">{{ spec.contact_details.consultantName }}</div>
+        <div class="ellipsis">{{ spec.contact_details.consultantEmail }}</div>
+        <div class="ellipsis">{{ spec.contact_details.consultantPhone }}</div>
+      </div>
+    </div>
+  </div>
+</mat-card>

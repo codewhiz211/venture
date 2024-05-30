@@ -1,0 +1,12 @@
+<div class="primary notification-title">
+  <ven-icon-new icon="notifications" colour="#008be5" class="icon-on-line"></ven-icon-new><span class="subtitle">Notifications</span>
+</div>
+<div class="body-2" *ngIf="customValues?.length > 0">
+  This spec contains non-standard options <span class="primary review-button" (click)="onNonStandardOptions()">Review</span>
+</div>
+<div class="body-2">
+  Pope Electrical have submited a remedial for <span class="primary review-button" (click)="onElectricalReview()">Review</span>
+</div>
+<div class="body-2">
+  The Quote has a new pricing request for <span class="primary review-button" (click)="onQuoteReview()">Review</span>
+</div>

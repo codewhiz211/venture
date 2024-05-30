@@ -1,0 +1,52 @@
+@import 'chrome-theme';
+@import 'variables';
+
+.mat-expansion-panel {
+  box-shadow: none;
+  border-bottom: 1px solid $chrome-border-colour-dark;
+  border-radius: 0;
+}
+.half-width {
+  width: 48%;
+  @media screen and (max-width: $tablet) {
+    width: 100%;
+  }
+}
+.text-fields {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  .text-field {
+    display: flex;
+    flex-direction: column;
+    padding: 12px 0;
+    border-bottom: 1px solid $chrome-border-colour-dark;
+  }
+}
+
+.icon-line {
+  cursor: pointer;
+
+  span {
+    margin-top: 2px;
+    margin-left: 8px;
+    a {
+      color: $blue-primary;
+      text-decoration: none;
+    }
+  }
+}
+
+.attachment-item {
+  padding-top: 16px;
+}
+
+.pull-right {
+  text-align: right;
+  width: 100%;
+  margin: 8px 0;
+  span {
+    cursor: pointer;
+  }
+}

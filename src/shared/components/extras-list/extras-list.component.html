@@ -1,0 +1,34 @@
+<h6>
+  <span class="primary subtitle">{{ spec?.quote?.includeGST ? 'inc.GST' : 'excl.GST' }}</span>
+</h6>
+<ul class="body-override">
+  <li *ngFor="let key of objectKeys(postExtrasForDisplay)">
+    <div class="primary">
+      <span>{{ postExtrasForDisplay[key].title }}</span>
+    </div>
+    <div *ngFor="let extra of postExtrasForDisplay[key].extras">
+      <span>{{ extra.display }}</span>
+      <span *ngIf="extra.amount != 'pending'; else pendingExtra" [ngClass]="{ red: extra.amount < 0 }">
+        ${{ (spec?.quote?.includeGST ? extra.amount : extra?.net) | number: '1.2-2' }}
+      </span>
+      <ng-template #pendingExtra>
+        <span>{{ extra.amount }}</span>
+      </ng-template>
+    </div>
+  </li>
+  <li>
+    <div class="dividing-row"></div>
+    <div class="bold">
+      <span>Total extras</span>
+      <span>${{ totalPostExtras | number: '1.2-2' }}</span>
+    </div>
+    <div>
+      <span>Contracted price</span>
+      <span>${{ (spec?.quote?.includeGST ? quote.gross : quote?.net) | number: '1.2-2' }}</span>
+    </div>
+    <div class="bold">
+      <span>Total price</span>
+      <span>${{ total | number: '1.2-2' }}</span>
+    </div>
+  </li>
+</ul>

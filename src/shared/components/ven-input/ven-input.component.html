@@ -1,0 +1,6 @@
+<form [formGroup]="inputForm">
+  <mat-form-field [ngClass]="styleClass" appearance="outline">
+    <mat-label>{{ label }}</mat-label>
+    <input matInput formControlName="field" type="details" id="field" name="field" (blur)="onBlur()" [value]="value || ''" />
+  </mat-form-field>
+</form>

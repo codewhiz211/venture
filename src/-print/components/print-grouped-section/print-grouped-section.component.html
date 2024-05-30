@@ -1,0 +1,117 @@
+<div class="section">
+  <div class="grouped-content">
+    <h4 *ngIf="!section.dontPrintTitle && showTitle">{{ section.title }}</h4>
+    <ng-container *ngFor="let group of groups" class="group">
+      <div *ngIf="!(spec.hiddenSections | isHidden: section?.name:group.fields[0]?.canHide)" class="group">
+        <div class="subtitle">{{ group.title }}</div>
+        <ng-container *ngFor="let field of group.fields">
+          <ng-container [ngSwitch]="field?.type">
+            <ng-container *ngIf="!(spec.hiddenSections | isHidden: section?.name:field?.canHide)">
+              <ng-container
+                *venSwitchCases="['dropdown', 'dropdown-conditional', 'text-conditional', 'number', 'number-conditional', 'text']"
+              >
+                <div *ngIf="field.show">
+                  <ven-print-item>
+                    <ven-print-text-field [spec]="spec" [section]="section" [field]="field"></ven-print-text-field>
+                  </ven-print-item>
+                </div>
+              </ng-container>
+
+              <ng-container *ngSwitchCase="'colour'">
+                <ven-print-item>
+                  <ven-print-colour [spec]="spec" [section]="section" [field]="field"></ven-print-colour>
+                </ven-print-item>
+              </ng-container>
+
+              <ng-container *ngSwitchCase="'custom-blocks'">
+                <ven-print-custom-field [spec]="spec" [section]="section" [field]="field"></ven-print-custom-field>
+              </ng-container>
+
+              <ng-container *ngSwitchCase="'image-picker'">
+                <ng-container *ngIf="field.show">
+                  <ven-print-item>
+                    <ven-print-image [spec]="spec" [section]="section" [field]="field"></ven-print-image>
+                  </ven-print-item>
+                </ng-container>
+              </ng-container>
+
+              <ng-container *ngSwitchCase="'note'">
+                <!-- INTENTIONALLY EMPTY -->
+              </ng-container>
+
+              <ng-container *ngSwitchCase="'subtitle'">
+                <div *ngIf="field?.text" class="subtitle">{{ field.text }}</div>
+              </ng-container>
+
+              <ng-container *ngSwitchCase="'subtitle-conditional'">
+                <ng-container *ngIf="field.show">
+                  <div *ngIf="field?.text" class="subtitle">{{ field.text }}</div>
+                </ng-container>
+              </ng-container>
+
+              <ng-container *ngSwitchCase="'textarea'">
+                <ng-container *ngIf="field?.name?.indexOf('PmNote') >= 0 && field?.value !== 'n/a'">
+                  <ven-print-item-full-width>
+                    <ven-print-text-area
+                      [field]="field"
+                      [label]="'PM Notes'"
+                      [value]="field.value"
+                      [highlight]="field?.highlighted"
+                    ></ven-print-text-area>
+                  </ven-print-item-full-width>
+                </ng-container>
+
+                <ng-container *ngIf="field?.name?.indexOf('PmNote') < 0" class="textarea">
+                  <ven-print-item-full-width>
+                    <ven-print-text-area
+                      *ngIf="field?.value !== 'n/a'"
+                      [field]="field"
+                      [label]="'Additional Info'"
+                      [value]="field.value"
+                    ></ven-print-text-area>
+                  </ven-print-item-full-width>
+                  <ven-print-item-full-width>
+                    <ven-print-text-area
+                      *ngIf="field?.value === 'n/a' && field?.default"
+                      [field]="field"
+                      [label]="'Additional Info'"
+                      [value]="field.default"
+                    ></ven-print-text-area>
+                  </ven-print-item-full-width>
+                </ng-container>
+              </ng-container>
+
+              <ng-container *ngSwitchCase="'textarea-conditional'">
+                <ng-container *ngIf="field.show">
+                  <ven-print-item-full-width>
+                    <ven-print-text-area
+                      *ngIf="field?.value !== 'n/a'"
+                      [field]="field"
+                      [label]="'Additional Info'"
+                      [value]="field.value"
+                    ></ven-print-text-area>
+                  </ven-print-item-full-width>
+                </ng-container>
+              </ng-container>
+
+              <ng-container *ngSwitchDefault>
+                <p>UKNOWN TYPE => {{ field.type }}</p>
+              </ng-container>
+            </ng-container>
+          </ng-container>
+        </ng-container>
+      </div>
+    </ng-container>
+  </div>
+
+  <ven-print-extras-section
+    class="section-inner"
+    *ngIf="section.hasExtras !== undefined"
+    [section]="section"
+    [specStatus]="spec?.details.status == 'Prepared for contract'"
+    [extras]="extras"
+    [includeGST]="true"
+  ></ven-print-extras-section>
+
+  <ven-print-section-signature *ngIf="showSign" [section]="section" [signed]="signed" [spec]="spec"></ven-print-section-signature>
+</div>

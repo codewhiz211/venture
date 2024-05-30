@@ -1,0 +1,25 @@
+<div>
+  <div
+    class="grid-total-row body-2"
+    *ngFor="let row of rows"
+    [ngClass]="row.description == 'total' ? 'dark-high-emphasis' : 'dark-medium-emphasis'"
+  >
+    <div>
+      <span>{{ row.description | titlecase }}</span>
+    </div>
+    <div>
+      <span>{{ row.margin | percent: '1.2-2' }}</span>
+    </div>
+    <div>
+      <span>${{ row.total | number: '1.2-2' }}</span>
+    </div>
+    <div>
+      <ven-icon-new
+        *ngIf="row.operator && editable"
+        [icon]="row.operator.icon"
+        (click)="row.operator.action()"
+        colour="rgba(0,0,0,0.87)"
+      ></ven-icon-new>
+    </div>
+  </div>
+</div>

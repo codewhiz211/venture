@@ -1,0 +1,39 @@
+@import 'variables';
+@import 'chrome-theme';
+mat-card {
+  margin-bottom: 16px;
+}
+
+.mast {
+  border-bottom: 1px solid $chrome-border-colour-dark;
+}
+
+.details {
+  display: grid; //two columns; second is twice width of the first
+  grid-template-columns: 1fr 2fr;
+}
+
+img {
+  display: none;
+}
+
+.ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: inherit;
+  width: 100%;
+  @media only screen and (max-width: #{$mobile}) {
+    width: 55vw;
+  }
+}
+
+@media print {
+  img {
+    display: block;
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    width: 15%;
+  }
+}

@@ -1,0 +1,136 @@
+@import 'variables';
+@import 'chrome-theme';
+h3 {
+  color: $color-accent;
+  border-bottom: 1px solid $chrome-border-colour-dark;
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.button-container {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+  padding-bottom: 16px;
+  margin-bottom: 16px;
+  > * {
+    margin-left: 16px;
+  }
+}
+
+.loader {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  border: 2px solid rgba(3, 155, 229, 0.17);
+  border-radius: 5px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.field-wrapper {
+  .button-container {
+    border-bottom: 1px solid $chrome-border-colour-dark;
+  }
+  &:last-child {
+    .button-container {
+      display: none;
+    }
+  }
+}
+
+h2.subtitle {
+  color: $color-accent;
+  font-size: 15px;
+  border-bottom: 1px solid #f2f1f7;
+  margin-bottom: 8px;
+  padding-bottom: 4px;
+  margin-left: 8px;
+}
+
+.field-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%; //border-top: 1px solid #F2F1F7;
+  padding-top: 16px; // the last field should be full with, if the expandLastField flag is set
+  // and the item is odd
+  &.expand-last-field {
+    .spec-field:last-child:nth-child(odd) {
+      flex-grow: 1;
+    }
+  }
+  ven-spec-text-field,
+  ven-spec-text-field-conditional,
+  ven-spec-droppicker,
+  ven-spec-colour,
+  ven-spec-number,
+  ven-spec-number-conditional,
+  ven-spec-image-select,
+  ven-spec-image-picker {
+    width: 50%;
+    padding: 0 8px;
+  }
+  ven-spec-text-area-conditional,
+  ven-spec-text-area {
+    width: 100%;
+    margin: 0 8px;
+  }
+}
+
+@media only screen and (max-width: #{$mobile}) {
+  .field-wrapper {
+    ven-spec-text-field,
+    ven-spec-text-field-conditional,
+    ven-spec-number,
+    ven-spec-number-conditional,
+    ven-spec-droppicker,
+    ven-spec-droppicker-conditional,
+    ven-spec-text-area,
+    ven-spec-colour,
+    ven-spec-image-select,
+    ven-spec-image-picker {
+      width: 100%;
+      padding: 0;
+    }
+    ven-spec-text-area,
+    ven-spec-text-area-conditional {
+      margin: 0;
+    }
+  }
+}
+
+ven-spec-image-picker,
+ven-spec-number-conditional,
+ven-spec-droppicker,
+ven-spec-subtitle-conditional,
+ven-spec-droppicker-conditional,
+ven-spec-image-select-conditional,
+ven-spec-text-field-conditional,
+ven-spec-text-area-conditional {
+  &.hideField {
+    display: none;
+  }
+}
+
+.no-print {
+  @media print {
+    display: none;
+  }
+}
+
+.visibility_toggle {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  opacity: 0.6;
+  mat-icon {
+    margin-right: 5px;
+  }
+  @media print {
+    display: none;
+  }
+  &.sub-section {
+    padding: 12px 0 20px;
+  }
+}

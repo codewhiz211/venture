@@ -1,0 +1,16 @@
+div {
+    &:first-child {
+        flex: 1;
+    }
+    display: flex;
+    justify-content: space-between;
+
+    div {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        span {
+            margin-left: 8px;
+        }
+    }
+}

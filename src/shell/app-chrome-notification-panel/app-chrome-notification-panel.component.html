@@ -1,0 +1,27 @@
+<div>
+  <div class="header">
+    <div>
+      Updates
+      <ng-container *ngIf="releaseNotesCount$ | async as count">
+        <mat-chip-list *ngIf="count > 0">
+          <mat-chip color="accent"> {{ count }} </mat-chip>
+        </mat-chip-list>
+      </ng-container>
+    </div>
+    <ven-icon-new icon="close" (click)="close()"></ven-icon-new>
+  </div>
+  <div class="list">
+    <ng-container *ngFor="let note of releaseNotes$ | async">
+      <div class="note">
+        <div class="title">
+          {{ note.title }}<span>{{ note.version }}</span>
+        </div>
+        <div>
+          <div markdown [data]="note.markdown"></div>
+        </div>
+      </div>
+    </ng-container>
+    <button (click)="devAddNotes()">Add</button><button (click)="devClearNotes()">Clear</button>
+  </div>
+</div>
+<div></div>

@@ -1,0 +1,6 @@
+@import 'variables';
+@import 'chrome-theme';
+
+.job-card-header {
+  border-bottom: 1px solid $chrome-border-colour-dark;
+}

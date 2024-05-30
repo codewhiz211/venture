@@ -1,0 +1,9 @@
+<button mat-icon-button [matMenuTriggerFor]="menu">
+  <ven-icon-new icon="more_vert" colour="black"></ven-icon-new>
+</button>
+<mat-menu #menu="matMenu">
+  <a class="menu-item-button" mat-menu-item *ngFor="let item of menuItems" (click)="menuSelected.emit(item.name)">
+    <ven-icon-new [icon]="item.icon" colour="rgba(0,0,0,0.87)" hover="black"></ven-icon-new>
+    <span>{{ item.name }}</span>
+  </a>
+</mat-menu>

@@ -1,0 +1,17 @@
+<ven-share-file-list [files]="rootFiles" (selectedFilesChanged)="onSelectedFilesChanged($event)"></ven-share-file-list>
+<mat-accordion class="folder-accordion">
+  <div class="bordered">
+    <mat-expansion-panel
+      *ngFor="let folder of folders"
+      (opened)="panelOpenState = true"
+      (closed)="panelOpenState = false"
+      class="mat-elevation-z0 bordered-bottom"
+    >
+      <mat-expansion-panel-header>
+        <mat-panel-title class="subtitle primary"> {{ folder }} </mat-panel-title>
+      </mat-expansion-panel-header>
+      <!-- content -->
+      <ven-share-file-list [files]="folderFiles[folder]" (selectedFilesChanged)="onSelectedFilesChanged($event)"></ven-share-file-list>
+    </mat-expansion-panel>
+  </div>
+</mat-accordion>

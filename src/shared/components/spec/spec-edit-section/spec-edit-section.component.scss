@@ -1,0 +1,31 @@
+@import 'variables';
+
+:host {
+  ::ng-deep {
+    .mat-form-field-wrapper {
+      padding-bottom: 1.34375em !important;
+    }
+
+    .mat-dialog-actions {
+      justify-content: flex-end;
+    }
+  }
+}
+
+h2 {
+  display: flex;
+  align-items: center;
+  color: $color-accent;
+
+  mat-icon {
+    margin-right: 5px;
+  }
+}
+
+p {
+  margin-bottom: 20px;
+}
+
+form > * {
+  width: 100%;
+}

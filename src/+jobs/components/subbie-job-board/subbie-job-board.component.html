@@ -1,0 +1,17 @@
+<div class="tab-content-container" *ngIf="subbieService.subbieJobs$ | async; else blankSubbies">
+  <ven-subbie-job-card
+    *ngIf="remedialJobs?.length"
+    [jobs]="remedialJobs"
+    [specUid]="specUid"
+    jobTitle="Remedials"
+    [isRemedial]="true"
+  ></ven-subbie-job-card>
+  <ven-subbie-job-card
+    *ngIf="standardJobs?.length"
+    [jobs]="standardJobs"
+    [specUid]="specUid"
+    jobTitle="Jobs"
+    [isRemedial]="false"
+  ></ven-subbie-job-card>
+</div>
+<ng-template #blankSubbies><ven-subbies-blank-message></ven-subbies-blank-message></ng-template>

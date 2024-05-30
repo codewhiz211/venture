@@ -1,0 +1,211 @@
+@import 'variables';
+@import 'chrome-theme';
+.example-headers-align .mat-expansion-panel-header-title,
+.example-headers-align .mat-expansion-panel-header-description {
+  flex-basis: 0;
+}
+
+.example-headers-align .mat-expansion-panel-header-description {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mat-expansion-panel-header-title {
+  color: $color-accent;
+}
+
+.mat-expansion-panel:not([class*='mat-elevation-z']) {
+  @media print {
+    box-shadow: none;
+  }
+}
+
+.accordion-content {
+  // ideally we would use padding on expansion body, but the read only accordion,
+  // uses print components that already have a padding set. And this would
+  // lead to double padding in the read only accordion.
+  margin: 16px;
+}
+
+.hos-content {
+  padding: 0 0.75em 0 0.75em;
+}
+
+ul {
+  padding-left: 16px;
+}
+
+p {
+  margin-bottom: 8px;
+  &.note {
+    margin-bottom: 24px;
+  }
+}
+
+h3 {
+  color: $color-accent;
+  border-bottom: 1px solid $chrome-border-colour-dark;
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+h2.subtitle-2 {
+  width: 100%;
+  border-bottom: 1px solid #f2f1f7;
+  margin-bottom: 8px;
+  padding-bottom: 4px;
+  margin-left: 8px;
+}
+
+.subtitle-container {
+  width: 100%;
+}
+
+.signature {
+  display: flex;
+  margin: 32px 0;
+  div:first-child {
+    display: flex;
+    width: 50%;
+    margin-right: 16px;
+    span {
+      display: flex;
+      width: 100%;
+      border-bottom: 1px solid #666;
+    }
+  }
+}
+
+//TODO to shared?
+.field-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  border-top: 1px solid #f2f1f7;
+  padding-top: 16px; // the last field should be full with, if the expandLastField flag is set
+  // and the item is odd
+  &.expandLastField {
+    .spec-field:last-child:nth-child(odd) {
+      flex-grow: 1;
+    }
+  }
+  ven-spec-text-field,
+  ven-spec-text-field-conditional,
+  ven-spec-subtitle-conditional,
+  ven-spec-text-area-conditional,
+  ven-spec-text-field-optional,
+  ven-spec-number-conditional,
+  ven-spec-number,
+  ven-spec-image-select-conditional,
+  ven-spec-colour,
+  ven-spec-image-select,
+  ven-spec-droppicker,
+  ven-spec-image-picker {
+    width: 50%;
+    padding: 0 8px;
+    &.fullWidth {
+      width: 100%;
+    }
+    &.hideField {
+      display: none;
+    }
+  }
+
+  ven-spec-text-area,
+  ven-spec-multi-text-field,
+  ven-spec-text-field-optional,
+  ven-spec-custom-manager,
+  ven-spec-text-area-conditional {
+    width: 100%;
+    padding: 0 8px;
+  }
+
+  ven-spec-subtitle-conditional {
+    width: 100%;
+    padding-left: 0;
+  }
+}
+
+@media only screen and (max-width: #{$mobile}) {
+  .field-wrapper {
+    ven-spec-subtitle-conditional,
+    ven-spec-text-field,
+    ven-spec-text-field-conditional,
+    ven-spec-number,
+    ven-spec-number-conditional,
+    ven-spec-text-area,
+    ven-spec-text-field-optional,
+    ven-spec-colour,
+    ven-spec-image-select-conditional,
+    ven-spec-image-select,
+    ven-spec-droppicker,
+    ven-spec-image-picker {
+      width: 100%;
+      padding: 0;
+    }
+    ven-spec-text-area,
+    ven-spec-text-area-conditional,
+    ven-spec-subtitle-conditional,
+    ven-spec-text-field-optional,
+    ven-spec-custom-manager {
+      margin: 0;
+    }
+  }
+}
+
+.visibility_toggle {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  opacity: 0.6;
+  mat-icon {
+    margin-right: 5px;
+  }
+  @media print {
+    display: none;
+  }
+  &.sub-section {
+    padding: 12px 0 20px;
+  }
+}
+
+.no-print {
+  @media print {
+    display: none !important;
+  }
+}
+
+.section-footer {
+  display: flex;
+  align-items: center;
+
+  & > span {
+    margin-right: 10px;
+  }
+}
+
+::ng-deep .mat-expansion-indicator,
+.mat-expansion-indicator::after {
+  @media print {
+    display: none !important;
+  }
+}
+
+.mat-expansion-panel {
+  box-shadow: none;
+  border-bottom: 1px solid $chrome-border-colour-dark;
+  border-radius: 0;
+}
+
+:host {
+  ::ng-deep {
+    mat-panel-title {
+      display: flex;
+      align-items: center;
+
+      mat-icon {
+        margin-left: 5px;
+      }
+    }
+  }
+}

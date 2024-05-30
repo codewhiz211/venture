@@ -1,0 +1,22 @@
+<div class="mark-complete-form dialog-wrapper">
+  <mat-form-field appearance="outline">
+    <mat-label>Job Comments</mat-label>
+    <input matInput [(ngModel)]="comments" />
+    <mat-hint>Add any comments for the PM</mat-hint>
+  </mat-form-field>
+  <ven-file-uploader-engine
+    [specId]="data.specUid"
+    [folder]="folder"
+    (fileUploaded)="handleUploaded($event)"
+    (uploading)="handleUploading($event)"
+  >
+    <label for="fileUpload">
+      <ven-icon-new icon="add_a_photo" colour="#008be5"></ven-icon-new>
+      <span class="body-2">Add photos</span>
+    </label>
+  </ven-file-uploader-engine>
+  <div class="upload-file-list">
+    <div *ngFor="let item of uploadedFiles" class="body-2 dark-medium-emphasis">{{ item.filename }}</div>
+  </div>
+  <ven-dialog-footer-buttons [submitAction]="submitAction" [closeAction]="closeAction" [disabled]="uploading"></ven-dialog-footer-buttons>
+</div>

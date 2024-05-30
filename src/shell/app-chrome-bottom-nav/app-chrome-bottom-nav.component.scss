@@ -1,0 +1,26 @@
+@import 'chrome-theme';
+@import 'variables';
+
+:host {
+  display: none;
+}
+
+@media only screen and (max-width: #{$tablet}) {
+  :host {
+    display: block;
+  }
+}
+
+mat-nav-list {
+  background: $blue-primary;
+  bottom: 0;
+  display: flex;
+  height: $chrome-mobile-nav-height;
+  padding: 0;
+  position: fixed;
+  width: 100%;
+}
+
+.app-bottom-nav {
+  z-index: 2;
+}

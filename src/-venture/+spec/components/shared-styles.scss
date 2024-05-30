@@ -1,0 +1,103 @@
+mat-form-field {
+  width: 100%;
+  margin-bottom: 4px;
+}
+
+@keyframes pulseGreen {
+  0% {
+    background-color: rgba(165, 245, 196, 0.1);
+  }
+  50% {
+    background-color: rgba(165, 245, 196, 0.3);
+  }
+  100% {
+    background-color: rgba(165, 245, 196, 0.1);
+  }
+}
+
+@keyframes pulseRed {
+  0% {
+    background-color: rgba(241, 97, 97, 0.1);
+  }
+  50% {
+    background-color: rgba(241, 97, 97, 0.3);
+  }
+  100% {
+    background-color: rgba(241, 97, 97, 0.1);
+  }
+}
+
+.animateSuccess {
+  animation: pulseGreen 1s 1 ease-in-out;
+}
+
+.animateFail {
+  animation: pulseRed 1s 1 ease-in-out;
+}
+
+.custom-error {
+  position: absolute;
+  box-sizing: border-box;
+  width: 94%;
+  overflow: hidden;
+  font-size: 75%;
+  opacity: 1;
+  color: #b71c1c;
+  margin-left: 24px;
+  margin-top: -8px;
+}
+
+.other-text {
+  display: flex;
+  width: 100%;
+
+  &.mat-select-arrow {
+    cursor: pointer;
+  }
+}
+
+::ng-deep {
+  .default-cursor {
+    cursor: not-allowed !important;
+
+    .list-blur,
+    .suffix,
+    .mat-form-field-suffix,
+    .placeholder,
+    input,
+    .input {
+      pointer-events: none !important;
+      cursor: not-allowed !important;
+      color: rgba(0, 0, 0, 0.5) !important;
+      opacity: 1 !important;
+    }
+
+    .mat-select-arrow-wrapper {
+      opacity: 0;
+      cursor: default !important;
+
+      .mat-select-arrow {
+        cursor: default !important;
+      }
+    }
+
+    .mat-select-value-text span,
+    .extra-row span,
+    .total-price,
+    .package-row span,
+    mat-label {
+      opacity: 1 !important;
+      color: rgba(0, 0, 0, 0.5) !important;
+    }
+
+    // works for cursor in 'ven-spec-text-field'
+    .mat-select-disabled {
+      cursor: not-allowed !important;
+    }
+
+    // works for cursor in 'ven-spec-droppicker'
+    .mat-select-disabled .mat-select-trigger {
+      cursor: not-allowed !important;
+    }
+  }
+}

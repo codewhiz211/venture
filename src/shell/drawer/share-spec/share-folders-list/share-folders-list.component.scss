@@ -1,0 +1,11 @@
+@import 'chrome-theme';
+
+.folder-accordion {
+  ::ng-deep.mat-expansion-panel-body {
+    padding: 16px 24px !important;
+  }
+}
+
+.bordered-bottom:not(:last-of-type) {
+  border-bottom: $grey-border;
+}

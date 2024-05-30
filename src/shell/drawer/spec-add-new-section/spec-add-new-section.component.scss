@@ -1,0 +1,70 @@
+@import 'variables';
+@import 'chrome-theme';
+
+:host {
+  ::ng-deep {
+    .mat-form-field-wrapper {
+      padding-bottom: 1.34375em !important;
+    }
+
+    .mat-dialog-actions {
+      justify-content: flex-end;
+      display: flex;
+
+      & > * {
+        margin-left: 8px;
+      }
+    }
+
+    .section-radio-group {
+      &.mat-radio-group {
+        display: flex;
+        flex-direction: column;
+
+        @media screen and (max-width: $mobile) {
+          .mat-radio-button {
+            padding: 6px 0;
+          }
+        }
+      }
+    }
+
+    .section-checkbox-container {
+      @media screen and (max-width: $mobile) {
+        .mat-checkbox {
+          padding: 6px 0;
+        }
+      }
+    }
+  }
+}
+
+.dialog-wrapper {
+  .section-detail-container {
+    border: 1px solid $blue-light;
+    border-radius: 4px;
+    padding: 16px 8px;
+    margin-bottom: 16px;
+
+    .section-detail-label {
+      margin-bottom: 16px;
+
+      &:last-of-type {
+        margin-bottom: 6px;
+      }
+    }
+
+    .section-checkbox-container {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+}
+
+p {
+  margin-bottom: 20px;
+}
+
+form > * {
+  width: 100%;
+}

@@ -1,0 +1,23 @@
+<div class="edit-extras">
+  <div class="header">
+    <span class="primary subtitle">Customise Extras</span>
+    <span class="caption dark-high-emphasis col-checkbox">Included in build price</span>
+  </div>
+  <div *ngFor="let extra of extras; let idx = index">
+    <mat-form-field appearance="outline">
+      <mat-label>{{ extra.display }}</mat-label>
+      <span matPrefix>$&nbsp;</span>
+      <input
+        matInput
+        [(ngModel)]="modifiedExtras[idx].amount"
+        [ngModelOptions]="{ standalone: true }"
+        (change)="extraChanged(idx)"
+        [disabled]="modifiedExtras[idx]?.includeInBuildPrice"
+        type="number"
+      />
+    </mat-form-field>
+    <div class="col-checkbox">
+      <mat-checkbox (change)="buildPriceChanged($event, idx)" [(ngModel)]="modifiedExtras[idx].includeInBuildPrice"></mat-checkbox>
+    </div>
+  </div>
+</div>

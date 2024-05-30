@@ -1,0 +1,71 @@
+<ng-template #icon>
+  <mat-icon (click)="editStandardPackage()" *ngIf="!print">
+    <svg height="16" width="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0 0h24v24H0V0z" fill="none"></path>
+      <path
+        d="M14.06 9.02l.92.92L5.92 19H5v-.92l9.06-9.06M17.66 3c-.25 0-.51.1-.7.29l-1.83 1.83 3.75 3.75 1.83-1.83c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.2-.2-.45-.29-.71-.29zm-3.6 3.19L3 17.25V21h3.75L17.81 9.94l-3.75-3.75z"
+      ></path>
+    </svg>
+  </mat-icon>
+</ng-template>
+
+<ng-container [ngSwitch]="package">
+  <div *ngSwitchCase="ElectricalPackages.None" class="package package-detail-container">
+    <p>Edit Standard Package</p>
+    <ng-container *ngTemplateOutlet="icon"> </ng-container>
+  </div>
+
+  <div *ngSwitchCase="ElectricalPackages.PleaseEnterHouseSize" class="package package-detail-container">
+    <p>Please enter a house size in section details</p>
+  </div>
+
+  <div *ngSwitchCase="ElectricalPackages.POASmall" class="package package-detail-container">
+    <p>Standard Electrical packages for houses under 80sqm are POA</p>
+    <ng-container *ngTemplateOutlet="icon"> </ng-container>
+  </div>
+
+  <div *ngSwitchCase="ElectricalPackages.POALarge" class="package package-detail-container">
+    <p>Standard Electrical packages for houses over 200sqm are POA</p>
+    <ng-container *ngTemplateOutlet="icon"> </ng-container>
+  </div>
+
+  <div *ngSwitchCase="ElectricalPackages.StandardSmall"
+       [class.default-cursor]="spec.disabled"
+       class="package">
+    <h3 class="subtitle">
+      Standard Package (80m2 to 129m2)
+      <ng-container *ngTemplateOutlet="icon"> </ng-container>
+    </h3>
+    <div class="package-wrapper">
+      <div class="package-row">
+        <span *ngFor="let item of packages">{{ item }}</span>
+      </div>
+    </div>
+  </div>
+  <div *ngSwitchCase="ElectricalPackages.StandardMedium"
+       [class.default-cursor]="spec.disabled"
+       class="package">
+    <h3 class="subtitle">
+      Standard Package (130m2 to 169m2)
+      <ng-container *ngTemplateOutlet="icon"> </ng-container>
+    </h3>
+    <div class="package-wrapper">
+      <div class="package-row">
+        <span *ngFor="let item of packages">{{ item }}</span>
+      </div>
+    </div>
+  </div>
+
+  <div *ngSwitchCase="ElectricalPackages.StandardLarge" class="package"
+       [class.default-cursor]="spec.disabled">
+    <h3 class="subtitle">
+      Standard Package (170m2 to 199m2)
+      <ng-container *ngTemplateOutlet="icon"> </ng-container>
+    </h3>
+    <div class="package-wrapper">
+      <div class="package-row">
+        <span *ngFor="let item of packages">{{ item }}</span>
+      </div>
+    </div>
+  </div>
+</ng-container>

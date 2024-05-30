@@ -1,0 +1,28 @@
+@import 'variables';
+mat-card {
+  margin: 8px 0;
+}
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.date-card {
+  margin: 0 16px;
+  .date-span {
+    text-align: center;
+  }
+}
+
+.view-details-button {
+  color: $color-accent;
+  width: fit-content;
+  margin-top: 16px;
+  padding: 0 16px;
+  margin-left: -16px;
+}

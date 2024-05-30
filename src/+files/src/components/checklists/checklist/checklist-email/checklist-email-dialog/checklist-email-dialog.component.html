@@ -1,0 +1,16 @@
+<div class="dialog-wrapper">
+  <form [formGroup]="emailFormGroup">
+    <mat-form-field appearance="outline">
+      <mat-label>Email(s) *</mat-label>
+      <input matInput formControlName="to" />
+      <mat-hint>Separate multiple emails with a comma</mat-hint>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Subject *</mat-label>
+      <input matInput formControlName="subject" />
+    </mat-form-field>
+    <p class="body-override">Please enter your message below. A copy of the checklist will be attached to the email.</p>
+    <angular-editor formControlName="message" [config]="editorConfig"></angular-editor>
+  </form>
+  <ven-dialog-footer-buttons [submitAction]="submitAction" [closeAction]="closeAction"></ven-dialog-footer-buttons>
+</div>

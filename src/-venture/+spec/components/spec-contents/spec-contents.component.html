@@ -1,0 +1,18 @@
+<ul>
+  <li class="subtitle-2">Contents</li>
+  <li *ngFor="let section of sections" class="subtitle-2">
+    <a (click)="onSectionClicked(section.id)">{{section.title}}</a>
+    <!-- [ngClass]="{active: activeSection === section.id}"-->
+  </li>
+</ul>
+<ng-container *ngIf="!spec?.disabled">
+  <ul class="side-bar-navigation">
+    <li class="subtitle-2">
+      <a (click)="onSectionActionClicked(1)">Add new section</a>
+    </li>
+    <li class="subtitle-2">
+      <a (click)="onSectionActionClicked(2)">Re-order spec</a>
+    </li>
+  </ul>
+</ng-container>
+

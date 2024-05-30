@@ -1,0 +1,492 @@
+/* You can add global styles to this file, and also import other style files */
+@import 'variables';
+@import 'chrome-theme';
+
+//RESET
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+//dont show these buttons in text editor
+button[title='Insert Image'],
+button[title='Subscript'],
+button[title='Superscript'],
+button[title='Strikethrough'],
+button[title='Background Color'],
+button[title='HTML Code'] {
+  display: none;
+}
+
+// on mobile override the details drawer header if the text needs to wrap
+// this is done here instead of inside the component, because we also need to style the page content
+// which is in another component (.app-chrome-details-page)
+.tall-header {
+  .sub-drawer-header {
+    height: 128px !important;
+    align-items: flex-start !important;
+
+    h6 {
+      bottom: 28px;
+      position: absolute;
+      white-space: normal;
+      width: calc(100% - 112px);
+    }
+  }
+  .app-chrome-details-page {
+    padding-top: 130px !important;
+  }
+}
+
+// when the detail view is open ensure nav buttons are behind it
+.details-open {
+  .app-bottom-nav {
+    z-index: 1 !important;
+  }
+}
+
+//this is added by route animation logic if not 100% it removes scrollbars of content area
+.ng-trigger-routeAnimations {
+  height: 100%;
+}
+
+.mobile-only {
+  display: none;
+}
+
+.desktop-only {
+  display: block;
+}
+.not-mobile {
+  display: inline-block;
+}
+
+@media only screen and (max-width: $mobile) {
+  .mobile-only {
+    display: inline-block;
+  }
+  .desktop-only {
+    display: none !important;
+  }
+  .not-mobile {
+    display: none !important;
+  }
+}
+
+@media only screen and (min-width: #{$tablet + 1}) {
+  body,
+  html {
+    // the page should never scroll
+    overflow: hidden;
+  }
+}
+
+.do-scroll {
+  overflow: auto !important;
+}
+
+.no-scroll {
+  overflow: hidden !important;
+}
+
+body {
+  /* for IOS Native like experience */
+  //-webkit-user-select:none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  background-color: #fafafa;
+  background-image: none;
+
+  &.new-shell {
+    // desktop background
+    background-image: url('/assets/img/background-desktop.png');
+    background-repeat: no-repeat;
+    background-color: $chrome-background-colour;
+    background-attachment: fixed;
+    background-position: bottom;
+    background-size: contain;
+
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0.5px;
+
+    &.small,
+    .body-2 {
+      font-size: 14px;
+      line-height: 20px;
+      letter-spacing: 0.25px;
+      font-weight: 400;
+    }
+
+    @import 'chrome-typography';
+    @import 'chrome-buttons';
+
+    @media only screen and (max-width: #{$tablet}) {
+      background-image: url('/assets/img/background-mobile.png');
+      background-position: right 0px bottom $chrome-mobile-nav-height;
+      background-size: cover;
+    }
+
+    .material-icons-outlined {
+      font-family: 'Material Icons Outlined' !important;
+    }
+    .material-icons {
+      font-family: 'Material Icons' !important;
+    }
+
+    //Use at the place where we don't want any font style covers our default body font style
+    .body-override {
+      font-size: 16px;
+      line-height: 24px;
+      letter-spacing: 0.5px;
+      font-weight: 400;
+    }
+  }
+
+  &.old-shell {
+    @import 'typography';
+
+    font-size: 15.8px;
+    line-height: 24px;
+    letter-spacing: 0.5px;
+
+    &.small,
+    .body-2 {
+      font-size: 13.82px;
+      line-height: 20px;
+      letter-spacing: 0.25px;
+      font-weight: 400;
+    }
+
+    .material-icons-outlined {
+      font-family: 'Material Icons Outlined' !important;
+    }
+    .material-icons {
+      font-family: 'Material Icons' !important;
+    }
+
+    .body-override {
+      font-size: 15.8px;
+      line-height: 24px;
+      letter-spacing: 0.5px;
+    }
+  }
+
+  // safari "fixes"
+  &.safari {
+    @media only screen and (max-width: #{$tablet}) {
+      &.details-open {
+        mat-drawer-container {
+          height: 100% !important;
+        }
+        .app-drawer-container {
+          padding: 0 !important;
+        }
+        .chrome-sidenav-content {
+          top: 0 !important;
+        }
+      }
+    }
+  }
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+/* dialog styles */
+
+// .cdk-overlay-pane.base-dialog {
+//   position: relative !important;
+// }
+// .close.mat-button {
+//   position: absolute;
+//   top: 0;
+//   right: 0;
+//   padding: 5px;
+//   line-height: 14px;
+//   min-width: auto;
+// }
+
+// move to print styles
+// .mat-drawer-content {
+//   overflow: initial !important;
+// }
+
+/* search field styles */
+ven-clients-table {
+  .mat-form-field-appearance-legacy .mat-form-field-underline {
+    display: none;
+  }
+  .mat-form-field-appearance-legacy .mat-form-field-infix {
+    border-top: 0;
+  }
+  .mat-form-field-appearance-legacy .mat-form-field-wrapper {
+    padding-bottom: 0 !important;
+    .mat-form-field-flex {
+      align-items: center;
+    }
+  }
+}
+/* END search field styles */
+
+/* colour picker dropdown styles */
+ven-spec-colour,
+ven-spec-image-select {
+  .mat-form-field-appearance-outline .mat-form-field-infix {
+    padding: 2px;
+    //border-top-width: 3px;
+  }
+  .mat-select-arrow-wrapper {
+    display: initial !important;
+  }
+  .mat-select-placeholder {
+    line-height: 48px;
+    min-height: 48px;
+    display: block;
+  }
+}
+/* END colour picker dropdown styles */
+
+/* START image picker dropdown styles */
+ven-spec-image-picker {
+  .mat-form-field-appearance-outline .mat-form-field-infix {
+    padding: 0;
+  }
+}
+.image-mat-option {
+  //force the options to be taller in image picker select
+  height: 100% !important;
+  padding: 0 !important;
+
+  div {
+    position: relative !important;
+    &:hover {
+      opacity: 0.8;
+    }
+    span {
+      position: absolute !important;
+      color: white !important;
+      border-radius: 0 !important;
+      width: 100% !important;
+      padding: 0 0 0 16px !important;
+      top: 0 !important;
+      background: rgba(0, 0, 0, 0.5) !important;
+    }
+    img {
+      width: 100% !important;
+    }
+  }
+}
+/* END image picker dropdown styles */
+
+.full-width-dialog {
+  max-width: 100vw !important;
+}
+.full-width-dialog .mat-dialog-container {
+  max-width: 100vw !important;
+}
+
+.full-width {
+  width: 100%;
+}
+
+//page with saved summary card and ven table
+.page-container {
+  .table-section {
+    margin-top: 36px;
+    height: 100%;
+    h6 {
+      margin-bottom: 24px;
+    }
+  }
+}
+
+.summary-cards {
+  @media screen and (min-width: #{$tablet+1}) {
+    width: min(33.3%, 500px);
+    padding: 8px 16px 8px 0;
+  }
+
+  @media screen and (max-width: $mobile) {
+    width: 100%;
+    padding: 0 0 8px 0;
+  }
+
+  @media screen and (min-width: #{$mobile+1}) and (max-width:$tablet) {
+    width: 50%;
+    padding: 8px 16px 8px 0;
+  }
+}
+
+.dialog-wrapper {
+  height: 100%;
+  overflow: auto;
+  padding: 0;
+  @media screen and (max-width: $tablet) {
+    height: calc(100% - 72px); // 72px = 16px * 2 paddings + 40px height of title
+    padding: 24px 16px 50px 16px;
+  }
+  @media screen and (max-width: $mobile) {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.dialog-button {
+  display: flex !important;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  button {
+    margin-left: 16px !important; // to override the rule defined by .mat-card-actions
+    margin-right: 0 !important; // to override the rule defined by .mat-card-actions
+  }
+}
+
+//double column container under detail drawer tab
+.double-column-container {
+  display: flex;
+  flex-direction: row-reverse;
+
+  .left-container {
+    width: 66.6%;
+    .main-table {
+      border: 1px solid $chrome-border-colour-dark;
+      border-radius: 3px;
+      margin-bottom: 16px;
+    }
+  }
+
+  .right-container {
+    width: 33.3%;
+    margin-left: 16px;
+  }
+
+  .bordered {
+    border: 1px solid $chrome-border-colour-dark;
+    border-radius: 3px;
+    padding: 16px;
+    margin-bottom: 16px;
+  }
+
+  .no-padding {
+    padding: 0;
+  }
+
+  @media screen and (max-width: $tablet) {
+    flex-direction: column;
+
+    .left-container {
+      width: 100%;
+      margin-bottom: 63px;
+      .main-table {
+        border: none;
+        padding: 0;
+      }
+    }
+
+    .right-container {
+      width: 100%;
+      margin-left: 0;
+    }
+  }
+}
+
+//handle detail drawer tab content's margins and scrolls .double-column-container should also add this class.
+.tab-content-container {
+  margin: 24px 16px;
+  height: calc(100vh - 208px); // 56 + 56 + 48 + 48 (app header + details header + details sub header + some bottom padding)
+  overflow-y: auto;
+
+  @media screen and (max-width: $tablet) {
+    margin: 24px 0 0 0;
+    height: calc(100vh - 160px); // 56 + 56 + 48
+  }
+}
+
+.tab-content-container-with-fab {
+  margin: 24px 16px;
+  overflow-y: auto;
+  @media screen and (min-width:#{$tablet+1}) {
+    height: calc(100vh - 280px); // 56px extra space and 24px top margin for FAB
+  }
+
+  @media screen and (max-width: $tablet) {
+    margin: 24px 0 0 0;
+    height: calc(100vh - 216px); // 56 + 56 + 48 + 56;
+  }
+}
+
+//rules for menu item button
+.mat-item-container {
+  a.mat-menu-item {
+    align-items: center;
+    display: flex;
+    justify-content: flex-start;
+    span {
+      margin-left: 8px;
+    }
+  }
+}
+
+.mat-hint {
+  //margin-top: 8px!important;
+  font-size: 7.8px;
+
+  &.warning {
+    color: #b71c1c;
+  }
+
+  .custom-value-warning {
+    margin-left: 4px;
+  }
+}
+
+.warning {
+  color: #b71c1c;
+}
+
+// style for MatDialog when page is long and have scroll
+html.cdk-global-scrollblock {
+  position: initial;
+}
+
+/* Tablet format and lower */
+
+@media only screen and (max-width: 1024px) {
+}
+
+/* Mobile format and lower */
+
+@media only screen and (max-width: 768px) {
+}
+
+/* Mobile format landscape (wide) */
+
+@media only screen and (min-width: 320px) and (max-width: 480px) {
+}
+
+/* Mobile format portrait (small) */
+
+@media only screen and (max-width: 320px) {
+}
+
+.linked-point {
+  cursor: pointer;
+}
+
+.left-gap {
+  margin-left: 8px;
+}
+
+.bordered {
+  border: $grey-border;
+  border-radius: 3px;
+}

@@ -1,0 +1,19 @@
+@media print {
+  ven-connection-status {
+    display: none;
+  }
+  .mat-expansion-indicator,
+  .mat-select-arrow {
+    display: none !important;
+  }
+  .no-print {
+    display: none;
+  }
+  /* no print rules */
+  ::ng-deep.mat-select-arrow-wrapper {
+    display: none;
+  }
+  ::ng-deep.mat-select-arrow {
+    display: none;
+  }
+}

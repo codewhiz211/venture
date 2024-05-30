@@ -1,0 +1,15 @@
+@import 'chrome-theme';
+
+// style rules for this component is defined in styles.scss
+.add-client-button {
+  position: fixed;
+  bottom: 60px;
+  right: 50px;
+  height: 56px;
+  width: 56px;
+  background-color: $blue-primary;
+  border-radius: 50%;
+  padding: 16px;
+  border: none;
+  line-height: normal;
+}

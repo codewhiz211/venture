@@ -1,0 +1,110 @@
+@import 'variables';
+@import 'chrome-theme';
+
+.dialog-wrapper {
+  &.loader-active {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+  }
+}
+
+.small-icon {
+  transform: scale(0.75);
+}
+
+.loader-wrapper {
+  height: 100%;
+  align-items: center;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 8px;
+}
+
+.veritical-buttons {
+  display: flex;
+  flex-direction: column;
+}
+
+span {
+  display: flex;
+  align-items: center;
+}
+
+:host::ng-deep .mat-flat-button {
+  padding: 0 !important;
+}
+
+.span-field-label {
+  padding: 0 5px;
+}
+
+.user-add-button {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 8px 0;
+}
+
+.user-onboard {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+  span mat-checkbox {
+    margin-right: 4px;
+  }
+}
+
+.mat-card-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.subbie-users {
+  border: $secondary-blue-border;
+  padding: 16px;
+  border-radius: 3px;
+  margin-top: 16px;
+}
+
+.mat-for-field-wrapper {
+  padding-bottom: 8px !important;
+}
+
+.user-span-field-line {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.header {
+  display: flex;
+  margin-bottom: 21px;
+  justify-content: space-between;
+}
+
+.onboard-tip {
+  padding-left: 5px;
+  fill: gray;
+}
+
+.align-field {
+  margin-left: -4px;
+}
+
+.small-icon {
+  svg {
+    margin: 3px;
+  }
+}
+
+@media screen and (min-width: #{$mobile+1}) {
+  .header-icon {
+    display: none;
+  }
+}

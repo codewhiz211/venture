@@ -1,0 +1,112 @@
+@import 'variables';
+@import 'chrome-theme';
+
+.mat-card {
+  padding: 0px;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid $chrome-border-colour-dark;
+}
+.job-item {
+  display: flex;
+  flex-direction: column;
+  padding: 16px 16px 0 16px;
+}
+
+.job-item-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.job-item-title {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex-grow: 3;
+}
+
+.header-button {
+  display: flex;
+  align-items: center;
+  .mat-icon {
+    margin-right: 0;
+  }
+  span {
+    margin-left: 8px;
+  }
+  :hover {
+    text-decoration: none;
+  }
+}
+
+.job-item-status {
+  text-transform: uppercase;
+}
+
+mat-menu-item {
+  display: flex;
+  align-items: center;
+}
+
+.chips {
+  span {
+    margin: 0 1px;
+  }
+}
+
+.thick-margin {
+  margin: 24px 0;
+}
+.thin-margin {
+  margin: 16px 0;
+}
+
+.chip-button {
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  span {
+    border: none;
+    background-color: rgba(0, 0, 0, 0);
+    color: gray;
+  }
+}
+
+// TODO do these need to be IDs ??
+#urgent-chip,
+#pending-chip {
+  span {
+    color: red;
+  }
+  svg {
+    fill: red;
+  }
+}
+
+.date-picker-button {
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  margin-left: 1px;
+  margin-right: 1px;
+  cursor: pointer;
+}
+
+.small-icon-new {
+  transform: scale(0.75);
+}
+
+:host::ng-deep .accent-colour {
+  color: $color-accent;
+}
+
+mat-accordion {
+  border-top: 1px solid $chrome-border-colour-dark;
+}
+
+//disable hover style for chips
+:host::ng-deep .mat-standard-chip:hover::after {
+  opacity: 0 !important;
+}
+:host::ng-deep .mat-standard-chip:focus::after {
+  opacity: 0 !important;
+}

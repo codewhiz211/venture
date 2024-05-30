@@ -1,0 +1,31 @@
+<mat-card>
+  <div class="mast">
+    <h6 class="bold">{{spec.section_details.lot}} Scheme plan: {{spec.details.scheme}}</h6>
+  </div>
+  <div class="details">
+    <div><span class="emphasis-high">Bedrooms:</span></div>
+    <div><span class="emphasis-med">{{spec.layout.bedrooms}}</span></div>
+    <div><span class="emphasis-high">Bathrooms:</span></div>
+    <div><span class="emphasis-med">{{spec.layout.bathrooms}}</span></div>
+    <div><span class="emphasis-high">Section size:</span></div>
+    <div><span class="emphasis-med">{{spec.section_details.sectionSize}}</span></div>
+    <div><span class="emphasis-high">House size:</span></div>
+    <div><span class="emphasis-med">{{spec.section_details.houseSize}}</span></div>
+    <div><span class="emphasis-high">DB Code:</span></div>
+    <div><span class="emphasis-med">{{spec.section_details.dbCode}}</span></div>
+  </div>
+  <div>
+    <p class="subtitle-2 emphasis-med">
+      Thank you for the opportunity to provide you with a quote for your {{spec.layout.bedrooms}} bedroom, {{spec.layout.bathrooms}}
+      bathroom, {{spec.section_details.sectionSize}} SQM Section & {{spec.section_details.houseSize}} SQM dwelling at Lot
+      {{spec.section_details.lot}} {{spec.details.subdivision}}.
+    </p>
+    <p class="subtitle-2 emphasis-med">
+      To complete the project works as per plans and specifications, including all insurances, Council Consent and a 10 year Master
+      Build Guarantee.</p>
+    <p class="subtitle-2 emphasis-med">
+      This Quote is based on the {{spec.quote?.paymentMethod}}.
+    </p>
+  </div>
+
+</mat-card>

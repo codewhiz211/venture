@@ -1,0 +1,9 @@
+<div>
+  <h6 class="light-high-emphasis icon-title"><ven-icon-new icon="star" colour="white" filled="true"></ven-icon-new>{{ title }}</h6>
+  <div class="cards-container">
+    <ng-content *ngIf="savedItem?.length > 0; else noSavedBoard"></ng-content>
+    <ng-template #noSavedBoard>
+      <ven-no-saved-card [passages]="passages"></ven-no-saved-card>
+    </ng-template>
+  </div>
+</div>

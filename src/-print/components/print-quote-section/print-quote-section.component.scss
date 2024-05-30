@@ -1,0 +1,17 @@
+@import 'variables';
+@import '../../styles/shared-print-styles.scss';
+/* use shared styles where possible - ovveride print styles where required */
+
+.section-quote {
+  @media print {
+    display: block;
+    break-before: always;
+  }
+  h4 {
+    margin-bottom: 1em;
+    width: 100%;
+  }
+  > div {
+    margin-bottom: 1.5em;
+  }
+}

@@ -1,0 +1,22 @@
+<ng-container *ngIf="field.value; let image; else: noimage">
+  <div class="print-item">
+    <div class="label">{{ field.display }}</div>
+    <div>{{ image.display }}</div>
+    <span class="img-container"><img *ngIf="image.url" [src]="image.url" /> </span>
+    <span *ngIf="image.urls">
+      <!-- when we have new images, they should all have same height, so can probably remove this  -->
+      <img *ngFor="let url of image.urls" [src]="url" [style.height]="image.height | default: '75px'" />
+    </span>
+    <div class="hint">{{ field.hint }}</div>
+    <div class="hint warning" *ngIf="spec?.custom_value | customValueHint: section?.name:field?.name">
+      (NOTE: Non-std option selected. PM to review)
+    </div>
+  </div>
+</ng-container>
+<ng-template #noimage>
+  <div class="print-item">
+    <div class="label">{{ field.display }}</div>
+    <div>n/a</div>
+    <div class="hint">{{ field.hint }}</div>
+  </div>
+</ng-template>

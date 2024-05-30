@@ -1,0 +1,205 @@
+@import 'variables';
+@import 'chrome-theme';
+.spacer {
+  flex: 1 1 auto;
+}
+
+.not-mobile {
+  display: inline-block;
+  @media only screen and (max-width: #{$mobile}) {
+    display: none !important;
+  }
+}
+
+.spacer-light {
+  margin: 0 10px;
+}
+
+.mat-toolbar.mat-primary {
+  box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12);
+}
+
+mat-menu div a,
+div a:hover {
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.87);
+  &.no-link {
+    border-top: 1px solid $chrome-border-colour-dark;
+    cursor: default;
+    color: rgba(0, 0, 0, 0.87);
+  }
+}
+
+// .mat-caption.email {
+//   width: 50vw;
+//   text-overflow: ellipsis;
+//   overflow: hidden;
+//   display: inline-block;
+//   text-align: right;
+// }
+
+.mat-menu-item:hover:not([disabled]).no-link {
+  background: initial;
+}
+
+@media print {
+  mat-menu,
+  .header-menu {
+    display: none !important;
+  }
+}
+
+@media only screen and (max-width: #{$tablet}) {
+  .mat-item-container {
+    display: flex;
+    flex-direction: column;
+
+    a {
+      display: flex;
+
+      &:nth-of-type(1) {
+        order: 5;
+      }
+      &:nth-of-type(2) {
+        order: 3;
+      }
+      &:nth-of-type(3) {
+        order: 4;
+      }
+      &:nth-of-type(4) {
+        order: 2;
+      }
+      &:nth-of-type(5) {
+        order: 1;
+      }
+      &:nth-of-type(6) {
+        order: 6;
+      }
+      &:nth-of-type(7) {
+        order: 7;
+      }
+      &:nth-of-type(8) {
+        order: 8;
+      }
+      &:nth-of-type(9) {
+        order: 9;
+      }
+
+      &.share-files-item {
+        &:nth-of-type(1) {
+          order: 1;
+        }
+        &:nth-of-type(2) {
+          order: 2;
+        }
+        &:nth-of-type(3) {
+          order: 3;
+        }
+        &:nth-of-type(4) {
+          order: 4;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: #{$tablet}) {
+  .not-on-desktop {
+    display: none;
+  }
+}
+
+@media screen and (max-width: $mobile) {
+  .not-on-mobile {
+    display: none !important;
+  }
+}
+
+.back-link {
+  color: white;
+  font-size: 15.8px;
+  display: flex;
+  align-items: center;
+  mat-icon {
+    padding-right: 32px;
+  }
+  &:hover {
+    cursor: pointer; //text-decoration: none;
+    color: rgba(255, 255, 255, 0.87);
+  }
+}
+
+mat-toolbar {
+  z-index: 9998;
+  height: $header-height;
+  align-items: flex-start;
+  img {
+    height: 60px;
+    margin-top: 16px;
+  }
+  @media only screen and (max-width: #{$tablet}) {
+    mat-icon-button {
+      width: 20px;
+    }
+  }
+}
+
+mat-icon {
+  margin-right: 0px !important;
+}
+
+.menu-link a,
+.menu-link a:hover {
+  font-size: 14px;
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.87);
+  margin: 0 10px;
+}
+
+a {
+  display: flex;
+  align-items: center;
+}
+
+a,
+a:hover {
+  text-decoration: none;
+  color: rgba(0, 0, 0, 0.87);
+}
+
+a span {
+  margin-left: 8px;
+}
+
+.tall-header {
+  height: 100px;
+}
+
+@media only screen and (max-width: #{$mobile}) {
+  /* header still start on one line, but if client
+    name is too long, will expand to two lines */
+  mat-toolbar {
+    height: auto;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    max-height: 100px;
+    align-items: center;
+    padding-top: 0;
+    img {
+      max-height: 60px;
+      margin-top: 0;
+    }
+  }
+  .mat-icon-button {
+    width: 20px;
+  }
+  .spacer-light {
+    margin: 0;
+  }
+}
+
+@media print {
+  mat-toolbar {
+    display: none;
+  }
+}

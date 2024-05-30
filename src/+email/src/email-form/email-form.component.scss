@@ -1,0 +1,44 @@
+.notification-title {
+  margin-top: 8px;
+  margin-bottom: 16px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.mat-button-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 16px;
+  button {
+    margin-left: 16px;
+  }
+}
+
+.error-message {
+  background: darkred;
+  color: white;
+  padding: 0 1em;
+}
+
+.note {
+  margin-top: -1.5em;
+  font-size: 12px;
+  font-style: italic;
+  text-align: right;
+  margin-bottom: 0.5em;
+  opacity: 0.6;
+  margin-right: 1em;
+}
+
+//dont show these buttons
+button[title='Insert Image'] {
+  display: none;
+}
+
+.angular-editor-button[title='Insert Image'] {
+  display: none;
+}

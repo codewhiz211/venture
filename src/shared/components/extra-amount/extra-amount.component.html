@@ -1,0 +1,4 @@
+<div class="list-blur" *ngIf="amount && amountType === 'number' && amount != 0 && !isAddedInQuote">${{ amount | number }}</div>
+<div class="list-blur" *ngIf="amountType === 'string' && !isAddedInQuote">{{ amount }}</div>
+<div class="list-blur" *ngIf="amount == 0 && !isAddedInQuote">Included in build price</div>
+<div class="list-blur" *ngIf="isAddedInQuote">Included in quote</div>

@@ -1,0 +1,142 @@
+/*
+Specifications (font-size /line-height /letter-spacing / weight)
+h1 95.56 130 1.5 light
+h2 59.72 81 0.5 light
+h3 47.39 65 0 normal
+h4 33.57 46 0.25 normal
+h5 23.69 32 0 normal
+h6 19.74 27 0.25 normal
+body1 15.8 28 0.5 normal
+body2 13.82 20 0.25 normal
+subtitle1 15.8 24 0.15 normal
+subtitle2 13.82 24 0.1 normal
+button 13.82 ?? 0.4 normal
+caption 11.85 16 0.4 normal
+
+*
+
+*/
+
+$color-accent: #039be5; //todo from theme
+$color-grey: #424242;
+$color-highlight: #badffa;
+
+*:not(ven-icon) {
+  font-family: 'Open Sans', sans-serif;
+}
+
+h1 {
+  font-size: 95.56px;
+  line-height: 130px;
+  letter-spacing: 1.5px;
+  font-weight: lighter;
+}
+h2 {
+  font-size: 59.72px;
+  line-height: 81px;
+  letter-spacing: 0.5px;
+  font-weight: lighter;
+}
+h3 {
+  font-size: 47.39px;
+  line-height: 65px;
+  letter-spacing: 0px;
+  font-weight: normal;
+}
+h4 {
+  font-size: 33.57px;
+  line-height: 46px;
+  letter-spacing: 0.25px;
+  font-weight: normal;
+}
+h5 {
+  font-size: 23.69px;
+  line-height: 32px;
+  letter-spacing: 0px;
+  font-weight: normal;
+}
+h6,
+.h6 {
+  font-size: 19.74px;
+  line-height: 24px;
+  letter-spacing: 0.15px;
+  font-weight: normal;
+}
+// body {
+//   font-size: 15.8px;
+//   line-height: 28px;
+//   letter-spacing: 0.5px;
+// }
+// body.small,
+// .body-2 {
+//   font-size: 13.82px;
+//   line-height: 20px;
+//   letter-spacing: 0.25px;
+// }
+
+.subtitle-container {
+  width: 100%;
+}
+
+button,
+.button {
+  letter-spacing: 1.25px;
+}
+
+// leave here since this file will be removed when we move to one shell design
+.primary-button {
+  background-color: $color-highlight;
+  color: $color-accent;
+}
+// leave here since this file will be removed when we move to one shell design
+.outline-button {
+  border: 1px solid $color-grey;
+}
+
+.subtitle {
+  font-size: 15.8px;
+  line-height: 24px;
+  letter-spacing: 0.15px;
+  font-weight: 400;
+}
+.subtitle-2 {
+  font-size: 13.82px;
+  line-height: 24px;
+  letter-spacing: 0.1px;
+}
+.caption {
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.4px;
+}
+.overline {
+  font-size: 10px;
+  line-height: 16px;
+  letter-spacing: 1.5px;
+}
+
+//to fix that mat-dialog-title style overrived by h1
+h1[mat-dialog-title],
+h2[mat-dialog-title] {
+  font: 500 20px/32px Open Sans, sans-serif;
+  letter-spacing: normal;
+}
+
+.emphasis-med,
+.dark-medium-emphasis {
+  opacity: 0.6;
+}
+.emphasis-high,
+.dark-high-emphasis {
+  opacity: 0.87;
+}
+
+.small-icon {
+  svg {
+    margin: 3px;
+  }
+}
+
+.accent-colour {
+  color: $color-accent;
+}

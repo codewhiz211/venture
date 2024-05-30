@@ -1,0 +1,16 @@
+<ng-container *ngIf="checklists?.length > 0">
+  <div class="share-checklist-container">
+    <mat-checkbox
+      *ngFor="let checklist of checklists"
+      class="example-margin"
+      [(ngModel)]="checklist.checked"
+      (change)="onSelectedChecklistsChanged()"
+      ><span class="ellipsis dark-medium-emphasis body-2">{{ checklist.name }}</span></mat-checkbox
+    >
+    <mat-checkbox *ngIf="checklists.length > 1" class="example-margin" [(ngModel)]="selectAll" (change)="onSelectAll()">
+      <span class="dark-medium-emphasis body-2">All</span>
+    </mat-checkbox>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="checklists && checklists.length === 0"> <small> No checklists found for this client </small> </ng-container>

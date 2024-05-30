@@ -1,0 +1,57 @@
+<mat-accordion displayMode="flat">
+  <mat-expansion-panel class="mat-elevation-z0" (opened)="footerTitle = 'HIDE ACTIVITY'" (closed)="footerTitle = 'VIEW ACTIVITY'">
+    <mat-expansion-panel-header>
+      <mat-panel-title class="footer-title accent-colour">
+        <button class="primary footer-title-button" mat-flat-button disableRipple="true">{{ footerTitle }}</button>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <mat-vertical-stepper class="job-activity-stepper" [disableRipple]="true">
+      <mat-step *ngIf="job.status == 'completed'" state="edit" [completed]="false">
+        <ng-template matStepLabel>
+          <div class="subtitle-2 dark-high-emphasis">To be verified</div>
+          <div>
+            <span class="caption dark-medium-emphasis">Verify work </span><span class="caption primary" (click)="verify()">here</span>
+          </div>
+        </ng-template>
+      </mat-step>
+      <ng-container *ngFor="let item of activity">
+        <ng-container [ngSwitch]="item.step">
+          <!-- If we put mat-vertical-stepper and mat-step in two templates separately, the step will not be shown. So we didn't seperate step into child component here.-->
+          <mat-step *ngSwitchCase="'declined'" state="alert" [editable]="false">
+            <ng-template matStepLabel>
+              <ven-job-step-label [step]="getDeclinedStep(item)"></ven-job-step-label>
+            </ng-template>
+          </mat-step>
+          <mat-step *ngSwitchCase="'verified'" state="done" [editable]="false" [completed]="true">
+            <ng-template matStepLabel>
+              <ven-job-step-label [step]="getVerifiedStep(item)"></ven-job-step-label>
+            </ng-template>
+          </mat-step>
+          <mat-step *ngSwitchCase="'completed'" state="done" [editable]="false" [completed]="true">
+            <ng-template matStepLabel>
+              <ven-job-step-label [step]="getCompleteStep(item)"></ven-job-step-label>
+            </ng-template>
+            <div *ngFor="let image of item.images" class="accent-colour font-line view-image">
+              <ven-icon-new icon="insert_photo" colour="#008be5"></ven-icon-new>
+              <a class="accent-colour font-line" [href]="image.url">{{ image.filename }}</a>
+            </div>
+          </mat-step>
+          <mat-step *ngSwitchCase="'created'" state="done" [editable]="false" [completed]="true">
+            <ng-template matStepLabel>
+              <ven-job-step-label [step]="getCreateStep(item)"></ven-job-step-label>
+            </ng-template>
+          </mat-step>
+        </ng-container>
+      </ng-container>
+      <ng-template matStepperIcon="edit">
+        <ven-icon-new class="step-icon" icon="circle" colour="#008be5"></ven-icon-new>
+      </ng-template>
+      <ng-template matStepperIcon="done">
+        <ven-icon-new class="step-icon" icon="task_alt" colour="#008be5"></ven-icon-new>
+      </ng-template>
+      <ng-template matStepperIcon="alert">
+        <ven-icon-new class="step-icon" icon="error" colour="red"></ven-icon-new>
+      </ng-template>
+    </mat-vertical-stepper>
+  </mat-expansion-panel>
+</mat-accordion>

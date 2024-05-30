@@ -1,0 +1,39 @@
+<ven-app-chrome-loader *ngIf="!(clients$ | async); else mainContent"></ven-app-chrome-loader>
+
+<ng-template #mainContent>
+  <div class="page-container">
+    <!-- Add ngIf to avoid it shown on animation time -->
+    <ven-saved-cards-board
+      title="SAVED JOBS"
+      *ngIf="savedPricingClients$ | async as savedItem"
+      [savedItem]="savedItem"
+      [passages]="passages"
+    >
+      <ven-summary-card
+        class="summary-cards"
+        *ngFor="let item of savedItem"
+        [status]="item.status"
+        [id]="item.lot"
+        [description]="item.client"
+        [chips]="item.chips"
+      >
+        <ven-details-view-button
+          title="VIEW DETAILS"
+          [saved]="true"
+          [routeArray]="['/staff/pricing/', item.uid]"
+          (saveToggled)="handleSaveToggled(item.uid)"
+        >
+        </ven-details-view-button>
+      </ven-summary-card>
+    </ven-saved-cards-board>
+    <div class="table-section">
+      <h6 class="light-high-emphasis">ALL JOBS</h6>
+      <ven-table
+        [data]="clients$ | async"
+        [columns]="columns"
+        [initialSortedColumn]="initialSortedColumn"
+        (onRowClick)="viewPricingDetails($event)"
+      ></ven-table>
+    </div>
+  </div>
+</ng-template>

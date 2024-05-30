@@ -1,0 +1,11 @@
+<div id="section_contents_{{ section.id }}">
+  <ven-electrical-package
+    [houseSize]="spec.section_details.houseSize"
+    [manualPackage]="manualPackage"
+    [spec]="spec"
+    [print]="print"
+    [section]="section"
+  ></ven-electrical-package>
+  <ven-spec-extras-dropdown [spec]="spec" [section]="section"></ven-spec-extras-dropdown>
+  <ven-spec-extras [spec]="spec" [section]="section"></ven-spec-extras>
+</div>

@@ -1,0 +1,34 @@
+<div>
+  <!-- header row -->
+  <div class="grid-row subtitle primary">
+    <div class="pull-right" *ngFor="let header of table.columns">
+      <span>{{ header.label | titlecase }}</span>
+    </div>
+  </div>
+  <ng-container *ngIf="table.tableSections; else singleSection">
+    <ng-container *ngFor="let section of table.tableSections">
+      <div class="body-override dark-high-emphasis section-line">
+        {{ section }}
+      </div>
+      <ven-pricing-rows
+        [data]="items[section]"
+        [columns]="table.columns"
+        [editable]="editable"
+        (onOperatorClicked)="handleTableClicked($event)"
+      ></ven-pricing-rows>
+    </ng-container>
+  </ng-container>
+  <ng-template #singleSection>
+    <ven-pricing-rows
+      [data]="items || []"
+      [columns]="table.columns"
+      [editable]="editable"
+      (onOperatorClicked)="handleTableClicked($event)"
+    ></ven-pricing-rows>
+  </ng-template>
+  <ven-pricing-total-rows *ngIf="totals" [rows]="totals" [editable]="editable"></ven-pricing-total-rows>
+  <div class="icon-line add-row-button" (click)="addRow()" *ngIf="editable">
+    <ven-icon-new icon="add" colour="#008be5"></ven-icon-new>
+    <span class="primary">ADD ROW</span>
+  </div>
+</div>

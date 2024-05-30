@@ -1,0 +1,19 @@
+<div class="dialog-wrapper">
+  <p>To edit, please add the new heading in the box below</p>
+  <div mat-dialog-content>
+    <form novalidate [formGroup]="form">
+      <mat-form-field appearance="outline">
+        <mat-label>New Heading</mat-label>
+        <input [formControlName]="'title'" matInput cdkFocusInitial />
+        <mat-error *ngIf="form.get('title').invalid">Field is required</mat-error>
+      </mat-form-field>
+    </form>
+  </div>
+  <div mat-dialog-actions>
+    <ven-dialog-footer-buttons
+      [closeAction]="closeAction"
+      [submitAction]="submitAction"
+      [disabled]="form.invalid"
+    ></ven-dialog-footer-buttons>
+  </div>
+</div>

@@ -1,0 +1,31 @@
+<div class="sub-drawer-header">
+  <div class="left-hand-side" #lhsRef>
+    <button mat-icon-button (click)="onCloseClick()" class="no-print">
+      <ven-icon-new [icon]="'close'" [colour]="headerColour" [margin]="32"></ven-icon-new>
+    </button>
+
+    <div class="title" #titleRef>
+      <h6>{{ title }}</h6>
+    </div>
+  </div>
+  <div class="right-hand-side">
+    <button
+      mat-icon-button
+      *ngFor="let actionItem of barActions"
+      (click)="actionItem.action(); actionItem.filled = !actionItem.filled"
+      class="no-print"
+    >
+      <ven-icon-new [icon]="actionItem.icon" [colour]="actionItem.colours[actionItem.filled]" [filled]="actionItem.filled"></ven-icon-new>
+    </button>
+
+    <button *ngIf="menuActions?.length > 0" mat-icon-button [matMenuTriggerFor]="menu" class="no-print">
+      <ven-icon-new [icon]="'more_vert'" [colour]="headerColour"></ven-icon-new>
+    </button>
+  </div>
+</div>
+<mat-menu class="details-menu" #menu="matMenu">
+  <a mat-menu-item *ngFor="let actionItem of menuActions" (click)="actionItem.action()">
+    <ven-icon-new [icon]="actionItem.icon" [colour]="headerColour"></ven-icon-new>
+    <span>{{ actionItem.label }}</span>
+  </a>
+</mat-menu>

@@ -1,0 +1,31 @@
+@import 'variables';
+
+:host {
+  display: block;
+  width: 100%;
+  padding: 0 8px;
+}
+
+.file-list {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.loader-wrapper {
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  align-items: center;
+}
+
+.file-btn {
+  display: flex;
+  align-items: center;
+  margin: 20px 0;
+  cursor: pointer;
+
+  mat-icon {
+    margin-right: 5px;
+  }
+}

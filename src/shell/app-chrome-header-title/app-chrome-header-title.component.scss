@@ -1,0 +1,45 @@
+@import 'chrome-theme';
+@import 'variables';
+
+:host {
+  flex: 1;
+}
+
+header {
+  align-items: center;
+  background: transparent;
+  color: white;
+  display: flex;
+  height: $chrome-header-height;
+  justify-content: space-between;
+  left: $chrome-drawer-width;
+  padding: $chrome-spacing;
+  position: absolute;
+  right: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.76);
+}
+.desktop-header {
+  display: block;
+}
+.mobile-header {
+  display: none;
+}
+
+@media only screen and (max-width: #{$tablet}) {
+  header {
+    align-items: center;
+    background: $black-primary;
+    height: 40px;
+    left: 8px;
+    padding: 8px;
+    position: fixed;
+    right: 8px;
+    top: 8px;
+  }
+  .desktop-header {
+    display: none;
+  }
+  .mobile-header {
+    display: block;
+  }
+}

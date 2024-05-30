@@ -1,0 +1,19 @@
+@import 'variables';
+@import 'chrome-theme';
+mat-card {
+  margin-bottom: 16px;
+}
+.mast {
+  border-bottom: 1px solid $chrome-border-colour-dark;
+  margin-bottom: 8px;
+  padding-bottom: 8px;
+}
+
+.details {
+  display: grid;
+  //two columns; second is twice width of the first
+  grid-template-columns: 1fr 2fr;
+  border-bottom: 1px solid $chrome-border-colour-dark;
+  margin-bottom: 8px;
+  padding-bottom: 8px;
+}

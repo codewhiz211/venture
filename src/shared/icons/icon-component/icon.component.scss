@@ -1,0 +1,42 @@
+@import 'variables';
+
+:host {
+  display: inline-flex;
+  //height: 24px;
+  margin-right: 0px;
+  //width: 24px;
+
+  &.hide {
+    width: 0;
+  }
+}
+
+mat-icon {
+  svg {
+    //limit the size of mat-icon, if not, the icon will take 300px X 150px
+    max-width: 24px;
+    max-height: 24px;
+  }
+}
+
+@media only screen and (min-width: #{$tablet}) {
+  mat-icon:hover {
+    //color: #039be5 !important; //needed to override colour set by Input()
+    cursor: pointer;
+    opacity: 0.8;
+  }
+}
+mat-icon:disabled svg {
+  color: rgba(211, 211, 211, 0.918);
+}
+
+:host.useMargin {
+  margin-right: 24px;
+}
+
+:host.hide {
+  mat-icon {
+    visibility: hidden;
+    width: 0;
+  }
+}

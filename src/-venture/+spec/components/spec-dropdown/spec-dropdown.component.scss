@@ -1,0 +1,53 @@
+@import '../shared-styles.scss';
+.ven-spec-dropdown {
+    cursor: pointer;
+    &.otherMode {
+        ::ng-deep.mat-form-field-infix {
+            padding: 0;
+        }
+        input {
+            padding: 1em 0 1em 0;
+        }
+    }
+
+    input {
+        cursor: pointer;
+
+        &.otherMode {
+            cursor: auto;
+        }
+    }
+
+    // these styles align the hint to the right and move it closer to the field outline
+    ::ng-deep.mat-form-field-appearance-outline ::ng-deep.mat-form-field-subscript-wrapper {
+        margin-top: 0;
+    }
+    ::ng-deep.mat-select-arrow-wrapper {
+        @media print {
+            display: none;
+        } // use padding to create click target, and negative margin to fix bloated alignment
+        cursor: pointer;
+        padding: 1rem; //margin-top: -0.85rem;
+        margin-right: -1rem;
+        margin-bottom: -1rem;
+        margin-top: -0.75rem;
+    }
+    ::ng-deep.mat-select-arrow {
+        cursor: pointer;
+        width: 0;
+        height: 0;
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        border-top: 5px solid;
+        margin: 0 4px;
+        z-index: 100;
+    }
+    &.dropdownMode {
+        input:focus {
+            outline: none;
+        //    cursor: none !important;
+        }
+    }
+
+  
+}

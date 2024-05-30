@@ -1,0 +1,70 @@
+<mat-accordion #myaccordion="matAccordion" multi="openAll" class="accordion-readonly">
+  <mat-expansion-panel
+    *ngFor="let section of sections; trackBy: trackSectionChange"
+    [expanded]="activeSection === section.id"
+    (opened)="setStep(section.id)"
+    [ngClass]="{ 'no-print': (spec?.hiddenSections)[section?.name] }"
+    (afterExpand)="scrollToMe(section.id)"
+    (afterCollapse)="afterCollapse(section.id)"
+  >
+    <mat-expansion-panel-header>
+      <mat-panel-title class="subtitle primary" id="section_{{ section.id }}">
+        {{ section.title }}
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <ng-template matExpansionPanelContent>
+      <div>
+        <div
+          id="section_contents_{{ section?.id }}"
+          *ngIf="section.fields"
+          [class.expandLastField]="section.expandLastField"
+          [class.noPrint]="spec.hiddenSections | isHidden: section?.name"
+          class="field-wrapper"
+        >
+          <ven-print-planning-section
+            *ngIf="section.name === 'planning'"
+            [spec]="spec"
+            [section]="section"
+            [signed]="isSigned"
+          ></ven-print-planning-section>
+
+          <ng-container>
+            <ng-container *ngIf="!section.groupBySubtitle; else grouped">
+              <ven-print-standard-section
+                *ngIf="section.name !== 'electrical' && section.name !== 'planning'"
+                [spec]="spec"
+                [extras]="extras"
+                [section]="section"
+                [signed]="isSigned"
+                [showSign]="false"
+              ></ven-print-standard-section>
+            </ng-container>
+            <ng-template #grouped>
+              <ven-print-grouped-section
+                *ngIf="section.name !== 'electrical' && section.name !== 'planning'"
+                [spec]="spec"
+                [extras]="extras"
+                [section]="section"
+                [signed]="isSigned"
+                [showSign]="false"
+              ></ven-print-grouped-section>
+            </ng-template>
+          </ng-container>
+        </div>
+
+        <ul *ngIf="section.list" id="section_contents_{{ section.id }}">
+          <li *ngFor="let item of section.list; trackBy: trackSectionChange">{{ item }}</li>
+        </ul>
+
+        <ven-print-electrical-section
+          *ngIf="section.name === 'electrical'"
+          [spec]="spec"
+          [extras]="extras"
+          [section]="section"
+          [signed]="isSigned"
+        ></ven-print-electrical-section>
+      </div>
+    </ng-template>
+  </mat-expansion-panel>
+</mat-accordion>

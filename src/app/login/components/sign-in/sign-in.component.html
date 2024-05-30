@@ -1,0 +1,41 @@
+<div class="wrapper">
+  <img src="/assets/img/logo.svg" class="logo" />
+
+  <img src="/assets/img/background-desktop.png" class="background" />
+  <img src="/assets/img/background-mobile.png" class="background-mobile" />
+
+  <div class="box">
+    <h6 class="bold">Login</h6>
+
+    <ng-container *ngIf="loading$ | async as loading; else signin">
+      <mat-progress-spinner [mode]="'indeterminate'" [color]="'accent'" *ngIf="loading; else signin"></mat-progress-spinner>
+    </ng-container>
+
+    <ng-template #signin>
+      <form (ngSubmit)="onSignIn()" [formGroup]="loginForm">
+        <!-- EMAIL -->
+        <mat-form-field class="full-width" appearance="outline">
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email" type="email" id="email" name="email" />
+          <mat-error *ngIf="!loginForm.controls.email.valid && loginForm.controls.email.touched">Please enter a valid email</mat-error>
+        </mat-form-field>
+
+        <!-- PWD -->
+        <mat-form-field class="full-width" appearance="outline">
+          <mat-label>Password</mat-label>
+          <input matInput formControlName="password" type="password" id="password" name="password" />
+          <mat-error *ngIf="!loginForm.controls.password.valid && loginForm.controls.password.touched"
+            >Please enter a valid password</mat-error
+          >
+        </mat-form-field>
+
+        <button mat-raised-button color="accent" type="submit" [disabled]="!loginForm.valid">Login</button>
+
+        <div *ngIf="error$ | async as error" class="error-message">
+          {{ error }}
+        </div>
+      </form>
+      <a [routerLink]="['/venture/forgot-password']">forgot password? </a>
+    </ng-template>
+  </div>
+</div>

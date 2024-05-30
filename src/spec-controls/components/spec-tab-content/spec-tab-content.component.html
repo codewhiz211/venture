@@ -1,0 +1,31 @@
+<div class="container tab-content-container">
+  <div class="right-container">
+    <div class="status-section bordered" *ngIf="isStaffView">
+      <ven-staff-status [specUid]="(spec$ | async).uid" [status]="(spec$ | async)?.details.status"></ven-staff-status>
+    </div>
+    <div class="notification-section bordered" *ngIf="isStaffView">
+      <ven-staff-notification [customValues]="customValues"></ven-staff-notification>
+    </div>
+    <div class="rhs">
+      <div>
+        <ven-spec-contents-readonly [spec]="spec$ | async" [sections]="sections$ | async"></ven-spec-contents-readonly>
+      </div>
+    </div>
+  </div>
+  <div class="lhs">
+    <div>
+      <ng-container *ngIf="editing$ | async; else readonly">
+        <!-- EDITABLE SPEC -->
+        <ven-spec-accordion id="spec-accordion" [spec]="spec$ | async" [sections]="sections$ | async"></ven-spec-accordion>
+      </ng-container>
+      <ng-template #readonly>
+        <!-- READ ONLY SPEC -->
+        <ven-spec-accordion-readonly
+          id="spec-accordion"
+          [spec]="spec$ | async"
+          [sections]="sections$ | async"
+        ></ven-spec-accordion-readonly>
+      </ng-template>
+    </div>
+  </div>
+</div>

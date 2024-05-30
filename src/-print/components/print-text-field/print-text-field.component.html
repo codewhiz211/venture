@@ -1,0 +1,10 @@
+<div class="print-item">
+  <div class="label">{{ field.display }}</div>
+  <div class="value">
+    {{ field.value }} <span *ngIf="field.suffix" class="suffix">{{ field.suffix }}</span>
+  </div>
+  <div class="hint">{{ field.hint }}</div>
+  <div class="hint warning" *ngIf="spec?.custom_value | customValueHint: section?.name:field?.name">
+    (NOTE: Non-std option selected. PM to review)
+  </div>
+</div>

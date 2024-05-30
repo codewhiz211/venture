@@ -1,0 +1,111 @@
+<div class="dialog-wrapper" [ngClass]="{ 'loader-active': loading, 'print-active': printing }">
+  <div *ngIf="loading; else share" class="loader-wrapper">
+    <mat-progress-spinner [mode]="'indeterminate'" [color]="'accent'"></mat-progress-spinner>
+  </div>
+  <ng-template #share>
+    <ng-container *ngIf="!showEmailForm">
+      <div class="section">
+        <p>What do you want to share?</p>
+        <mat-radio-group class="example-radio-group" [(ngModel)]="printItem" (change)="validate(); updateLink()">
+          <mat-radio-button [value]="ShareType.Spec"> <span>Spec</span> </mat-radio-button>
+          <mat-radio-button *ngIf="spec.details?.postContract" [value]="ShareType.Extras"> <span>Extra</span> </mat-radio-button>
+          <mat-radio-button [value]="ShareType.Quote"> <span>Quote</span> </mat-radio-button>
+          <mat-radio-button [value]="ShareType.Files"> <span>Files</span> </mat-radio-button>
+          <mat-radio-button [value]="ShareType.Checklists"> <span>Checklists</span> </mat-radio-button>
+        </mat-radio-group>
+      </div>
+
+      <ng-container *ngIf="printItem === ShareType.Extras || printItem === ShareType.Quote">
+        <div class="section">
+          <p>Do you want to include a copy of the Spec?</p>
+          <mat-radio-group [(ngModel)]="includeSpec" (change)="validate()">
+            <mat-radio-button [value]="true">Yes</mat-radio-button>
+            <mat-radio-button [value]="false">No</mat-radio-button>
+          </mat-radio-group>
+        </div>
+      </ng-container>
+
+      <div
+        *ngIf="printItem === ShareType.Spec || ((printItem === ShareType.Extras || printItem === ShareType.Quote) && includeSpec)"
+        class="section"
+      >
+        <p>Which version do you want to share?</p>
+        <mat-radio-group class="example-radio-group" [(ngModel)]="snapId" (change)="validate()">
+          <mat-radio-button [value]="snapId" (click)="showSpecCopy()"> <span>Copy of current</span> </mat-radio-button>
+          <mat-form-field *ngIf="snapId === 0 || (isSafariFirefox && showCopy)" appearance="outline" (change)="validate()">
+            <mat-label>Description</mat-label>
+            <input matInput [formControl]="description" required type="text" />
+            <mat-error *ngIf="description.invalid">{{ getErrorMessage() }}</mat-error>
+          </mat-form-field>
+
+          <mat-accordion #historicCopies="matAccordion" [multi]="true">
+            <mat-expansion-panel class="mat-elevation-z0 bordered">
+              <mat-expansion-panel-header>
+                <mat-panel-title class="primary subtitle">
+                  Historic copies<ng-container *ngIf="snapId !== 0 && !showCopy"
+                    >: <i>{{ selectedCopy }}</i></ng-container
+                  >
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <ng-template matExpansionPanelContent>
+                <mat-radio-button
+                  *ngFor="let snapshot of specSnapshots"
+                  [value]="snapshot.uid"
+                  (click)="onCopyChosen(snapshot.description)"
+                >
+                  <span class="body-2 dark-medium-emphasis">{{ snapshot.description }}</span>
+                </mat-radio-button>
+              </ng-template>
+            </mat-expansion-panel>
+          </mat-accordion>
+        </mat-radio-group>
+      </div>
+
+      <div class="section" *ngIf="printItem === ShareType.Files">
+        <p>Which files do you want to share?</p>
+        <ven-share-folders-list [files]="files$ | async" (selectedFilesChanged)="onSelectedFilesChanged($event)"></ven-share-folders-list>
+      </div>
+
+      <div class="section" *ngIf="printItem === ShareType.Checklists">
+        <p>Which checklists do you want to share?</p>
+        <ven-share-checklists-list
+          [specId]="data.uid"
+          (selectedChecklistsChanged)="onSelectedChecklistsChanged($event); updateLink(); validate()"
+        ></ven-share-checklists-list>
+      </div>
+
+      <div class="section" *ngIf="printItem !== ShareType.NotSelected">
+        <p>How do you want to share it?</p>
+        <span *ngIf="error" class="error-message">{{ error.msg }}</span>
+        <div class="button-container">
+          <ven-app-primary-button
+            style="margin-left: 16px"
+            label="Print Preview"
+            icon="print"
+            (onClick)="onPrintPreview()"
+            [disabled]="printItem === ShareType.Files"
+          ></ven-app-primary-button>
+          <ven-app-primary-button style="margin-left: 16px" label="Email" icon="email" (onClick)="onEmailLink()"></ven-app-primary-button>
+          <ven-share-spec-by-link-button
+            [specUid]="this.data.uid"
+            [snapUid]="this.snapId"
+            [checklists]="checklists"
+            [printItem]="printItem"
+            [disabled]="printItem === ShareType.Files || error"
+            (copyComplete)="onCopied()"
+          ></ven-share-spec-by-link-button>
+        </div>
+      </div>
+
+      <ven-dialog-footer-buttons [closeAction]="closeAction"></ven-dialog-footer-buttons>
+    </ng-container>
+
+    <ng-container *ngIf="showEmailForm">
+      <p *ngIf="attachments.length > 0">
+        Send email with {{ attachments.length }} file<ng-container *ngIf="attachments.length > 1">s</ng-container> attached.
+      </p>
+      <ven-email-form [emailData]="emailData" (formSubmitted)="onFormSubmitted($event)" (formCancelled)="onCancelClick()"></ven-email-form>
+    </ng-container>
+  </ng-template>
+</div>
+<ng-template print-host></ng-template>

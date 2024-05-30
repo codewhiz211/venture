@@ -1,0 +1,19 @@
+@import 'variables';
+.dialog-wrapper {
+  @media screen and(max-width:$tablet) {
+    padding-bottom: 90px;
+  }
+}
+.mat-dialog-actions {
+  justify-content: flex-end;
+}
+
+.dialog-content {
+  padding-bottom: 24px;
+}
+
+ven-dialog-footer-buttons {
+  position: absolute;
+  right: 24px;
+  bottom: 24px;
+}

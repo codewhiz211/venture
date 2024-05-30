@@ -1,0 +1,27 @@
+<div class="double-column-container tab-content-container">
+  <div class="right-container">
+    <div class="bordered hide-on-mobile" *ngIf="(currentFolder$ | async) != 'Checklists'">
+      <!-- File Options -->
+      <div class="subtitle primary">File Options</div>
+      <!-- only show on root folder -->
+      <div class="icon-line" (click)="onAddFolder()" *ngIf="(currentFolder$ | async) == 'root'">
+        <ven-icon-new icon="create_new_folder" colour="black" hover="black"></ven-icon-new>
+        <span class="dark-high-emphasis">Add Folder</span>
+      </div>
+      <div class="icon-line">
+        <ven-file-uploader-engine [specId]="specUid" [folder]="currentFolder$ | async">
+          <label for="fileUpload" class="linked-point">
+            <ven-icon-new icon="file_upload" colour="black" hover="black"></ven-icon-new>
+            <span class="dark-high-emphasis">Upload File</span>
+          </label>
+        </ven-file-uploader-engine>
+      </div>
+    </div>
+  </div>
+  <div class="left-container">
+    <!-- Folders and Files -->
+    <div class="main-table">
+      <ven-files-container [specUid]="specUid"></ven-files-container>
+    </div>
+  </div>
+</div>

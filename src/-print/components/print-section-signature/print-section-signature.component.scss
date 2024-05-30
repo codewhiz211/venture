@@ -1,0 +1,57 @@
+@import 'variables';
+
+@media print {
+  .signature-section {
+    page-break-inside: avoid;
+  }
+}
+
+.signature-container {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.signature-section {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.signature-signed {
+  display: flex;
+  align-items: center;
+
+  img {
+    max-height: 100px;
+    margin-left: 10px;
+  }
+
+  @media print {
+    page-break-inside: avoid;
+  }
+}
+
+.signature-actions {
+  display: flex;
+  justify-content: space-between;
+
+  @media only screen and (max-width: #{$mobile}) {
+    margin-top: 20px;
+  }
+
+  button {
+    text-transform: uppercase;
+    width: 100px;
+    margin-left: 10px;
+  }
+}
+
+.signature {
+  padding: 5px 15px;
+}
+
+@media print {
+  button {
+    display: none;
+  }
+}

@@ -1,0 +1,153 @@
+<div class="section std-section">
+  <h4 *ngIf="!section.dontPrintTitle && showTitle">{{ section.title }}</h4>
+  <div class="section-content">
+    <ng-container *ngFor="let field of printFields">
+      <ng-container [ngSwitch]="field?.type">
+        <ng-container *ngIf="!(spec.hiddenSections | isHidden: section?.name:field?.canHide)">
+          <ng-container *ngSwitchCase="'subtitle'">
+            <div *ngIf="field?.text && !(spec.hiddenSections | isHidden: section?.name:field?.name)" class="subtitle">{{ field.text }}</div>
+          </ng-container>
+
+          <ng-container *ngSwitchCase="'subtitle-conditional'">
+            <ng-container *ngIf="field.show">
+              <div *ngIf="field?.text && !(spec.hiddenSections | isHidden: section?.name:field?.name)" class="subtitle">
+                {{ field.text }}
+              </div>
+            </ng-container>
+          </ng-container>
+
+          <ng-container *venSwitchCases="['dropdown', 'dropdown-conditional', 'text-conditional', 'number', 'number-conditional', 'text']">
+            <div *ngIf="field.show" [ngClass]="{ ' full-width': field.textType == 'email' }">
+              <ven-print-item>
+                <ven-print-text-field [spec]="spec" [section]="section" [field]="field"></ven-print-text-field>
+              </ven-print-item>
+            </div>
+          </ng-container>
+
+          <ng-container *ngSwitchCase="'colour'">
+            <ven-print-item>
+              <ven-print-colour [spec]="spec" [section]="section" [field]="field"></ven-print-colour>
+            </ven-print-item>
+          </ng-container>
+
+          <ng-container *ngSwitchCase="'custom-blocks'">
+            <ven-print-custom-field [spec]="spec" [section]="section" [field]="field"></ven-print-custom-field>
+          </ng-container>
+
+          <ng-container *ngSwitchCase="'image-picker'">
+            <ng-container *ngIf="field.show">
+              <ven-print-item>
+                <ven-print-image [spec]="spec" [section]="section" [field]="field"></ven-print-image>
+              </ven-print-item>
+            </ng-container>
+          </ng-container>
+
+          <ng-container *ngSwitchCase="'note'">
+            <!-- INTENTIONALLY EMPTY -->
+          </ng-container>
+
+          <ng-container *ngSwitchCase="'textarea'">
+            <ng-container *ngIf="field?.name?.indexOf('PmNote') >= 0 && field?.value !== 'n/a'">
+              <ven-print-item-full-width>
+                <ven-print-text-area
+                  [field]="field"
+                  [label]="'PM Notes'"
+                  [value]="field.value"
+                  [highlight]="highlightNote(field?.name)"
+                ></ven-print-text-area>
+              </ven-print-item-full-width>
+            </ng-container>
+
+            <ng-container *ngIf="field?.name?.indexOf('PmNote') < 0">
+              <ven-print-item-full-width>
+                <ven-print-text-area [field]="field" [label]="'Additional Info'" [value]="field?.value"></ven-print-text-area>
+              </ven-print-item-full-width>
+            </ng-container>
+          </ng-container>
+
+          <ng-container *ngSwitchCase="'text-optional'">
+            <ng-container *ngIf="field.show">
+              <div class="print-item">
+                <span class="label">{{ field.display }} </span> <span class="value">{{ field.value }} </span>
+              </div>
+            </ng-container>
+          </ng-container>
+
+          <ng-container *ngSwitchCase="'multi-text'">
+            <ng-container *ngIf="field.show">
+              <div class="description" [ngClass]="{ ' full-width': field.textType == 'email' }">
+                <span class="description-label">{{ field.display }} </span>
+                <ng-container *ngIf="field.value && field.value != 'n/a'; else noValue">
+                  <span class="description-value" *ngFor="let value of field.value">{{ value }}</span>
+                </ng-container>
+                <ng-template #noValue>
+                  <span>n/a</span>
+                </ng-template>
+              </div>
+            </ng-container>
+          </ng-container>
+
+          <ng-container *ngSwitchCase="'textarea-conditional'">
+            <ng-container *ngIf="field.show">
+              <ven-print-item-full-width>
+                <ven-print-text-area [field]="field" [label]="'Additional Info'" [value]="field?.value"></ven-print-text-area>
+              </ven-print-item-full-width>
+            </ng-container>
+          </ng-container>
+
+          <ng-container *ngSwitchCase="'attach-image'">
+            <ng-container *ngIf="field.show">
+              <ng-container *ngIf="field.items; else noimage">
+                <div class="file-list">
+                  <mat-card *ngFor="let file of field.items" class="file-list-card" id="{{ file.fuid }}">
+                    <div class="image-wrapper">
+                      <img *ngIf="file.isImage" (click)="openFile(file)" mat-card-image [src]="file.url" alt="{{ file.filename }}" />
+                      <img
+                        *ngIf="file.isEmail"
+                        (click)="openFile(file)"
+                        mat-card-image
+                        [src]="placeholderEmail"
+                        alt="{{ file.filename }}"
+                      />
+                      <img *ngIf="file.isPdf" (click)="openFile(file)" mat-card-image [src]="placeholderPdf" alt="{{ file.filename }}" />
+                      <img
+                        *ngIf="!file.isImage && !file.isEmail && !file.isPdf"
+                        (click)="downloadFile(file)"
+                        [src]="placeholderImage"
+                        alt="{{ file.filename }}"
+                      />
+                    </div>
+                    <mat-card-footer>
+                      <div>
+                        <div class="filename">{{ file.filename }}</div>
+                        <div>{{ file.uploadedBy }}</div>
+                        <div class="emphasis-med">{{ file.uploadedDate | date }}</div>
+                      </div>
+                    </mat-card-footer>
+                  </mat-card>
+                </div>
+              </ng-container>
+              <ng-template #noimage>
+                <div class="description">
+                  <span>{{ field.display }} </span> <span>n/a</span> <span class="hint"> {{ field.hint }}</span>
+                </div>
+              </ng-template>
+            </ng-container>
+          </ng-container>
+          <ng-container *ngSwitchDefault>
+            <p>UKNOWN TYPE => {{ field.type }}</p>
+          </ng-container>
+        </ng-container>
+      </ng-container>
+    </ng-container>
+  </div>
+  <ven-print-extras-section
+    class="section-inner"
+    *ngIf="section.hasExtras !== undefined"
+    [section]="section"
+    [extras]="extras"
+    [specStatus]="spec?.details.status == 'Prepared for contract'"
+  >
+  </ven-print-extras-section>
+  <ven-print-section-signature *ngIf="showSign" [section]="section" [signed]="signed" [spec]="spec"></ven-print-section-signature>
+</div>
